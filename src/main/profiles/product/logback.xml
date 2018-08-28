@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- ======================================= -->
+    <!-- 所有日志					                 -->
+    <!-- ======================================= -->
+    <appender name="ALL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 支持多JVM同时操作同一个日志文件 -->
+        <prudent>true</prudent>
+        <!-- 按天来回滚，如果需要按小时来回滚，则设置为{yyyy-MM-dd_HH} -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina.base}/logs/sys.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!-- 如果按天来回滚，则最大保存时间为2天，2天之前的都将被清理掉 -->
+            <maxHistory>4</maxHistory>
+            <!-- 按时间回滚的同时，按文件大小来回滚 -->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>400MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>[%-5p] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] [%C] - %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="ALL_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <queueSize>1048576</queueSize>
+        <discardingThreshold>0</discardingThreshold>
+        <includeCallerData>true</includeCallerData>
+        <appender-ref ref="ALL"/>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="ALL_ASYNC"/>
+    </root>
+
+</configuration>

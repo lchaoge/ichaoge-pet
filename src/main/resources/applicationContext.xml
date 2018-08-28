@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:ctx="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+       default-lazy-init="true">
+
+    <ctx:component-scan base-package="com.ichaoge.pet,com.retail.permission">
+        <ctx:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <ctx:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+    </ctx:component-scan>
+
+    <ctx:property-placeholder ignore-resource-not-found="true" location="classpath:props/*.properties" />
+
+    <!-- 加载所有的spring配置-->
+    <!--<import resource="classpath*:spring/spring-*.xml"/>-->
+
+    <import resource="classpath:spring/spring-config-service.xml"/>
+    <import resource="classpath:spring/spring-config-servlet.xml"/>
+    <import resource="classpath:spring/spring-config-dubbo-consumer.xml"/>
+    <import resource="classpath:spring/spring-config-dao.xml"/>
+    <import resource="classpath:spring/spring-schedule.xml"/>
+</beans>

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.wm:wm-erp-common:1.8.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://D:/Developer/maven-repository/com/wm/wm-erp-common/1.8.0-SNAPSHOT/wm-erp-common-1.8.0-20170928.091706-1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://D:/Developer/maven-repository/com/wm/wm-erp-common/1.8.0-SNAPSHOT/wm-erp-common-1.8.0-20170928.091706-1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://D:/Developer/maven-repository/com/wm/wm-erp-common/1.8.0-SNAPSHOT/wm-erp-common-1.8.0-20170928.091706-1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
