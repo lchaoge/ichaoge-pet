@@ -1,43 +1,43 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ichaoge.pet.dao.mapper.PetMapper">
-  <resultMap id="BaseResultMap" type="com.ichaoge.pet.domain.entity.Pet">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="card_no" jdbcType="BIGINT" property="cardNo" />
-    <result column="user_id" jdbcType="BIGINT" property="userId" />
-    <result column="pet_sort_id" jdbcType="BIGINT" property="petSortId" />
-    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
-    <result column="photo" jdbcType="VARCHAR" property="photo" />
-    <result column="sex" jdbcType="VARCHAR" property="sex" />
-    <result column="weight" jdbcType="VARCHAR" property="weight" />
-    <result column="describe" jdbcType="VARCHAR" property="describe" />
-    <result column="sterilization" jdbcType="VARCHAR" property="sterilization" />
-    <result column="birth_date" jdbcType="TIMESTAMP" property="birthDate" />
-    <result column="home_date" jdbcType="TIMESTAMP" property="homeDate" />
-    <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="creator" jdbcType="BIGINT" property="creator" />
-    <result column="created" jdbcType="TIMESTAMP" property="created" />
-    <result column="modified" jdbcType="TIMESTAMP" property="modified" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ichaoge.pet.dao.mapper.PetMapper" >
+  <resultMap id="BaseResultMap" type="com.ichaoge.pet.domain.entity.Pet" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="card_no" property="cardNo" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="pet_sort_id" property="petSortId" jdbcType="BIGINT" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="photo" property="photo" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="weight" property="weight" jdbcType="VARCHAR" />
+    <result column="describes" property="describes" jdbcType="VARCHAR" />
+    <result column="sterilization" property="sterilization" jdbcType="VARCHAR" />
+    <result column="birth_date" property="birthDate" jdbcType="TIMESTAMP" />
+    <result column="home_date" property="homeDate" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="creator" property="creator" jdbcType="BIGINT" />
+    <result column="created" property="created" jdbcType="TIMESTAMP" />
+    <result column="modified" property="modified" jdbcType="TIMESTAMP" />
   </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -48,25 +48,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -77,220 +77,226 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List">
-    id, card_no, user_id, pet_sort_id, nickname, photo, sex, weight, describe, sterilization, 
+  <sql id="Base_Column_List" >
+    id, card_no, user_id, pet_sort_id, nickname, photo, sex, weight, describes, sterilization, 
     birth_date, home_date, status, creator, created, modified
   </sql>
-  <select id="selectByExample" parameterType="com.ichaoge.pet.domain.entity.PetExample" resultMap="BaseResultMap">
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ichaoge.pet.domain.entity.PetExample" >
     select
-    <if test="distinct">
+    <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
     from pet
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null">
+    <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from pet
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  <select id="selectByCardNo" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from pet
+    where card_no = #{cardNo,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from pet
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ichaoge.pet.domain.entity.PetExample">
+  <delete id="deleteByExample" parameterType="com.ichaoge.pet.domain.entity.PetExample" >
     delete from pet
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ichaoge.pet.domain.entity.Pet">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+  <insert id="insert" parameterType="com.ichaoge.pet.domain.entity.Pet" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into pet (card_no, user_id, pet_sort_id, 
       nickname, photo, sex, 
-      weight, describe, sterilization, 
+      weight, describes, sterilization, 
       birth_date, home_date, status, 
       creator, created, modified
       )
     values (#{cardNo,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{petSortId,jdbcType=BIGINT}, 
       #{nickname,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
-      #{weight,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR}, #{sterilization,jdbcType=VARCHAR}, 
+      #{weight,jdbcType=VARCHAR}, #{describes,jdbcType=VARCHAR}, #{sterilization,jdbcType=VARCHAR}, 
       #{birthDate,jdbcType=TIMESTAMP}, #{homeDate,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
       #{creator,jdbcType=BIGINT}, #{created,jdbcType=TIMESTAMP}, #{modified,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.ichaoge.pet.domain.entity.Pet">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+  <insert id="insertSelective" parameterType="com.ichaoge.pet.domain.entity.Pet" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into pet
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="cardNo != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cardNo != null" >
         card_no,
       </if>
-      <if test="userId != null">
+      <if test="userId != null" >
         user_id,
       </if>
-      <if test="petSortId != null">
+      <if test="petSortId != null" >
         pet_sort_id,
       </if>
-      <if test="nickname != null">
+      <if test="nickname != null" >
         nickname,
       </if>
-      <if test="photo != null">
+      <if test="photo != null" >
         photo,
       </if>
-      <if test="sex != null">
+      <if test="sex != null" >
         sex,
       </if>
-      <if test="weight != null">
+      <if test="weight != null" >
         weight,
       </if>
-      <if test="describe != null">
-        describe,
+      <if test="describes != null" >
+        describes,
       </if>
-      <if test="sterilization != null">
+      <if test="sterilization != null" >
         sterilization,
       </if>
-      <if test="birthDate != null">
+      <if test="birthDate != null" >
         birth_date,
       </if>
-      <if test="homeDate != null">
+      <if test="homeDate != null" >
         home_date,
       </if>
-      <if test="status != null">
+      <if test="status != null" >
         status,
       </if>
-      <if test="creator != null">
+      <if test="creator != null" >
         creator,
       </if>
-      <if test="created != null">
+      <if test="created != null" >
         created,
       </if>
-      <if test="modified != null">
+      <if test="modified != null" >
         modified,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="cardNo != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cardNo != null" >
         #{cardNo,jdbcType=BIGINT},
       </if>
-      <if test="userId != null">
+      <if test="userId != null" >
         #{userId,jdbcType=BIGINT},
       </if>
-      <if test="petSortId != null">
+      <if test="petSortId != null" >
         #{petSortId,jdbcType=BIGINT},
       </if>
-      <if test="nickname != null">
+      <if test="nickname != null" >
         #{nickname,jdbcType=VARCHAR},
       </if>
-      <if test="photo != null">
+      <if test="photo != null" >
         #{photo,jdbcType=VARCHAR},
       </if>
-      <if test="sex != null">
+      <if test="sex != null" >
         #{sex,jdbcType=VARCHAR},
       </if>
-      <if test="weight != null">
+      <if test="weight != null" >
         #{weight,jdbcType=VARCHAR},
       </if>
-      <if test="describe != null">
-        #{describe,jdbcType=VARCHAR},
+      <if test="describes != null" >
+        #{describes,jdbcType=VARCHAR},
       </if>
-      <if test="sterilization != null">
+      <if test="sterilization != null" >
         #{sterilization,jdbcType=VARCHAR},
       </if>
-      <if test="birthDate != null">
+      <if test="birthDate != null" >
         #{birthDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="homeDate != null">
+      <if test="homeDate != null" >
         #{homeDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="status != null">
+      <if test="status != null" >
         #{status,jdbcType=INTEGER},
       </if>
-      <if test="creator != null">
+      <if test="creator != null" >
         #{creator,jdbcType=BIGINT},
       </if>
-      <if test="created != null">
+      <if test="created != null" >
         #{created,jdbcType=TIMESTAMP},
       </if>
-      <if test="modified != null">
+      <if test="modified != null" >
         #{modified,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ichaoge.pet.domain.entity.PetExample" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="com.ichaoge.pet.domain.entity.PetExample" resultType="java.lang.Integer" >
     select count(*) from pet
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+  <update id="updateByExampleSelective" parameterType="map" >
     update pet
-    <set>
-      <if test="record.id != null">
+    <set >
+      <if test="record.id != null" >
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.cardNo != null">
+      <if test="record.cardNo != null" >
         card_no = #{record.cardNo,jdbcType=BIGINT},
       </if>
-      <if test="record.userId != null">
+      <if test="record.userId != null" >
         user_id = #{record.userId,jdbcType=BIGINT},
       </if>
-      <if test="record.petSortId != null">
+      <if test="record.petSortId != null" >
         pet_sort_id = #{record.petSortId,jdbcType=BIGINT},
       </if>
-      <if test="record.nickname != null">
+      <if test="record.nickname != null" >
         nickname = #{record.nickname,jdbcType=VARCHAR},
       </if>
-      <if test="record.photo != null">
+      <if test="record.photo != null" >
         photo = #{record.photo,jdbcType=VARCHAR},
       </if>
-      <if test="record.sex != null">
+      <if test="record.sex != null" >
         sex = #{record.sex,jdbcType=VARCHAR},
       </if>
-      <if test="record.weight != null">
+      <if test="record.weight != null" >
         weight = #{record.weight,jdbcType=VARCHAR},
       </if>
-      <if test="record.describe != null">
-        describe = #{record.describe,jdbcType=VARCHAR},
+      <if test="record.describes != null" >
+        describes = #{record.describes,jdbcType=VARCHAR},
       </if>
-      <if test="record.sterilization != null">
+      <if test="record.sterilization != null" >
         sterilization = #{record.sterilization,jdbcType=VARCHAR},
       </if>
-      <if test="record.birthDate != null">
+      <if test="record.birthDate != null" >
         birth_date = #{record.birthDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.homeDate != null">
+      <if test="record.homeDate != null" >
         home_date = #{record.homeDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.status != null">
+      <if test="record.status != null" >
         status = #{record.status,jdbcType=INTEGER},
       </if>
-      <if test="record.creator != null">
+      <if test="record.creator != null" >
         creator = #{record.creator,jdbcType=BIGINT},
       </if>
-      <if test="record.created != null">
+      <if test="record.created != null" >
         created = #{record.created,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.modified != null">
+      <if test="record.modified != null" >
         modified = #{record.modified,jdbcType=TIMESTAMP},
       </if>
     </set>
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map">
+  <update id="updateByExample" parameterType="map" >
     update pet
     set id = #{record.id,jdbcType=BIGINT},
       card_no = #{record.cardNo,jdbcType=BIGINT},
@@ -300,7 +306,7 @@
       photo = #{record.photo,jdbcType=VARCHAR},
       sex = #{record.sex,jdbcType=VARCHAR},
       weight = #{record.weight,jdbcType=VARCHAR},
-      describe = #{record.describe,jdbcType=VARCHAR},
+      describes = #{record.describes,jdbcType=VARCHAR},
       sterilization = #{record.sterilization,jdbcType=VARCHAR},
       birth_date = #{record.birthDate,jdbcType=TIMESTAMP},
       home_date = #{record.homeDate,jdbcType=TIMESTAMP},
@@ -308,62 +314,62 @@
       creator = #{record.creator,jdbcType=BIGINT},
       created = #{record.created,jdbcType=TIMESTAMP},
       modified = #{record.modified,jdbcType=TIMESTAMP}
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ichaoge.pet.domain.entity.Pet">
+  <update id="updateByPrimaryKeySelective" parameterType="com.ichaoge.pet.domain.entity.Pet" >
     update pet
-    <set>
-      <if test="cardNo != null">
+    <set >
+      <if test="cardNo != null" >
         card_no = #{cardNo,jdbcType=BIGINT},
       </if>
-      <if test="userId != null">
+      <if test="userId != null" >
         user_id = #{userId,jdbcType=BIGINT},
       </if>
-      <if test="petSortId != null">
+      <if test="petSortId != null" >
         pet_sort_id = #{petSortId,jdbcType=BIGINT},
       </if>
-      <if test="nickname != null">
+      <if test="nickname != null" >
         nickname = #{nickname,jdbcType=VARCHAR},
       </if>
-      <if test="photo != null">
+      <if test="photo != null" >
         photo = #{photo,jdbcType=VARCHAR},
       </if>
-      <if test="sex != null">
+      <if test="sex != null" >
         sex = #{sex,jdbcType=VARCHAR},
       </if>
-      <if test="weight != null">
+      <if test="weight != null" >
         weight = #{weight,jdbcType=VARCHAR},
       </if>
-      <if test="describe != null">
-        describe = #{describe,jdbcType=VARCHAR},
+      <if test="describes != null" >
+        describes = #{describes,jdbcType=VARCHAR},
       </if>
-      <if test="sterilization != null">
+      <if test="sterilization != null" >
         sterilization = #{sterilization,jdbcType=VARCHAR},
       </if>
-      <if test="birthDate != null">
+      <if test="birthDate != null" >
         birth_date = #{birthDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="homeDate != null">
+      <if test="homeDate != null" >
         home_date = #{homeDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="status != null">
+      <if test="status != null" >
         status = #{status,jdbcType=INTEGER},
       </if>
-      <if test="creator != null">
+      <if test="creator != null" >
         creator = #{creator,jdbcType=BIGINT},
       </if>
-      <if test="created != null">
+      <if test="created != null" >
         created = #{created,jdbcType=TIMESTAMP},
       </if>
-      <if test="modified != null">
+      <if test="modified != null" >
         modified = #{modified,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ichaoge.pet.domain.entity.Pet">
+  <update id="updateByPrimaryKey" parameterType="com.ichaoge.pet.domain.entity.Pet" >
     update pet
     set card_no = #{cardNo,jdbcType=BIGINT},
       user_id = #{userId,jdbcType=BIGINT},
@@ -372,769 +378,7 @@
       photo = #{photo,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=VARCHAR},
       weight = #{weight,jdbcType=VARCHAR},
-      describe = #{describe,jdbcType=VARCHAR},
-      sterilization = #{sterilization,jdbcType=VARCHAR},
-      birth_date = #{birthDate,jdbcType=TIMESTAMP},
-      home_date = #{homeDate,jdbcType=TIMESTAMP},
-      status = #{status,jdbcType=INTEGER},
-      creator = #{creator,jdbcType=BIGINT},
-      created = #{created,jdbcType=TIMESTAMP},
-      modified = #{modified,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <resultMap id="BaseResultMap" type="com.ichaoge.pet.domain.entity.Pet">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="card_no" jdbcType="BIGINT" property="cardNo" />
-    <result column="user_id" jdbcType="BIGINT" property="userId" />
-    <result column="pet_sort_id" jdbcType="BIGINT" property="petSortId" />
-    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
-    <result column="photo" jdbcType="VARCHAR" property="photo" />
-    <result column="sex" jdbcType="VARCHAR" property="sex" />
-    <result column="weight" jdbcType="VARCHAR" property="weight" />
-    <result column="describe" jdbcType="VARCHAR" property="describe" />
-    <result column="sterilization" jdbcType="VARCHAR" property="sterilization" />
-    <result column="birth_date" jdbcType="TIMESTAMP" property="birthDate" />
-    <result column="home_date" jdbcType="TIMESTAMP" property="homeDate" />
-    <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="creator" jdbcType="BIGINT" property="creator" />
-    <result column="created" jdbcType="TIMESTAMP" property="created" />
-    <result column="modified" jdbcType="TIMESTAMP" property="modified" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    id, card_no, user_id, pet_sort_id, nickname, photo, sex, weight, describe, sterilization, 
-    birth_date, home_date, status, creator, created, modified
-  </sql>
-  <select id="selectByExample" parameterType="com.ichaoge.pet.domain.entity.PetExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from pet
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from pet
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from pet
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.ichaoge.pet.domain.entity.PetExample">
-    delete from pet
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.ichaoge.pet.domain.entity.Pet">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into pet (card_no, user_id, pet_sort_id, 
-      nickname, photo, sex, 
-      weight, describe, sterilization, 
-      birth_date, home_date, status, 
-      creator, created, modified
-      )
-    values (#{cardNo,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{petSortId,jdbcType=BIGINT}, 
-      #{nickname,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
-      #{weight,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR}, #{sterilization,jdbcType=VARCHAR}, 
-      #{birthDate,jdbcType=TIMESTAMP}, #{homeDate,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
-      #{creator,jdbcType=BIGINT}, #{created,jdbcType=TIMESTAMP}, #{modified,jdbcType=TIMESTAMP}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.ichaoge.pet.domain.entity.Pet">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into pet
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="cardNo != null">
-        card_no,
-      </if>
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="petSortId != null">
-        pet_sort_id,
-      </if>
-      <if test="nickname != null">
-        nickname,
-      </if>
-      <if test="photo != null">
-        photo,
-      </if>
-      <if test="sex != null">
-        sex,
-      </if>
-      <if test="weight != null">
-        weight,
-      </if>
-      <if test="describe != null">
-        describe,
-      </if>
-      <if test="sterilization != null">
-        sterilization,
-      </if>
-      <if test="birthDate != null">
-        birth_date,
-      </if>
-      <if test="homeDate != null">
-        home_date,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="creator != null">
-        creator,
-      </if>
-      <if test="created != null">
-        created,
-      </if>
-      <if test="modified != null">
-        modified,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="cardNo != null">
-        #{cardNo,jdbcType=BIGINT},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=BIGINT},
-      </if>
-      <if test="petSortId != null">
-        #{petSortId,jdbcType=BIGINT},
-      </if>
-      <if test="nickname != null">
-        #{nickname,jdbcType=VARCHAR},
-      </if>
-      <if test="photo != null">
-        #{photo,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null">
-        #{sex,jdbcType=VARCHAR},
-      </if>
-      <if test="weight != null">
-        #{weight,jdbcType=VARCHAR},
-      </if>
-      <if test="describe != null">
-        #{describe,jdbcType=VARCHAR},
-      </if>
-      <if test="sterilization != null">
-        #{sterilization,jdbcType=VARCHAR},
-      </if>
-      <if test="birthDate != null">
-        #{birthDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="homeDate != null">
-        #{homeDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="creator != null">
-        #{creator,jdbcType=BIGINT},
-      </if>
-      <if test="created != null">
-        #{created,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modified != null">
-        #{modified,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.ichaoge.pet.domain.entity.PetExample" resultType="java.lang.Integer">
-    select count(*) from pet
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update pet
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=BIGINT},
-      </if>
-      <if test="record.cardNo != null">
-        card_no = #{record.cardNo,jdbcType=BIGINT},
-      </if>
-      <if test="record.userId != null">
-        user_id = #{record.userId,jdbcType=BIGINT},
-      </if>
-      <if test="record.petSortId != null">
-        pet_sort_id = #{record.petSortId,jdbcType=BIGINT},
-      </if>
-      <if test="record.nickname != null">
-        nickname = #{record.nickname,jdbcType=VARCHAR},
-      </if>
-      <if test="record.photo != null">
-        photo = #{record.photo,jdbcType=VARCHAR},
-      </if>
-      <if test="record.sex != null">
-        sex = #{record.sex,jdbcType=VARCHAR},
-      </if>
-      <if test="record.weight != null">
-        weight = #{record.weight,jdbcType=VARCHAR},
-      </if>
-      <if test="record.describe != null">
-        describe = #{record.describe,jdbcType=VARCHAR},
-      </if>
-      <if test="record.sterilization != null">
-        sterilization = #{record.sterilization,jdbcType=VARCHAR},
-      </if>
-      <if test="record.birthDate != null">
-        birth_date = #{record.birthDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.homeDate != null">
-        home_date = #{record.homeDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.status != null">
-        status = #{record.status,jdbcType=INTEGER},
-      </if>
-      <if test="record.creator != null">
-        creator = #{record.creator,jdbcType=BIGINT},
-      </if>
-      <if test="record.created != null">
-        created = #{record.created,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.modified != null">
-        modified = #{record.modified,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update pet
-    set id = #{record.id,jdbcType=BIGINT},
-      card_no = #{record.cardNo,jdbcType=BIGINT},
-      user_id = #{record.userId,jdbcType=BIGINT},
-      pet_sort_id = #{record.petSortId,jdbcType=BIGINT},
-      nickname = #{record.nickname,jdbcType=VARCHAR},
-      photo = #{record.photo,jdbcType=VARCHAR},
-      sex = #{record.sex,jdbcType=VARCHAR},
-      weight = #{record.weight,jdbcType=VARCHAR},
-      describe = #{record.describe,jdbcType=VARCHAR},
-      sterilization = #{record.sterilization,jdbcType=VARCHAR},
-      birth_date = #{record.birthDate,jdbcType=TIMESTAMP},
-      home_date = #{record.homeDate,jdbcType=TIMESTAMP},
-      status = #{record.status,jdbcType=INTEGER},
-      creator = #{record.creator,jdbcType=BIGINT},
-      created = #{record.created,jdbcType=TIMESTAMP},
-      modified = #{record.modified,jdbcType=TIMESTAMP}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ichaoge.pet.domain.entity.Pet">
-    update pet
-    <set>
-      <if test="cardNo != null">
-        card_no = #{cardNo,jdbcType=BIGINT},
-      </if>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=BIGINT},
-      </if>
-      <if test="petSortId != null">
-        pet_sort_id = #{petSortId,jdbcType=BIGINT},
-      </if>
-      <if test="nickname != null">
-        nickname = #{nickname,jdbcType=VARCHAR},
-      </if>
-      <if test="photo != null">
-        photo = #{photo,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null">
-        sex = #{sex,jdbcType=VARCHAR},
-      </if>
-      <if test="weight != null">
-        weight = #{weight,jdbcType=VARCHAR},
-      </if>
-      <if test="describe != null">
-        describe = #{describe,jdbcType=VARCHAR},
-      </if>
-      <if test="sterilization != null">
-        sterilization = #{sterilization,jdbcType=VARCHAR},
-      </if>
-      <if test="birthDate != null">
-        birth_date = #{birthDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="homeDate != null">
-        home_date = #{homeDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="creator != null">
-        creator = #{creator,jdbcType=BIGINT},
-      </if>
-      <if test="created != null">
-        created = #{created,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modified != null">
-        modified = #{modified,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ichaoge.pet.domain.entity.Pet">
-    update pet
-    set card_no = #{cardNo,jdbcType=BIGINT},
-      user_id = #{userId,jdbcType=BIGINT},
-      pet_sort_id = #{petSortId,jdbcType=BIGINT},
-      nickname = #{nickname,jdbcType=VARCHAR},
-      photo = #{photo,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=VARCHAR},
-      weight = #{weight,jdbcType=VARCHAR},
-      describe = #{describe,jdbcType=VARCHAR},
-      sterilization = #{sterilization,jdbcType=VARCHAR},
-      birth_date = #{birthDate,jdbcType=TIMESTAMP},
-      home_date = #{homeDate,jdbcType=TIMESTAMP},
-      status = #{status,jdbcType=INTEGER},
-      creator = #{creator,jdbcType=BIGINT},
-      created = #{created,jdbcType=TIMESTAMP},
-      modified = #{modified,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <resultMap id="BaseResultMap" type="com.ichaoge.pet.domain.entity.Pet">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="card_no" jdbcType="BIGINT" property="cardNo" />
-    <result column="user_id" jdbcType="BIGINT" property="userId" />
-    <result column="pet_sort_id" jdbcType="BIGINT" property="petSortId" />
-    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
-    <result column="photo" jdbcType="VARCHAR" property="photo" />
-    <result column="sex" jdbcType="VARCHAR" property="sex" />
-    <result column="weight" jdbcType="VARCHAR" property="weight" />
-    <result column="describe" jdbcType="VARCHAR" property="describe" />
-    <result column="sterilization" jdbcType="VARCHAR" property="sterilization" />
-    <result column="birth_date" jdbcType="TIMESTAMP" property="birthDate" />
-    <result column="home_date" jdbcType="TIMESTAMP" property="homeDate" />
-    <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="creator" jdbcType="BIGINT" property="creator" />
-    <result column="created" jdbcType="TIMESTAMP" property="created" />
-    <result column="modified" jdbcType="TIMESTAMP" property="modified" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    id, card_no, user_id, pet_sort_id, nickname, photo, sex, weight, describe, sterilization, 
-    birth_date, home_date, status, creator, created, modified
-  </sql>
-  <select id="selectByExample" parameterType="com.ichaoge.pet.domain.entity.PetExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from pet
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from pet
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from pet
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.ichaoge.pet.domain.entity.PetExample">
-    delete from pet
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.ichaoge.pet.domain.entity.Pet">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into pet (card_no, user_id, pet_sort_id, 
-      nickname, photo, sex, 
-      weight, describe, sterilization, 
-      birth_date, home_date, status, 
-      creator, created, modified
-      )
-    values (#{cardNo,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{petSortId,jdbcType=BIGINT}, 
-      #{nickname,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
-      #{weight,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR}, #{sterilization,jdbcType=VARCHAR}, 
-      #{birthDate,jdbcType=TIMESTAMP}, #{homeDate,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
-      #{creator,jdbcType=BIGINT}, #{created,jdbcType=TIMESTAMP}, #{modified,jdbcType=TIMESTAMP}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.ichaoge.pet.domain.entity.Pet">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into pet
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="cardNo != null">
-        card_no,
-      </if>
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="petSortId != null">
-        pet_sort_id,
-      </if>
-      <if test="nickname != null">
-        nickname,
-      </if>
-      <if test="photo != null">
-        photo,
-      </if>
-      <if test="sex != null">
-        sex,
-      </if>
-      <if test="weight != null">
-        weight,
-      </if>
-      <if test="describe != null">
-        describe,
-      </if>
-      <if test="sterilization != null">
-        sterilization,
-      </if>
-      <if test="birthDate != null">
-        birth_date,
-      </if>
-      <if test="homeDate != null">
-        home_date,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="creator != null">
-        creator,
-      </if>
-      <if test="created != null">
-        created,
-      </if>
-      <if test="modified != null">
-        modified,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="cardNo != null">
-        #{cardNo,jdbcType=BIGINT},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=BIGINT},
-      </if>
-      <if test="petSortId != null">
-        #{petSortId,jdbcType=BIGINT},
-      </if>
-      <if test="nickname != null">
-        #{nickname,jdbcType=VARCHAR},
-      </if>
-      <if test="photo != null">
-        #{photo,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null">
-        #{sex,jdbcType=VARCHAR},
-      </if>
-      <if test="weight != null">
-        #{weight,jdbcType=VARCHAR},
-      </if>
-      <if test="describe != null">
-        #{describe,jdbcType=VARCHAR},
-      </if>
-      <if test="sterilization != null">
-        #{sterilization,jdbcType=VARCHAR},
-      </if>
-      <if test="birthDate != null">
-        #{birthDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="homeDate != null">
-        #{homeDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="creator != null">
-        #{creator,jdbcType=BIGINT},
-      </if>
-      <if test="created != null">
-        #{created,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modified != null">
-        #{modified,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.ichaoge.pet.domain.entity.PetExample" resultType="java.lang.Integer">
-    select count(*) from pet
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update pet
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=BIGINT},
-      </if>
-      <if test="record.cardNo != null">
-        card_no = #{record.cardNo,jdbcType=BIGINT},
-      </if>
-      <if test="record.userId != null">
-        user_id = #{record.userId,jdbcType=BIGINT},
-      </if>
-      <if test="record.petSortId != null">
-        pet_sort_id = #{record.petSortId,jdbcType=BIGINT},
-      </if>
-      <if test="record.nickname != null">
-        nickname = #{record.nickname,jdbcType=VARCHAR},
-      </if>
-      <if test="record.photo != null">
-        photo = #{record.photo,jdbcType=VARCHAR},
-      </if>
-      <if test="record.sex != null">
-        sex = #{record.sex,jdbcType=VARCHAR},
-      </if>
-      <if test="record.weight != null">
-        weight = #{record.weight,jdbcType=VARCHAR},
-      </if>
-      <if test="record.describe != null">
-        describe = #{record.describe,jdbcType=VARCHAR},
-      </if>
-      <if test="record.sterilization != null">
-        sterilization = #{record.sterilization,jdbcType=VARCHAR},
-      </if>
-      <if test="record.birthDate != null">
-        birth_date = #{record.birthDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.homeDate != null">
-        home_date = #{record.homeDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.status != null">
-        status = #{record.status,jdbcType=INTEGER},
-      </if>
-      <if test="record.creator != null">
-        creator = #{record.creator,jdbcType=BIGINT},
-      </if>
-      <if test="record.created != null">
-        created = #{record.created,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.modified != null">
-        modified = #{record.modified,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update pet
-    set id = #{record.id,jdbcType=BIGINT},
-      card_no = #{record.cardNo,jdbcType=BIGINT},
-      user_id = #{record.userId,jdbcType=BIGINT},
-      pet_sort_id = #{record.petSortId,jdbcType=BIGINT},
-      nickname = #{record.nickname,jdbcType=VARCHAR},
-      photo = #{record.photo,jdbcType=VARCHAR},
-      sex = #{record.sex,jdbcType=VARCHAR},
-      weight = #{record.weight,jdbcType=VARCHAR},
-      describe = #{record.describe,jdbcType=VARCHAR},
-      sterilization = #{record.sterilization,jdbcType=VARCHAR},
-      birth_date = #{record.birthDate,jdbcType=TIMESTAMP},
-      home_date = #{record.homeDate,jdbcType=TIMESTAMP},
-      status = #{record.status,jdbcType=INTEGER},
-      creator = #{record.creator,jdbcType=BIGINT},
-      created = #{record.created,jdbcType=TIMESTAMP},
-      modified = #{record.modified,jdbcType=TIMESTAMP}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ichaoge.pet.domain.entity.Pet">
-    update pet
-    <set>
-      <if test="cardNo != null">
-        card_no = #{cardNo,jdbcType=BIGINT},
-      </if>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=BIGINT},
-      </if>
-      <if test="petSortId != null">
-        pet_sort_id = #{petSortId,jdbcType=BIGINT},
-      </if>
-      <if test="nickname != null">
-        nickname = #{nickname,jdbcType=VARCHAR},
-      </if>
-      <if test="photo != null">
-        photo = #{photo,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null">
-        sex = #{sex,jdbcType=VARCHAR},
-      </if>
-      <if test="weight != null">
-        weight = #{weight,jdbcType=VARCHAR},
-      </if>
-      <if test="describe != null">
-        describe = #{describe,jdbcType=VARCHAR},
-      </if>
-      <if test="sterilization != null">
-        sterilization = #{sterilization,jdbcType=VARCHAR},
-      </if>
-      <if test="birthDate != null">
-        birth_date = #{birthDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="homeDate != null">
-        home_date = #{homeDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="creator != null">
-        creator = #{creator,jdbcType=BIGINT},
-      </if>
-      <if test="created != null">
-        created = #{created,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modified != null">
-        modified = #{modified,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ichaoge.pet.domain.entity.Pet">
-    update pet
-    set card_no = #{cardNo,jdbcType=BIGINT},
-      user_id = #{userId,jdbcType=BIGINT},
-      pet_sort_id = #{petSortId,jdbcType=BIGINT},
-      nickname = #{nickname,jdbcType=VARCHAR},
-      photo = #{photo,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=VARCHAR},
-      weight = #{weight,jdbcType=VARCHAR},
-      describe = #{describe,jdbcType=VARCHAR},
+      describes = #{describes,jdbcType=VARCHAR},
       sterilization = #{sterilization,jdbcType=VARCHAR},
       birth_date = #{birthDate,jdbcType=TIMESTAMP},
       home_date = #{homeDate,jdbcType=TIMESTAMP},

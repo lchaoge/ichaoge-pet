@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.*;
 
 
 /**
- * @author liuxing
- * @date 2018-04-02
+ * @author chaoge
+ * @date 2018-08-28
  */
 @CrossOrigin(allowCredentials = "true", origins = "*", maxAge = 3600)
 @Controller

@@ -3,7 +3,7 @@ package com.ichaoge.pet.domain.inputParam;
 import java.io.Serializable;
 
 /**
- * Created by nikoou on 2016/5/17.
+ * Created by chaoge on 2018/8/28.
  */
 public class RequestParam implements Serializable {
     private Integer pageSize;

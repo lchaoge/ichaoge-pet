@@ -5,13 +5,11 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Created by user on 2018/7/30.
+ * Created by chaoge on 2018/8/28.
  */
 public class UserParam extends RequestParam implements Serializable {
 
     private Long id;
-
-    private String code;
 
     private String openid;
 
@@ -55,14 +53,6 @@ public class UserParam extends RequestParam implements Serializable {
 
     public void setOpenid(String openid) {
         this.openid = openid;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
     }
 
     public String getUserName() {

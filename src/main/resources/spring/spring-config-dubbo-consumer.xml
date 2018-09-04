@@ -4,12 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://code.alibabatech.com/schema/dubbo
-        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
-        ">
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
     <dubbo:application name="consumer-ichaoge-pet" />
-    <!--<dubbo:registry protocol="zookeeper" address="${dubbo.zookeeper}" />-->
-
-    <!--根据门店号查营运属性信息-->
-    <!--<dubbo:reference id="getShopList" interface="com.retail.permission.tree.api.IPermissionTree" retries="1" timeout="60000" check="false"/>-->
 </beans>

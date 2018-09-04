@@ -16,7 +16,6 @@
 
     <!-- 加载所有的spring配置-->
     <!--<import resource="classpath*:spring/spring-*.xml"/>-->
-
     <import resource="classpath:spring/spring-config-service.xml"/>
     <import resource="classpath:spring/spring-config-servlet.xml"/>
     <import resource="classpath:spring/spring-config-dubbo-consumer.xml"/>

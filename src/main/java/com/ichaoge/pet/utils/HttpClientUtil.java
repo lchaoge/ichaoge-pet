@@ -52,7 +52,6 @@ public class HttpClientUtil {
 				String temp = null;
 				while ((temp = br.readLine()) != null) {
 					sbf.append(temp);
-					sbf.append("\r\n");
 				}
 				result = sbf.toString();
 			}

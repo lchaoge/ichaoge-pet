@@ -1,40 +1,40 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ichaoge.pet.dao.mapper.ArticleSortMapper">
-  <resultMap id="BaseResultMap" type="com.ichaoge.pet.domain.entity.ArticleSort">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="parent_pet_sort_id" jdbcType="BIGINT" property="parentPetSortId" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="photo" jdbcType="VARCHAR" property="photo" />
-    <result column="see" jdbcType="INTEGER" property="see" />
-    <result column="praise" jdbcType="INTEGER" property="praise" />
-    <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="creator" jdbcType="BIGINT" property="creator" />
-    <result column="created" jdbcType="TIMESTAMP" property="created" />
-    <result column="modified" jdbcType="TIMESTAMP" property="modified" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ichaoge.pet.dao.mapper.ArticleSortMapper" >
+  <resultMap id="BaseResultMap" type="com.ichaoge.pet.domain.entity.ArticleSort" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="parent_pet_sort_id" property="parentPetSortId" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="photo" property="photo" jdbcType="VARCHAR" />
+    <result column="see" property="see" jdbcType="INTEGER" />
+    <result column="praise" property="praise" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="creator" property="creator" jdbcType="BIGINT" />
+    <result column="created" property="created" jdbcType="TIMESTAMP" />
+    <result column="modified" property="modified" jdbcType="TIMESTAMP" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ichaoge.pet.domain.entity.ArticleSort">
-    <result column="desc" jdbcType="LONGVARCHAR" property="desc" />
+  <resultMap id="ResultMapWithBLOBs" type="com.ichaoge.pet.domain.entity.ArticleSort" extends="BaseResultMap" >
+    <result column="describe" property="describe" jdbcType="LONGVARCHAR" />
   </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -45,25 +45,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -74,43 +74,43 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List">
+  <sql id="Base_Column_List" >
     id, parent_pet_sort_id, title, photo, see, praise, status, creator, created, modified
   </sql>
-  <sql id="Blob_Column_List">
-    desc
+  <sql id="Blob_Column_List" >
+    describe
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.ichaoge.pet.domain.entity.ArticleSortExample" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.ichaoge.pet.domain.entity.ArticleSortExample" >
     select
-    <if test="distinct">
+    <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
     from article_sort
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null">
+    <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" parameterType="com.ichaoge.pet.domain.entity.ArticleSortExample" resultMap="BaseResultMap">
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ichaoge.pet.domain.entity.ArticleSortExample" >
     select
-    <if test="distinct">
+    <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
     from article_sort
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null">
+    <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     ,
@@ -118,147 +118,147 @@
     from article_sort
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from article_sort
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ichaoge.pet.domain.entity.ArticleSortExample">
+  <delete id="deleteByExample" parameterType="com.ichaoge.pet.domain.entity.ArticleSortExample" >
     delete from article_sort
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ichaoge.pet.domain.entity.ArticleSort">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+  <insert id="insert" parameterType="com.ichaoge.pet.domain.entity.ArticleSort" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into article_sort (parent_pet_sort_id, title, photo, 
       see, praise, status, 
       creator, created, modified, 
-      desc)
+      describe)
     values (#{parentPetSortId,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, 
       #{see,jdbcType=INTEGER}, #{praise,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
       #{creator,jdbcType=BIGINT}, #{created,jdbcType=TIMESTAMP}, #{modified,jdbcType=TIMESTAMP}, 
-      #{desc,jdbcType=LONGVARCHAR})
+      #{describe,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ichaoge.pet.domain.entity.ArticleSort">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+  <insert id="insertSelective" parameterType="com.ichaoge.pet.domain.entity.ArticleSort" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into article_sort
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="parentPetSortId != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="parentPetSortId != null" >
         parent_pet_sort_id,
       </if>
-      <if test="title != null">
+      <if test="title != null" >
         title,
       </if>
-      <if test="photo != null">
+      <if test="photo != null" >
         photo,
       </if>
-      <if test="see != null">
+      <if test="see != null" >
         see,
       </if>
-      <if test="praise != null">
+      <if test="praise != null" >
         praise,
       </if>
-      <if test="status != null">
+      <if test="status != null" >
         status,
       </if>
-      <if test="creator != null">
+      <if test="creator != null" >
         creator,
       </if>
-      <if test="created != null">
+      <if test="created != null" >
         created,
       </if>
-      <if test="modified != null">
+      <if test="modified != null" >
         modified,
       </if>
-      <if test="desc != null">
-        desc,
+      <if test="describe != null" >
+        describe,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="parentPetSortId != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="parentPetSortId != null" >
         #{parentPetSortId,jdbcType=BIGINT},
       </if>
-      <if test="title != null">
+      <if test="title != null" >
         #{title,jdbcType=VARCHAR},
       </if>
-      <if test="photo != null">
+      <if test="photo != null" >
         #{photo,jdbcType=VARCHAR},
       </if>
-      <if test="see != null">
+      <if test="see != null" >
         #{see,jdbcType=INTEGER},
       </if>
-      <if test="praise != null">
+      <if test="praise != null" >
         #{praise,jdbcType=INTEGER},
       </if>
-      <if test="status != null">
+      <if test="status != null" >
         #{status,jdbcType=INTEGER},
       </if>
-      <if test="creator != null">
+      <if test="creator != null" >
         #{creator,jdbcType=BIGINT},
       </if>
-      <if test="created != null">
+      <if test="created != null" >
         #{created,jdbcType=TIMESTAMP},
       </if>
-      <if test="modified != null">
+      <if test="modified != null" >
         #{modified,jdbcType=TIMESTAMP},
       </if>
-      <if test="desc != null">
-        #{desc,jdbcType=LONGVARCHAR},
+      <if test="describe != null" >
+        #{describe,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ichaoge.pet.domain.entity.ArticleSortExample" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="com.ichaoge.pet.domain.entity.ArticleSortExample" resultType="java.lang.Integer" >
     select count(*) from article_sort
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+  <update id="updateByExampleSelective" parameterType="map" >
     update article_sort
-    <set>
-      <if test="record.id != null">
+    <set >
+      <if test="record.id != null" >
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.parentPetSortId != null">
+      <if test="record.parentPetSortId != null" >
         parent_pet_sort_id = #{record.parentPetSortId,jdbcType=BIGINT},
       </if>
-      <if test="record.title != null">
+      <if test="record.title != null" >
         title = #{record.title,jdbcType=VARCHAR},
       </if>
-      <if test="record.photo != null">
+      <if test="record.photo != null" >
         photo = #{record.photo,jdbcType=VARCHAR},
       </if>
-      <if test="record.see != null">
+      <if test="record.see != null" >
         see = #{record.see,jdbcType=INTEGER},
       </if>
-      <if test="record.praise != null">
+      <if test="record.praise != null" >
         praise = #{record.praise,jdbcType=INTEGER},
       </if>
-      <if test="record.status != null">
+      <if test="record.status != null" >
         status = #{record.status,jdbcType=INTEGER},
       </if>
-      <if test="record.creator != null">
+      <if test="record.creator != null" >
         creator = #{record.creator,jdbcType=BIGINT},
       </if>
-      <if test="record.created != null">
+      <if test="record.created != null" >
         created = #{record.created,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.modified != null">
+      <if test="record.modified != null" >
         modified = #{record.modified,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.desc != null">
-        desc = #{record.desc,jdbcType=LONGVARCHAR},
+      <if test="record.describe != null" >
+        describe = #{record.describe,jdbcType=LONGVARCHAR},
       </if>
     </set>
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
     update article_sort
     set id = #{record.id,jdbcType=BIGINT},
       parent_pet_sort_id = #{record.parentPetSortId,jdbcType=BIGINT},
@@ -270,12 +270,12 @@
       creator = #{record.creator,jdbcType=BIGINT},
       created = #{record.created,jdbcType=TIMESTAMP},
       modified = #{record.modified,jdbcType=TIMESTAMP},
-      desc = #{record.desc,jdbcType=LONGVARCHAR}
-    <if test="_parameter != null">
+      describe = #{record.describe,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map">
+  <update id="updateByExample" parameterType="map" >
     update article_sort
     set id = #{record.id,jdbcType=BIGINT},
       parent_pet_sort_id = #{record.parentPetSortId,jdbcType=BIGINT},
@@ -287,47 +287,47 @@
       creator = #{record.creator,jdbcType=BIGINT},
       created = #{record.created,jdbcType=TIMESTAMP},
       modified = #{record.modified,jdbcType=TIMESTAMP}
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ichaoge.pet.domain.entity.ArticleSort">
+  <update id="updateByPrimaryKeySelective" parameterType="com.ichaoge.pet.domain.entity.ArticleSort" >
     update article_sort
-    <set>
-      <if test="parentPetSortId != null">
+    <set >
+      <if test="parentPetSortId != null" >
         parent_pet_sort_id = #{parentPetSortId,jdbcType=BIGINT},
       </if>
-      <if test="title != null">
+      <if test="title != null" >
         title = #{title,jdbcType=VARCHAR},
       </if>
-      <if test="photo != null">
+      <if test="photo != null" >
         photo = #{photo,jdbcType=VARCHAR},
       </if>
-      <if test="see != null">
+      <if test="see != null" >
         see = #{see,jdbcType=INTEGER},
       </if>
-      <if test="praise != null">
+      <if test="praise != null" >
         praise = #{praise,jdbcType=INTEGER},
       </if>
-      <if test="status != null">
+      <if test="status != null" >
         status = #{status,jdbcType=INTEGER},
       </if>
-      <if test="creator != null">
+      <if test="creator != null" >
         creator = #{creator,jdbcType=BIGINT},
       </if>
-      <if test="created != null">
+      <if test="created != null" >
         created = #{created,jdbcType=TIMESTAMP},
       </if>
-      <if test="modified != null">
+      <if test="modified != null" >
         modified = #{modified,jdbcType=TIMESTAMP},
       </if>
-      <if test="desc != null">
-        desc = #{desc,jdbcType=LONGVARCHAR},
+      <if test="describe != null" >
+        describe = #{describe,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ichaoge.pet.domain.entity.ArticleSort">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ichaoge.pet.domain.entity.ArticleSort" >
     update article_sort
     set parent_pet_sort_id = #{parentPetSortId,jdbcType=BIGINT},
       title = #{title,jdbcType=VARCHAR},
@@ -338,716 +338,10 @@
       creator = #{creator,jdbcType=BIGINT},
       created = #{created,jdbcType=TIMESTAMP},
       modified = #{modified,jdbcType=TIMESTAMP},
-      desc = #{desc,jdbcType=LONGVARCHAR}
+      describe = #{describe,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ichaoge.pet.domain.entity.ArticleSort">
-    update article_sort
-    set parent_pet_sort_id = #{parentPetSortId,jdbcType=BIGINT},
-      title = #{title,jdbcType=VARCHAR},
-      photo = #{photo,jdbcType=VARCHAR},
-      see = #{see,jdbcType=INTEGER},
-      praise = #{praise,jdbcType=INTEGER},
-      status = #{status,jdbcType=INTEGER},
-      creator = #{creator,jdbcType=BIGINT},
-      created = #{created,jdbcType=TIMESTAMP},
-      modified = #{modified,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <resultMap id="BaseResultMap" type="com.ichaoge.pet.domain.entity.ArticleSort">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="parent_pet_sort_id" jdbcType="BIGINT" property="parentPetSortId" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="photo" jdbcType="VARCHAR" property="photo" />
-    <result column="see" jdbcType="INTEGER" property="see" />
-    <result column="praise" jdbcType="INTEGER" property="praise" />
-    <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="creator" jdbcType="BIGINT" property="creator" />
-    <result column="created" jdbcType="TIMESTAMP" property="created" />
-    <result column="modified" jdbcType="TIMESTAMP" property="modified" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ichaoge.pet.domain.entity.ArticleSort">
-    <result column="desc" jdbcType="LONGVARCHAR" property="desc" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    id, parent_pet_sort_id, title, photo, see, praise, status, creator, created, modified
-  </sql>
-  <sql id="Blob_Column_List">
-    desc
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.ichaoge.pet.domain.entity.ArticleSortExample" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from article_sort
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByExample" parameterType="com.ichaoge.pet.domain.entity.ArticleSortExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from article_sort
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from article_sort
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from article_sort
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.ichaoge.pet.domain.entity.ArticleSortExample">
-    delete from article_sort
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.ichaoge.pet.domain.entity.ArticleSort">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into article_sort (parent_pet_sort_id, title, photo, 
-      see, praise, status, 
-      creator, created, modified, 
-      desc)
-    values (#{parentPetSortId,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, 
-      #{see,jdbcType=INTEGER}, #{praise,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
-      #{creator,jdbcType=BIGINT}, #{created,jdbcType=TIMESTAMP}, #{modified,jdbcType=TIMESTAMP}, 
-      #{desc,jdbcType=LONGVARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.ichaoge.pet.domain.entity.ArticleSort">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into article_sort
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="parentPetSortId != null">
-        parent_pet_sort_id,
-      </if>
-      <if test="title != null">
-        title,
-      </if>
-      <if test="photo != null">
-        photo,
-      </if>
-      <if test="see != null">
-        see,
-      </if>
-      <if test="praise != null">
-        praise,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="creator != null">
-        creator,
-      </if>
-      <if test="created != null">
-        created,
-      </if>
-      <if test="modified != null">
-        modified,
-      </if>
-      <if test="desc != null">
-        desc,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="parentPetSortId != null">
-        #{parentPetSortId,jdbcType=BIGINT},
-      </if>
-      <if test="title != null">
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="photo != null">
-        #{photo,jdbcType=VARCHAR},
-      </if>
-      <if test="see != null">
-        #{see,jdbcType=INTEGER},
-      </if>
-      <if test="praise != null">
-        #{praise,jdbcType=INTEGER},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="creator != null">
-        #{creator,jdbcType=BIGINT},
-      </if>
-      <if test="created != null">
-        #{created,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modified != null">
-        #{modified,jdbcType=TIMESTAMP},
-      </if>
-      <if test="desc != null">
-        #{desc,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.ichaoge.pet.domain.entity.ArticleSortExample" resultType="java.lang.Integer">
-    select count(*) from article_sort
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update article_sort
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=BIGINT},
-      </if>
-      <if test="record.parentPetSortId != null">
-        parent_pet_sort_id = #{record.parentPetSortId,jdbcType=BIGINT},
-      </if>
-      <if test="record.title != null">
-        title = #{record.title,jdbcType=VARCHAR},
-      </if>
-      <if test="record.photo != null">
-        photo = #{record.photo,jdbcType=VARCHAR},
-      </if>
-      <if test="record.see != null">
-        see = #{record.see,jdbcType=INTEGER},
-      </if>
-      <if test="record.praise != null">
-        praise = #{record.praise,jdbcType=INTEGER},
-      </if>
-      <if test="record.status != null">
-        status = #{record.status,jdbcType=INTEGER},
-      </if>
-      <if test="record.creator != null">
-        creator = #{record.creator,jdbcType=BIGINT},
-      </if>
-      <if test="record.created != null">
-        created = #{record.created,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.modified != null">
-        modified = #{record.modified,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.desc != null">
-        desc = #{record.desc,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update article_sort
-    set id = #{record.id,jdbcType=BIGINT},
-      parent_pet_sort_id = #{record.parentPetSortId,jdbcType=BIGINT},
-      title = #{record.title,jdbcType=VARCHAR},
-      photo = #{record.photo,jdbcType=VARCHAR},
-      see = #{record.see,jdbcType=INTEGER},
-      praise = #{record.praise,jdbcType=INTEGER},
-      status = #{record.status,jdbcType=INTEGER},
-      creator = #{record.creator,jdbcType=BIGINT},
-      created = #{record.created,jdbcType=TIMESTAMP},
-      modified = #{record.modified,jdbcType=TIMESTAMP},
-      desc = #{record.desc,jdbcType=LONGVARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update article_sort
-    set id = #{record.id,jdbcType=BIGINT},
-      parent_pet_sort_id = #{record.parentPetSortId,jdbcType=BIGINT},
-      title = #{record.title,jdbcType=VARCHAR},
-      photo = #{record.photo,jdbcType=VARCHAR},
-      see = #{record.see,jdbcType=INTEGER},
-      praise = #{record.praise,jdbcType=INTEGER},
-      status = #{record.status,jdbcType=INTEGER},
-      creator = #{record.creator,jdbcType=BIGINT},
-      created = #{record.created,jdbcType=TIMESTAMP},
-      modified = #{record.modified,jdbcType=TIMESTAMP}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ichaoge.pet.domain.entity.ArticleSort">
-    update article_sort
-    <set>
-      <if test="parentPetSortId != null">
-        parent_pet_sort_id = #{parentPetSortId,jdbcType=BIGINT},
-      </if>
-      <if test="title != null">
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="photo != null">
-        photo = #{photo,jdbcType=VARCHAR},
-      </if>
-      <if test="see != null">
-        see = #{see,jdbcType=INTEGER},
-      </if>
-      <if test="praise != null">
-        praise = #{praise,jdbcType=INTEGER},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="creator != null">
-        creator = #{creator,jdbcType=BIGINT},
-      </if>
-      <if test="created != null">
-        created = #{created,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modified != null">
-        modified = #{modified,jdbcType=TIMESTAMP},
-      </if>
-      <if test="desc != null">
-        desc = #{desc,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ichaoge.pet.domain.entity.ArticleSort">
-    update article_sort
-    set parent_pet_sort_id = #{parentPetSortId,jdbcType=BIGINT},
-      title = #{title,jdbcType=VARCHAR},
-      photo = #{photo,jdbcType=VARCHAR},
-      see = #{see,jdbcType=INTEGER},
-      praise = #{praise,jdbcType=INTEGER},
-      status = #{status,jdbcType=INTEGER},
-      creator = #{creator,jdbcType=BIGINT},
-      created = #{created,jdbcType=TIMESTAMP},
-      modified = #{modified,jdbcType=TIMESTAMP},
-      desc = #{desc,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ichaoge.pet.domain.entity.ArticleSort">
-    update article_sort
-    set parent_pet_sort_id = #{parentPetSortId,jdbcType=BIGINT},
-      title = #{title,jdbcType=VARCHAR},
-      photo = #{photo,jdbcType=VARCHAR},
-      see = #{see,jdbcType=INTEGER},
-      praise = #{praise,jdbcType=INTEGER},
-      status = #{status,jdbcType=INTEGER},
-      creator = #{creator,jdbcType=BIGINT},
-      created = #{created,jdbcType=TIMESTAMP},
-      modified = #{modified,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <resultMap id="BaseResultMap" type="com.ichaoge.pet.domain.entity.ArticleSort">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="parent_pet_sort_id" jdbcType="BIGINT" property="parentPetSortId" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="photo" jdbcType="VARCHAR" property="photo" />
-    <result column="see" jdbcType="INTEGER" property="see" />
-    <result column="praise" jdbcType="INTEGER" property="praise" />
-    <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="creator" jdbcType="BIGINT" property="creator" />
-    <result column="created" jdbcType="TIMESTAMP" property="created" />
-    <result column="modified" jdbcType="TIMESTAMP" property="modified" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ichaoge.pet.domain.entity.ArticleSort">
-    <result column="desc" jdbcType="LONGVARCHAR" property="desc" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    id, parent_pet_sort_id, title, photo, see, praise, status, creator, created, modified
-  </sql>
-  <sql id="Blob_Column_List">
-    desc
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.ichaoge.pet.domain.entity.ArticleSortExample" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from article_sort
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByExample" parameterType="com.ichaoge.pet.domain.entity.ArticleSortExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from article_sort
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from article_sort
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from article_sort
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.ichaoge.pet.domain.entity.ArticleSortExample">
-    delete from article_sort
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.ichaoge.pet.domain.entity.ArticleSort">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into article_sort (parent_pet_sort_id, title, photo, 
-      see, praise, status, 
-      creator, created, modified, 
-      desc)
-    values (#{parentPetSortId,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, 
-      #{see,jdbcType=INTEGER}, #{praise,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
-      #{creator,jdbcType=BIGINT}, #{created,jdbcType=TIMESTAMP}, #{modified,jdbcType=TIMESTAMP}, 
-      #{desc,jdbcType=LONGVARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.ichaoge.pet.domain.entity.ArticleSort">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into article_sort
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="parentPetSortId != null">
-        parent_pet_sort_id,
-      </if>
-      <if test="title != null">
-        title,
-      </if>
-      <if test="photo != null">
-        photo,
-      </if>
-      <if test="see != null">
-        see,
-      </if>
-      <if test="praise != null">
-        praise,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="creator != null">
-        creator,
-      </if>
-      <if test="created != null">
-        created,
-      </if>
-      <if test="modified != null">
-        modified,
-      </if>
-      <if test="desc != null">
-        desc,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="parentPetSortId != null">
-        #{parentPetSortId,jdbcType=BIGINT},
-      </if>
-      <if test="title != null">
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="photo != null">
-        #{photo,jdbcType=VARCHAR},
-      </if>
-      <if test="see != null">
-        #{see,jdbcType=INTEGER},
-      </if>
-      <if test="praise != null">
-        #{praise,jdbcType=INTEGER},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="creator != null">
-        #{creator,jdbcType=BIGINT},
-      </if>
-      <if test="created != null">
-        #{created,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modified != null">
-        #{modified,jdbcType=TIMESTAMP},
-      </if>
-      <if test="desc != null">
-        #{desc,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.ichaoge.pet.domain.entity.ArticleSortExample" resultType="java.lang.Integer">
-    select count(*) from article_sort
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update article_sort
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=BIGINT},
-      </if>
-      <if test="record.parentPetSortId != null">
-        parent_pet_sort_id = #{record.parentPetSortId,jdbcType=BIGINT},
-      </if>
-      <if test="record.title != null">
-        title = #{record.title,jdbcType=VARCHAR},
-      </if>
-      <if test="record.photo != null">
-        photo = #{record.photo,jdbcType=VARCHAR},
-      </if>
-      <if test="record.see != null">
-        see = #{record.see,jdbcType=INTEGER},
-      </if>
-      <if test="record.praise != null">
-        praise = #{record.praise,jdbcType=INTEGER},
-      </if>
-      <if test="record.status != null">
-        status = #{record.status,jdbcType=INTEGER},
-      </if>
-      <if test="record.creator != null">
-        creator = #{record.creator,jdbcType=BIGINT},
-      </if>
-      <if test="record.created != null">
-        created = #{record.created,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.modified != null">
-        modified = #{record.modified,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.desc != null">
-        desc = #{record.desc,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update article_sort
-    set id = #{record.id,jdbcType=BIGINT},
-      parent_pet_sort_id = #{record.parentPetSortId,jdbcType=BIGINT},
-      title = #{record.title,jdbcType=VARCHAR},
-      photo = #{record.photo,jdbcType=VARCHAR},
-      see = #{record.see,jdbcType=INTEGER},
-      praise = #{record.praise,jdbcType=INTEGER},
-      status = #{record.status,jdbcType=INTEGER},
-      creator = #{record.creator,jdbcType=BIGINT},
-      created = #{record.created,jdbcType=TIMESTAMP},
-      modified = #{record.modified,jdbcType=TIMESTAMP},
-      desc = #{record.desc,jdbcType=LONGVARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update article_sort
-    set id = #{record.id,jdbcType=BIGINT},
-      parent_pet_sort_id = #{record.parentPetSortId,jdbcType=BIGINT},
-      title = #{record.title,jdbcType=VARCHAR},
-      photo = #{record.photo,jdbcType=VARCHAR},
-      see = #{record.see,jdbcType=INTEGER},
-      praise = #{record.praise,jdbcType=INTEGER},
-      status = #{record.status,jdbcType=INTEGER},
-      creator = #{record.creator,jdbcType=BIGINT},
-      created = #{record.created,jdbcType=TIMESTAMP},
-      modified = #{record.modified,jdbcType=TIMESTAMP}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ichaoge.pet.domain.entity.ArticleSort">
-    update article_sort
-    <set>
-      <if test="parentPetSortId != null">
-        parent_pet_sort_id = #{parentPetSortId,jdbcType=BIGINT},
-      </if>
-      <if test="title != null">
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="photo != null">
-        photo = #{photo,jdbcType=VARCHAR},
-      </if>
-      <if test="see != null">
-        see = #{see,jdbcType=INTEGER},
-      </if>
-      <if test="praise != null">
-        praise = #{praise,jdbcType=INTEGER},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="creator != null">
-        creator = #{creator,jdbcType=BIGINT},
-      </if>
-      <if test="created != null">
-        created = #{created,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modified != null">
-        modified = #{modified,jdbcType=TIMESTAMP},
-      </if>
-      <if test="desc != null">
-        desc = #{desc,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ichaoge.pet.domain.entity.ArticleSort">
-    update article_sort
-    set parent_pet_sort_id = #{parentPetSortId,jdbcType=BIGINT},
-      title = #{title,jdbcType=VARCHAR},
-      photo = #{photo,jdbcType=VARCHAR},
-      see = #{see,jdbcType=INTEGER},
-      praise = #{praise,jdbcType=INTEGER},
-      status = #{status,jdbcType=INTEGER},
-      creator = #{creator,jdbcType=BIGINT},
-      created = #{created,jdbcType=TIMESTAMP},
-      modified = #{modified,jdbcType=TIMESTAMP},
-      desc = #{desc,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ichaoge.pet.domain.entity.ArticleSort">
+  <update id="updateByPrimaryKey" parameterType="com.ichaoge.pet.domain.entity.ArticleSort" >
     update article_sort
     set parent_pet_sort_id = #{parentPetSortId,jdbcType=BIGINT},
       title = #{title,jdbcType=VARCHAR},

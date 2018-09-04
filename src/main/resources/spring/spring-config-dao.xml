@@ -65,14 +65,11 @@
         <property name="plugins">
             <list>
                 <bean id="sqlStatementInterceptor" class="com.ichaoge.pet.dao.mybatis.SqlStatementInterceptor"/>
-                <bean
-                        class="com.ichaoge.pet.dao.mybatis.PaginationInterceptor">
+                <bean class="com.ichaoge.pet.dao.mybatis.PaginationInterceptor">
                     <property name="dataBaseDialect">
-                        <bean
-                                class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+                        <bean class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
                             <property name="staticField">
-                                <value>com.ichaoge.pet.dao.mybatis.DataBaseDialect.MYSQL
-                                </value>
+                                <value>com.ichaoge.pet.dao.mybatis.DataBaseDialect.MYSQL</value>
                             </property>
                         </bean>
                     </property>
@@ -83,8 +80,7 @@
 
     <!--扫描basePackage下所有mapper -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage"
-                  value="com.ichaoge.pet.dao.mapper"/>
+        <property name="basePackage" value="com.ichaoge.pet.dao.mapper"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
         <!--<property name="annotationClass" value="org.springframework.stereotype.Repository"/> -->
     </bean>

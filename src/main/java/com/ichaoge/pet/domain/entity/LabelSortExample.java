@@ -235,73 +235,73 @@ public class LabelSortExample {
             return (Criteria) this;
         }
 
-        public Criteria andDescIsNull() {
-            addCriterion("desc is null");
+        public Criteria andDescribeIsNull() {
+            addCriterion("describe is null");
             return (Criteria) this;
         }
 
-        public Criteria andDescIsNotNull() {
-            addCriterion("desc is not null");
+        public Criteria andDescribeIsNotNull() {
+            addCriterion("describe is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDescEqualTo(String value) {
-            addCriterion("desc =", value, "desc");
+        public Criteria andDescribeEqualTo(String value) {
+            addCriterion("describe =", value, "describe");
             return (Criteria) this;
         }
 
-        public Criteria andDescNotEqualTo(String value) {
-            addCriterion("desc <>", value, "desc");
+        public Criteria andDescribeNotEqualTo(String value) {
+            addCriterion("describe <>", value, "describe");
             return (Criteria) this;
         }
 
-        public Criteria andDescGreaterThan(String value) {
-            addCriterion("desc >", value, "desc");
+        public Criteria andDescribeGreaterThan(String value) {
+            addCriterion("describe >", value, "describe");
             return (Criteria) this;
         }
 
-        public Criteria andDescGreaterThanOrEqualTo(String value) {
-            addCriterion("desc >=", value, "desc");
+        public Criteria andDescribeGreaterThanOrEqualTo(String value) {
+            addCriterion("describe >=", value, "describe");
             return (Criteria) this;
         }
 
-        public Criteria andDescLessThan(String value) {
-            addCriterion("desc <", value, "desc");
+        public Criteria andDescribeLessThan(String value) {
+            addCriterion("describe <", value, "describe");
             return (Criteria) this;
         }
 
-        public Criteria andDescLessThanOrEqualTo(String value) {
-            addCriterion("desc <=", value, "desc");
+        public Criteria andDescribeLessThanOrEqualTo(String value) {
+            addCriterion("describe <=", value, "describe");
             return (Criteria) this;
         }
 
-        public Criteria andDescLike(String value) {
-            addCriterion("desc like", value, "desc");
+        public Criteria andDescribeLike(String value) {
+            addCriterion("describe like", value, "describe");
             return (Criteria) this;
         }
 
-        public Criteria andDescNotLike(String value) {
-            addCriterion("desc not like", value, "desc");
+        public Criteria andDescribeNotLike(String value) {
+            addCriterion("describe not like", value, "describe");
             return (Criteria) this;
         }
 
-        public Criteria andDescIn(List<String> values) {
-            addCriterion("desc in", values, "desc");
+        public Criteria andDescribeIn(List<String> values) {
+            addCriterion("describe in", values, "describe");
             return (Criteria) this;
         }
 
-        public Criteria andDescNotIn(List<String> values) {
-            addCriterion("desc not in", values, "desc");
+        public Criteria andDescribeNotIn(List<String> values) {
+            addCriterion("describe not in", values, "describe");
             return (Criteria) this;
         }
 
-        public Criteria andDescBetween(String value1, String value2) {
-            addCriterion("desc between", value1, value2, "desc");
+        public Criteria andDescribeBetween(String value1, String value2) {
+            addCriterion("describe between", value1, value2, "describe");
             return (Criteria) this;
         }
 
-        public Criteria andDescNotBetween(String value1, String value2) {
-            addCriterion("desc not between", value1, value2, "desc");
+        public Criteria andDescribeNotBetween(String value1, String value2) {
+            addCriterion("describe not between", value1, value2, "describe");
             return (Criteria) this;
         }
 

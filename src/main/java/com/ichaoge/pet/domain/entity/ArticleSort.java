@@ -24,7 +24,7 @@ public class ArticleSort implements Serializable {
 
     private Date modified;
 
-    private String desc;
+    private String describe;
 
     private static final long serialVersionUID = 1L;
 
@@ -108,12 +108,12 @@ public class ArticleSort implements Serializable {
         this.modified = modified;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescribe() {
+        return describe;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+    public void setDescribe(String describe) {
+        this.describe = describe == null ? null : describe.trim();
     }
 
     @Override
@@ -138,7 +138,7 @@ public class ArticleSort implements Serializable {
             && (this.getCreator() == null ? other.getCreator() == null : this.getCreator().equals(other.getCreator()))
             && (this.getCreated() == null ? other.getCreated() == null : this.getCreated().equals(other.getCreated()))
             && (this.getModified() == null ? other.getModified() == null : this.getModified().equals(other.getModified()))
-            && (this.getDesc() == null ? other.getDesc() == null : this.getDesc().equals(other.getDesc()));
+            && (this.getDescribe() == null ? other.getDescribe() == null : this.getDescribe().equals(other.getDescribe()));
     }
 
     @Override
@@ -155,7 +155,7 @@ public class ArticleSort implements Serializable {
         result = prime * result + ((getCreator() == null) ? 0 : getCreator().hashCode());
         result = prime * result + ((getCreated() == null) ? 0 : getCreated().hashCode());
         result = prime * result + ((getModified() == null) ? 0 : getModified().hashCode());
-        result = prime * result + ((getDesc() == null) ? 0 : getDesc().hashCode());
+        result = prime * result + ((getDescribe() == null) ? 0 : getDescribe().hashCode());
         return result;
     }
 }

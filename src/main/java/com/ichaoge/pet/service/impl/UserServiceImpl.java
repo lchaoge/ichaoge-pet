@@ -23,6 +23,40 @@ public class UserServiceImpl implements UserServiceI {
     public List<User> selectByExample(UserParam param){
         UserExample userExample = new UserExample();
         UserExample.Criteria criteria = userExample.createCriteria();
+        if (org.apache.commons.lang3.StringUtils.isNotEmpty(param.getOpenid())) {
+            criteria.andOpenidEqualTo(param.getOpenid());
+        }
+        if (org.apache.commons.lang3.StringUtils.isNotEmpty(param.getUserName())) {
+            criteria.andOpenidEqualTo(param.getUserName());
+        }
         return userMapper.selectByExample(userExample);
     }
+
+    @Override
+    public int insert(User record){
+        return userMapper.insert(record);
+    }
+
+    @Override
+    public int insertSelective(User record){
+        return userMapper.insertSelective(record);
+    }
+
+    @Override
+    public int updateByPrimaryKey(User record){
+        return userMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public int updateByPrimaryKeySelective(User record){
+        return userMapper.updateByPrimaryKeySelective(record);
+    }
+
+    @Override
+    public User selectByPrimaryKey(Long id){
+        return userMapper.selectByPrimaryKey(id);
+    }
+
+
+
 }

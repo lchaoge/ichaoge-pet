@@ -20,6 +20,8 @@ public interface PetMapper {
 
     Pet selectByPrimaryKey(Long id);
 
+    Pet selectByCardNo(Long cardNo);
+
     int updateByExampleSelective(@Param("record") Pet record, @Param("example") PetExample example);
 
     int updateByExample(@Param("record") Pet record, @Param("example") PetExample example);

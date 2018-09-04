@@ -20,7 +20,7 @@ public class Pet implements Serializable {
 
     private String weight;
 
-    private String describe;
+    private String describes;
 
     private String sterilization;
 
@@ -102,12 +102,12 @@ public class Pet implements Serializable {
         this.weight = weight == null ? null : weight.trim();
     }
 
-    public String getDescribe() {
-        return describe;
+    public String getDescribes() {
+        return describes;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe == null ? null : describe.trim();
+    public void setDescribes(String describes) {
+        this.describes = describes == null ? null : describes.trim();
     }
 
     public String getSterilization() {
@@ -186,7 +186,7 @@ public class Pet implements Serializable {
             && (this.getPhoto() == null ? other.getPhoto() == null : this.getPhoto().equals(other.getPhoto()))
             && (this.getSex() == null ? other.getSex() == null : this.getSex().equals(other.getSex()))
             && (this.getWeight() == null ? other.getWeight() == null : this.getWeight().equals(other.getWeight()))
-            && (this.getDescribe() == null ? other.getDescribe() == null : this.getDescribe().equals(other.getDescribe()))
+            && (this.getDescribes() == null ? other.getDescribes() == null : this.getDescribes().equals(other.getDescribes()))
             && (this.getSterilization() == null ? other.getSterilization() == null : this.getSterilization().equals(other.getSterilization()))
             && (this.getBirthDate() == null ? other.getBirthDate() == null : this.getBirthDate().equals(other.getBirthDate()))
             && (this.getHomeDate() == null ? other.getHomeDate() == null : this.getHomeDate().equals(other.getHomeDate()))
@@ -208,7 +208,7 @@ public class Pet implements Serializable {
         result = prime * result + ((getPhoto() == null) ? 0 : getPhoto().hashCode());
         result = prime * result + ((getSex() == null) ? 0 : getSex().hashCode());
         result = prime * result + ((getWeight() == null) ? 0 : getWeight().hashCode());
-        result = prime * result + ((getDescribe() == null) ? 0 : getDescribe().hashCode());
+        result = prime * result + ((getDescribes() == null) ? 0 : getDescribes().hashCode());
         result = prime * result + ((getSterilization() == null) ? 0 : getSterilization().hashCode());
         result = prime * result + ((getBirthDate() == null) ? 0 : getBirthDate().hashCode());
         result = prime * result + ((getHomeDate() == null) ? 0 : getHomeDate().hashCode());

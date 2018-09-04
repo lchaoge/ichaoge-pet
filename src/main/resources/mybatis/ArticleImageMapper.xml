@@ -1,35 +1,35 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ichaoge.pet.dao.mapper.ArticleImageMapper">
-  <resultMap id="BaseResultMap" type="com.ichaoge.pet.domain.entity.ArticleImage">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="article_id" jdbcType="BIGINT" property="articleId" />
-    <result column="article_image_url" jdbcType="VARCHAR" property="articleImageUrl" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="creator" jdbcType="BIGINT" property="creator" />
-    <result column="created" jdbcType="TIMESTAMP" property="created" />
-    <result column="modified" jdbcType="TIMESTAMP" property="modified" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ichaoge.pet.dao.mapper.ArticleImageMapper" >
+  <resultMap id="BaseResultMap" type="com.ichaoge.pet.domain.entity.ArticleImage" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="article_id" property="articleId" jdbcType="BIGINT" />
+    <result column="article_image_url" property="articleImageUrl" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="creator" property="creator" jdbcType="BIGINT" />
+    <result column="created" property="created" jdbcType="TIMESTAMP" />
+    <result column="modified" property="modified" jdbcType="TIMESTAMP" />
   </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -40,25 +40,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -69,41 +69,41 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List">
+  <sql id="Base_Column_List" >
     id, article_id, article_image_url, title, status, creator, created, modified
   </sql>
-  <select id="selectByExample" parameterType="com.ichaoge.pet.domain.entity.ArticleImageExample" resultMap="BaseResultMap">
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ichaoge.pet.domain.entity.ArticleImageExample" >
     select
-    <if test="distinct">
+    <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
     from article_image
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null">
+    <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from article_image
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from article_image
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ichaoge.pet.domain.entity.ArticleImageExample">
+  <delete id="deleteByExample" parameterType="com.ichaoge.pet.domain.entity.ArticleImageExample" >
     delete from article_image
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ichaoge.pet.domain.entity.ArticleImage">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+  <insert id="insert" parameterType="com.ichaoge.pet.domain.entity.ArticleImage" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into article_image (article_id, article_image_url, title, 
@@ -113,97 +113,97 @@
       #{status,jdbcType=INTEGER}, #{creator,jdbcType=BIGINT}, #{created,jdbcType=TIMESTAMP}, 
       #{modified,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.ichaoge.pet.domain.entity.ArticleImage">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+  <insert id="insertSelective" parameterType="com.ichaoge.pet.domain.entity.ArticleImage" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into article_image
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="articleId != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="articleId != null" >
         article_id,
       </if>
-      <if test="articleImageUrl != null">
+      <if test="articleImageUrl != null" >
         article_image_url,
       </if>
-      <if test="title != null">
+      <if test="title != null" >
         title,
       </if>
-      <if test="status != null">
+      <if test="status != null" >
         status,
       </if>
-      <if test="creator != null">
+      <if test="creator != null" >
         creator,
       </if>
-      <if test="created != null">
+      <if test="created != null" >
         created,
       </if>
-      <if test="modified != null">
+      <if test="modified != null" >
         modified,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="articleId != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="articleId != null" >
         #{articleId,jdbcType=BIGINT},
       </if>
-      <if test="articleImageUrl != null">
+      <if test="articleImageUrl != null" >
         #{articleImageUrl,jdbcType=VARCHAR},
       </if>
-      <if test="title != null">
+      <if test="title != null" >
         #{title,jdbcType=VARCHAR},
       </if>
-      <if test="status != null">
+      <if test="status != null" >
         #{status,jdbcType=INTEGER},
       </if>
-      <if test="creator != null">
+      <if test="creator != null" >
         #{creator,jdbcType=BIGINT},
       </if>
-      <if test="created != null">
+      <if test="created != null" >
         #{created,jdbcType=TIMESTAMP},
       </if>
-      <if test="modified != null">
+      <if test="modified != null" >
         #{modified,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ichaoge.pet.domain.entity.ArticleImageExample" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="com.ichaoge.pet.domain.entity.ArticleImageExample" resultType="java.lang.Integer" >
     select count(*) from article_image
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+  <update id="updateByExampleSelective" parameterType="map" >
     update article_image
-    <set>
-      <if test="record.id != null">
+    <set >
+      <if test="record.id != null" >
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.articleId != null">
+      <if test="record.articleId != null" >
         article_id = #{record.articleId,jdbcType=BIGINT},
       </if>
-      <if test="record.articleImageUrl != null">
+      <if test="record.articleImageUrl != null" >
         article_image_url = #{record.articleImageUrl,jdbcType=VARCHAR},
       </if>
-      <if test="record.title != null">
+      <if test="record.title != null" >
         title = #{record.title,jdbcType=VARCHAR},
       </if>
-      <if test="record.status != null">
+      <if test="record.status != null" >
         status = #{record.status,jdbcType=INTEGER},
       </if>
-      <if test="record.creator != null">
+      <if test="record.creator != null" >
         creator = #{record.creator,jdbcType=BIGINT},
       </if>
-      <if test="record.created != null">
+      <if test="record.created != null" >
         created = #{record.created,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.modified != null">
+      <if test="record.modified != null" >
         modified = #{record.modified,jdbcType=TIMESTAMP},
       </if>
     </set>
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map">
+  <update id="updateByExample" parameterType="map" >
     update article_image
     set id = #{record.id,jdbcType=BIGINT},
       article_id = #{record.articleId,jdbcType=BIGINT},
@@ -213,546 +213,38 @@
       creator = #{record.creator,jdbcType=BIGINT},
       created = #{record.created,jdbcType=TIMESTAMP},
       modified = #{record.modified,jdbcType=TIMESTAMP}
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ichaoge.pet.domain.entity.ArticleImage">
+  <update id="updateByPrimaryKeySelective" parameterType="com.ichaoge.pet.domain.entity.ArticleImage" >
     update article_image
-    <set>
-      <if test="articleId != null">
+    <set >
+      <if test="articleId != null" >
         article_id = #{articleId,jdbcType=BIGINT},
       </if>
-      <if test="articleImageUrl != null">
+      <if test="articleImageUrl != null" >
         article_image_url = #{articleImageUrl,jdbcType=VARCHAR},
       </if>
-      <if test="title != null">
+      <if test="title != null" >
         title = #{title,jdbcType=VARCHAR},
       </if>
-      <if test="status != null">
+      <if test="status != null" >
         status = #{status,jdbcType=INTEGER},
       </if>
-      <if test="creator != null">
+      <if test="creator != null" >
         creator = #{creator,jdbcType=BIGINT},
       </if>
-      <if test="created != null">
+      <if test="created != null" >
         created = #{created,jdbcType=TIMESTAMP},
       </if>
-      <if test="modified != null">
+      <if test="modified != null" >
         modified = #{modified,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ichaoge.pet.domain.entity.ArticleImage">
-    update article_image
-    set article_id = #{articleId,jdbcType=BIGINT},
-      article_image_url = #{articleImageUrl,jdbcType=VARCHAR},
-      title = #{title,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER},
-      creator = #{creator,jdbcType=BIGINT},
-      created = #{created,jdbcType=TIMESTAMP},
-      modified = #{modified,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <resultMap id="BaseResultMap" type="com.ichaoge.pet.domain.entity.ArticleImage">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="article_id" jdbcType="BIGINT" property="articleId" />
-    <result column="article_image_url" jdbcType="VARCHAR" property="articleImageUrl" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="creator" jdbcType="BIGINT" property="creator" />
-    <result column="created" jdbcType="TIMESTAMP" property="created" />
-    <result column="modified" jdbcType="TIMESTAMP" property="modified" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    id, article_id, article_image_url, title, status, creator, created, modified
-  </sql>
-  <select id="selectByExample" parameterType="com.ichaoge.pet.domain.entity.ArticleImageExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from article_image
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from article_image
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from article_image
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.ichaoge.pet.domain.entity.ArticleImageExample">
-    delete from article_image
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.ichaoge.pet.domain.entity.ArticleImage">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into article_image (article_id, article_image_url, title, 
-      status, creator, created, 
-      modified)
-    values (#{articleId,jdbcType=BIGINT}, #{articleImageUrl,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
-      #{status,jdbcType=INTEGER}, #{creator,jdbcType=BIGINT}, #{created,jdbcType=TIMESTAMP}, 
-      #{modified,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.ichaoge.pet.domain.entity.ArticleImage">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into article_image
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="articleId != null">
-        article_id,
-      </if>
-      <if test="articleImageUrl != null">
-        article_image_url,
-      </if>
-      <if test="title != null">
-        title,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="creator != null">
-        creator,
-      </if>
-      <if test="created != null">
-        created,
-      </if>
-      <if test="modified != null">
-        modified,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="articleId != null">
-        #{articleId,jdbcType=BIGINT},
-      </if>
-      <if test="articleImageUrl != null">
-        #{articleImageUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="title != null">
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="creator != null">
-        #{creator,jdbcType=BIGINT},
-      </if>
-      <if test="created != null">
-        #{created,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modified != null">
-        #{modified,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.ichaoge.pet.domain.entity.ArticleImageExample" resultType="java.lang.Integer">
-    select count(*) from article_image
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update article_image
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=BIGINT},
-      </if>
-      <if test="record.articleId != null">
-        article_id = #{record.articleId,jdbcType=BIGINT},
-      </if>
-      <if test="record.articleImageUrl != null">
-        article_image_url = #{record.articleImageUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="record.title != null">
-        title = #{record.title,jdbcType=VARCHAR},
-      </if>
-      <if test="record.status != null">
-        status = #{record.status,jdbcType=INTEGER},
-      </if>
-      <if test="record.creator != null">
-        creator = #{record.creator,jdbcType=BIGINT},
-      </if>
-      <if test="record.created != null">
-        created = #{record.created,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.modified != null">
-        modified = #{record.modified,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update article_image
-    set id = #{record.id,jdbcType=BIGINT},
-      article_id = #{record.articleId,jdbcType=BIGINT},
-      article_image_url = #{record.articleImageUrl,jdbcType=VARCHAR},
-      title = #{record.title,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=INTEGER},
-      creator = #{record.creator,jdbcType=BIGINT},
-      created = #{record.created,jdbcType=TIMESTAMP},
-      modified = #{record.modified,jdbcType=TIMESTAMP}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ichaoge.pet.domain.entity.ArticleImage">
-    update article_image
-    <set>
-      <if test="articleId != null">
-        article_id = #{articleId,jdbcType=BIGINT},
-      </if>
-      <if test="articleImageUrl != null">
-        article_image_url = #{articleImageUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="title != null">
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="creator != null">
-        creator = #{creator,jdbcType=BIGINT},
-      </if>
-      <if test="created != null">
-        created = #{created,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modified != null">
-        modified = #{modified,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ichaoge.pet.domain.entity.ArticleImage">
-    update article_image
-    set article_id = #{articleId,jdbcType=BIGINT},
-      article_image_url = #{articleImageUrl,jdbcType=VARCHAR},
-      title = #{title,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER},
-      creator = #{creator,jdbcType=BIGINT},
-      created = #{created,jdbcType=TIMESTAMP},
-      modified = #{modified,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <resultMap id="BaseResultMap" type="com.ichaoge.pet.domain.entity.ArticleImage">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="article_id" jdbcType="BIGINT" property="articleId" />
-    <result column="article_image_url" jdbcType="VARCHAR" property="articleImageUrl" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="creator" jdbcType="BIGINT" property="creator" />
-    <result column="created" jdbcType="TIMESTAMP" property="created" />
-    <result column="modified" jdbcType="TIMESTAMP" property="modified" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    id, article_id, article_image_url, title, status, creator, created, modified
-  </sql>
-  <select id="selectByExample" parameterType="com.ichaoge.pet.domain.entity.ArticleImageExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from article_image
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from article_image
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from article_image
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.ichaoge.pet.domain.entity.ArticleImageExample">
-    delete from article_image
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.ichaoge.pet.domain.entity.ArticleImage">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into article_image (article_id, article_image_url, title, 
-      status, creator, created, 
-      modified)
-    values (#{articleId,jdbcType=BIGINT}, #{articleImageUrl,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
-      #{status,jdbcType=INTEGER}, #{creator,jdbcType=BIGINT}, #{created,jdbcType=TIMESTAMP}, 
-      #{modified,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.ichaoge.pet.domain.entity.ArticleImage">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into article_image
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="articleId != null">
-        article_id,
-      </if>
-      <if test="articleImageUrl != null">
-        article_image_url,
-      </if>
-      <if test="title != null">
-        title,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="creator != null">
-        creator,
-      </if>
-      <if test="created != null">
-        created,
-      </if>
-      <if test="modified != null">
-        modified,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="articleId != null">
-        #{articleId,jdbcType=BIGINT},
-      </if>
-      <if test="articleImageUrl != null">
-        #{articleImageUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="title != null">
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="creator != null">
-        #{creator,jdbcType=BIGINT},
-      </if>
-      <if test="created != null">
-        #{created,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modified != null">
-        #{modified,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.ichaoge.pet.domain.entity.ArticleImageExample" resultType="java.lang.Integer">
-    select count(*) from article_image
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update article_image
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=BIGINT},
-      </if>
-      <if test="record.articleId != null">
-        article_id = #{record.articleId,jdbcType=BIGINT},
-      </if>
-      <if test="record.articleImageUrl != null">
-        article_image_url = #{record.articleImageUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="record.title != null">
-        title = #{record.title,jdbcType=VARCHAR},
-      </if>
-      <if test="record.status != null">
-        status = #{record.status,jdbcType=INTEGER},
-      </if>
-      <if test="record.creator != null">
-        creator = #{record.creator,jdbcType=BIGINT},
-      </if>
-      <if test="record.created != null">
-        created = #{record.created,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.modified != null">
-        modified = #{record.modified,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update article_image
-    set id = #{record.id,jdbcType=BIGINT},
-      article_id = #{record.articleId,jdbcType=BIGINT},
-      article_image_url = #{record.articleImageUrl,jdbcType=VARCHAR},
-      title = #{record.title,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=INTEGER},
-      creator = #{record.creator,jdbcType=BIGINT},
-      created = #{record.created,jdbcType=TIMESTAMP},
-      modified = #{record.modified,jdbcType=TIMESTAMP}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ichaoge.pet.domain.entity.ArticleImage">
-    update article_image
-    <set>
-      <if test="articleId != null">
-        article_id = #{articleId,jdbcType=BIGINT},
-      </if>
-      <if test="articleImageUrl != null">
-        article_image_url = #{articleImageUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="title != null">
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="creator != null">
-        creator = #{creator,jdbcType=BIGINT},
-      </if>
-      <if test="created != null">
-        created = #{created,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modified != null">
-        modified = #{modified,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ichaoge.pet.domain.entity.ArticleImage">
+  <update id="updateByPrimaryKey" parameterType="com.ichaoge.pet.domain.entity.ArticleImage" >
     update article_image
     set article_id = #{articleId,jdbcType=BIGINT},
       article_image_url = #{articleImageUrl,jdbcType=VARCHAR},

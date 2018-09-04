@@ -8,7 +8,7 @@ public class LabelSort implements Serializable {
 
     private String title;
 
-    private String desc;
+    private String describe;
 
     private String photo;
 
@@ -38,12 +38,12 @@ public class LabelSort implements Serializable {
         this.title = title == null ? null : title.trim();
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescribe() {
+        return describe;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+    public void setDescribe(String describe) {
+        this.describe = describe == null ? null : describe.trim();
     }
 
     public String getPhoto() {
@@ -100,7 +100,7 @@ public class LabelSort implements Serializable {
         LabelSort other = (LabelSort) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getTitle() == null ? other.getTitle() == null : this.getTitle().equals(other.getTitle()))
-            && (this.getDesc() == null ? other.getDesc() == null : this.getDesc().equals(other.getDesc()))
+            && (this.getDescribe() == null ? other.getDescribe() == null : this.getDescribe().equals(other.getDescribe()))
             && (this.getPhoto() == null ? other.getPhoto() == null : this.getPhoto().equals(other.getPhoto()))
             && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
             && (this.getCreator() == null ? other.getCreator() == null : this.getCreator().equals(other.getCreator()))
@@ -114,7 +114,7 @@ public class LabelSort implements Serializable {
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getTitle() == null) ? 0 : getTitle().hashCode());
-        result = prime * result + ((getDesc() == null) ? 0 : getDesc().hashCode());
+        result = prime * result + ((getDescribe() == null) ? 0 : getDescribe().hashCode());
         result = prime * result + ((getPhoto() == null) ? 0 : getPhoto().hashCode());
         result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
         result = prime * result + ((getCreator() == null) ? 0 : getCreator().hashCode());
