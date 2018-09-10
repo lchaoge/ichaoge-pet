@@ -1,8 +1,11 @@
 package com.ichaoge.pet.domain.inputParam;
 
 
+import com.ichaoge.pet.domain.entity.Pet;
+
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by chaoge on 2018/8/28.
@@ -38,6 +41,8 @@ public class UserParam extends RequestParam implements Serializable {
     private Date created;
 
     private Date modified;
+
+    private List<Pet> petList;
 
     public Long getId() {
         return id;
@@ -159,6 +164,15 @@ public class UserParam extends RequestParam implements Serializable {
         this.modified = modified;
     }
 
+
+    public List<Pet> getPetList() {
+        return petList;
+    }
+
+    public void setPetList(List<Pet> petList) {
+        this.petList = petList;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("{");
@@ -176,6 +190,7 @@ public class UserParam extends RequestParam implements Serializable {
         sb.append("\"creator\":\"").append(creator).append('\"');
         sb.append("\"created\":\"").append(created).append('\"');
         sb.append("\"modified\":\"").append(modified).append('\"');
+        sb.append("\"petList\":\"").append(petList).append('\"');
         sb.append('}');
         return sb.toString();
     }

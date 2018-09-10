@@ -2,9 +2,11 @@ package com.ichaoge.pet.controller;
 
 import com.ichaoge.pet.controller.baseinfo.BaseController;
 import com.ichaoge.pet.domain.baseenum.ResulstCodeEnum;
+import com.ichaoge.pet.domain.entity.Pet;
 import com.ichaoge.pet.domain.entity.User;
 import com.ichaoge.pet.domain.entity.UserInfo;
 import com.ichaoge.pet.domain.inputParam.UserParam;
+import com.ichaoge.pet.service.iservice.PetServiceI;
 import com.ichaoge.pet.service.iservice.UserInfoServiceI;
 import com.ichaoge.pet.service.iservice.UserServiceI;
 import com.ichaoge.pet.utils.HttpClientUtil;
@@ -19,7 +21,9 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by chaoge on 2018/8/27.
@@ -35,6 +39,8 @@ public class UserController extends BaseController {
     private UserServiceI userServiceI;
     @Resource
     private UserInfoServiceI userInfoServiceI;
+    @Resource
+    private PetServiceI petServiceI;
 
     /**
      * 登录
@@ -49,7 +55,8 @@ public class UserController extends BaseController {
         String secret = "7d983f1bdbdf345deed336515c392843";
         String url = "https://api.weixin.qq.com/sns/jscode2session?appid="+appid+"&secret="+secret+"&js_code="+code+"&grant_type=authorization_code";
         logger.info("请求地址：" + request.getRequestURI() + "  " + "请求参数：" + code + "sessionid:" + request.getSession().getId() + "用户：" + getUser());
-        User user = null;
+        Map<String,Object> results = new HashMap<String,Object>();
+        User loginUser = null;
         String resultJson = HttpClientUtil.doGet(url);
         JSONObject jsonObject=JSONObject.fromObject(resultJson);
         String session_key = jsonObject.get("session_key").toString();
@@ -60,7 +67,7 @@ public class UserController extends BaseController {
             param.setOpenid(openid);
             List<User> users = userServiceI.selectByExample(param);
             if(users.size()>0){
-                user = users.get(0);
+                loginUser = users.get(0);
             }else{
                 User insertUser = new User();
                 insertUser.setOpenid(openid);
@@ -71,9 +78,9 @@ public class UserController extends BaseController {
                 if(result == 1){
                     // 注册成功
                     logger.error("注册成功！");
-                    user = userServiceI.selectByExample(param).get(0);
+                    loginUser = userServiceI.selectByExample(param).get(0);
                     UserInfo userInfo = new UserInfo();
-                    userInfo.setUserId(user.getId());
+                    userInfo.setUserId(loginUser.getId());
                     userInfo.setCreated(new Date());
                     userInfo.setModified(new Date());
                     int userInfoResult = userInfoServiceI.insert(userInfo);
@@ -89,14 +96,25 @@ public class UserController extends BaseController {
                 }
 
             }
-            logger.info("应答参数：" + user + ",sessionid:" + request.getSession().getId() + ",用户：" + getUser());
+            Pet petParam = new Pet();
+            petParam.setUserId(loginUser.getId());
+            List<Pet> petList = petServiceI.selectByExample(petParam);
+            Pet pet = null;
+            for (int i = 0;i<petList.size();i++){
+                if(petList.get(i).getIsCurrent().equals(1)){
+                    pet = petList.get(i);
+                    break;
+                }
+            }
+            results.put("loginUser",loginUser);
+            results.put("loginPet",pet);
+            logger.info("应答参数：" + results + ",sessionid:" + request.getSession().getId() + ",用户：" + getUser());
         } catch (Exception e) {
             logger.error("查询发生未知错误!", e);
             return Utils.webResult(false, ResulstCodeEnum.SERVICE_EXCEPTION.getCode(),
                     "查询发生未知错误!", null);
         }
-        return Utils.webResult(true, ResulstCodeEnum.SERVICE_SUCESS.getCode(),
-                ResulstCodeEnum.SERVICE_SUCESS.getCodeDesc(), user);
+        return Utils.webResult(true, ResulstCodeEnum.SERVICE_SUCESS.getCode(),ResulstCodeEnum.SERVICE_SUCESS.getCodeDesc(), results);
     }
 
     /**

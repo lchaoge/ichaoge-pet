@@ -12,6 +12,8 @@ public class Pet implements Serializable {
 
     private Long petSortId;
 
+    private Integer isCurrent;
+
     private String nickname;
 
     private String photo;
@@ -68,6 +70,14 @@ public class Pet implements Serializable {
 
     public void setPetSortId(Long petSortId) {
         this.petSortId = petSortId;
+    }
+
+    public Integer getIsCurrent() {
+        return isCurrent;
+    }
+
+    public void setIsCurrent(Integer isCurrent) {
+        this.isCurrent = isCurrent;
     }
 
     public String getNickname() {
@@ -182,6 +192,7 @@ public class Pet implements Serializable {
             && (this.getCardNo() == null ? other.getCardNo() == null : this.getCardNo().equals(other.getCardNo()))
             && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
             && (this.getPetSortId() == null ? other.getPetSortId() == null : this.getPetSortId().equals(other.getPetSortId()))
+            && (this.getIsCurrent() == null ? other.getIsCurrent() == null : this.getIsCurrent().equals(other.getIsCurrent()))
             && (this.getNickname() == null ? other.getNickname() == null : this.getNickname().equals(other.getNickname()))
             && (this.getPhoto() == null ? other.getPhoto() == null : this.getPhoto().equals(other.getPhoto()))
             && (this.getSex() == null ? other.getSex() == null : this.getSex().equals(other.getSex()))
@@ -204,6 +215,7 @@ public class Pet implements Serializable {
         result = prime * result + ((getCardNo() == null) ? 0 : getCardNo().hashCode());
         result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
         result = prime * result + ((getPetSortId() == null) ? 0 : getPetSortId().hashCode());
+        result = prime * result + ((getIsCurrent() == null) ? 0 : getIsCurrent().hashCode());
         result = prime * result + ((getNickname() == null) ? 0 : getNickname().hashCode());
         result = prime * result + ((getPhoto() == null) ? 0 : getPhoto().hashCode());
         result = prime * result + ((getSex() == null) ? 0 : getSex().hashCode());

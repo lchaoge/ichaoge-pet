@@ -6,6 +6,7 @@
     <result column="card_no" property="cardNo" jdbcType="BIGINT" />
     <result column="user_id" property="userId" jdbcType="BIGINT" />
     <result column="pet_sort_id" property="petSortId" jdbcType="BIGINT" />
+    <result column="is_current" property="isCurrent" jdbcType="INTEGER" />
     <result column="nickname" property="nickname" jdbcType="VARCHAR" />
     <result column="photo" property="photo" jdbcType="VARCHAR" />
     <result column="sex" property="sex" jdbcType="VARCHAR" />
@@ -78,8 +79,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, card_no, user_id, pet_sort_id, nickname, photo, sex, weight, describes, sterilization, 
-    birth_date, home_date, status, creator, created, modified
+    id, card_no, user_id, pet_sort_id, is_current, nickname, photo, sex, weight, describes, 
+    sterilization, birth_date, home_date, status, creator, created, modified
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ichaoge.pet.domain.entity.PetExample" >
     select
@@ -101,12 +102,6 @@
     from pet
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <select id="selectByCardNo" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select
-    <include refid="Base_Column_List" />
-    from pet
-    where card_no = #{cardNo,jdbcType=BIGINT}
-  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from pet
     where id = #{id,jdbcType=BIGINT}
@@ -122,17 +117,17 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into pet (card_no, user_id, pet_sort_id, 
-      nickname, photo, sex, 
-      weight, describes, sterilization, 
-      birth_date, home_date, status, 
-      creator, created, modified
-      )
+      is_current, nickname, photo, 
+      sex, weight, describes, 
+      sterilization, birth_date, home_date, 
+      status, creator, created, 
+      modified)
     values (#{cardNo,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{petSortId,jdbcType=BIGINT}, 
-      #{nickname,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
-      #{weight,jdbcType=VARCHAR}, #{describes,jdbcType=VARCHAR}, #{sterilization,jdbcType=VARCHAR}, 
-      #{birthDate,jdbcType=TIMESTAMP}, #{homeDate,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
-      #{creator,jdbcType=BIGINT}, #{created,jdbcType=TIMESTAMP}, #{modified,jdbcType=TIMESTAMP}
-      )
+      #{isCurrent,jdbcType=INTEGER}, #{nickname,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{weight,jdbcType=VARCHAR}, #{describes,jdbcType=VARCHAR}, 
+      #{sterilization,jdbcType=VARCHAR}, #{birthDate,jdbcType=TIMESTAMP}, #{homeDate,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER}, #{creator,jdbcType=BIGINT}, #{created,jdbcType=TIMESTAMP}, 
+      #{modified,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.ichaoge.pet.domain.entity.Pet" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
@@ -148,6 +143,9 @@
       </if>
       <if test="petSortId != null" >
         pet_sort_id,
+      </if>
+      <if test="isCurrent != null" >
+        is_current,
       </if>
       <if test="nickname != null" >
         nickname,
@@ -195,6 +193,9 @@
       </if>
       <if test="petSortId != null" >
         #{petSortId,jdbcType=BIGINT},
+      </if>
+      <if test="isCurrent != null" >
+        #{isCurrent,jdbcType=INTEGER},
       </if>
       <if test="nickname != null" >
         #{nickname,jdbcType=VARCHAR},
@@ -255,6 +256,9 @@
       <if test="record.petSortId != null" >
         pet_sort_id = #{record.petSortId,jdbcType=BIGINT},
       </if>
+      <if test="record.isCurrent != null" >
+        is_current = #{record.isCurrent,jdbcType=INTEGER},
+      </if>
       <if test="record.nickname != null" >
         nickname = #{record.nickname,jdbcType=VARCHAR},
       </if>
@@ -302,6 +306,7 @@
       card_no = #{record.cardNo,jdbcType=BIGINT},
       user_id = #{record.userId,jdbcType=BIGINT},
       pet_sort_id = #{record.petSortId,jdbcType=BIGINT},
+      is_current = #{record.isCurrent,jdbcType=INTEGER},
       nickname = #{record.nickname,jdbcType=VARCHAR},
       photo = #{record.photo,jdbcType=VARCHAR},
       sex = #{record.sex,jdbcType=VARCHAR},
@@ -329,6 +334,9 @@
       </if>
       <if test="petSortId != null" >
         pet_sort_id = #{petSortId,jdbcType=BIGINT},
+      </if>
+      <if test="isCurrent != null" >
+        is_current = #{isCurrent,jdbcType=INTEGER},
       </if>
       <if test="nickname != null" >
         nickname = #{nickname,jdbcType=VARCHAR},
@@ -374,6 +382,7 @@
     set card_no = #{cardNo,jdbcType=BIGINT},
       user_id = #{userId,jdbcType=BIGINT},
       pet_sort_id = #{petSortId,jdbcType=BIGINT},
+      is_current = #{isCurrent,jdbcType=INTEGER},
       nickname = #{nickname,jdbcType=VARCHAR},
       photo = #{photo,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=VARCHAR},
@@ -388,4 +397,10 @@
       modified = #{modified,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="selectByCardNo" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from pet
+    where card_no = #{cardNo,jdbcType=BIGINT}
+  </select>
 </mapper>

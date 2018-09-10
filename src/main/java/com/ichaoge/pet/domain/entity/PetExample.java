@@ -345,6 +345,66 @@ public class PetExample {
             return (Criteria) this;
         }
 
+        public Criteria andIsCurrentIsNull() {
+            addCriterion("is_current is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsCurrentIsNotNull() {
+            addCriterion("is_current is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsCurrentEqualTo(Integer value) {
+            addCriterion("is_current =", value, "isCurrent");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsCurrentNotEqualTo(Integer value) {
+            addCriterion("is_current <>", value, "isCurrent");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsCurrentGreaterThan(Integer value) {
+            addCriterion("is_current >", value, "isCurrent");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsCurrentGreaterThanOrEqualTo(Integer value) {
+            addCriterion("is_current >=", value, "isCurrent");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsCurrentLessThan(Integer value) {
+            addCriterion("is_current <", value, "isCurrent");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsCurrentLessThanOrEqualTo(Integer value) {
+            addCriterion("is_current <=", value, "isCurrent");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsCurrentIn(List<Integer> values) {
+            addCriterion("is_current in", values, "isCurrent");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsCurrentNotIn(List<Integer> values) {
+            addCriterion("is_current not in", values, "isCurrent");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsCurrentBetween(Integer value1, Integer value2) {
+            addCriterion("is_current between", value1, value2, "isCurrent");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsCurrentNotBetween(Integer value1, Integer value2) {
+            addCriterion("is_current not between", value1, value2, "isCurrent");
+            return (Criteria) this;
+        }
+
         public Criteria andNicknameIsNull() {
             addCriterion("nickname is null");
             return (Criteria) this;
@@ -625,73 +685,73 @@ public class PetExample {
             return (Criteria) this;
         }
 
-        public Criteria andDescribeIsNull() {
-            addCriterion("describe is null");
+        public Criteria andDescribesIsNull() {
+            addCriterion("describes is null");
             return (Criteria) this;
         }
 
-        public Criteria andDescribeIsNotNull() {
-            addCriterion("describe is not null");
+        public Criteria andDescribesIsNotNull() {
+            addCriterion("describes is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDescribeEqualTo(String value) {
-            addCriterion("describe =", value, "describe");
+        public Criteria andDescribesEqualTo(String value) {
+            addCriterion("describes =", value, "describes");
             return (Criteria) this;
         }
 
-        public Criteria andDescribeNotEqualTo(String value) {
-            addCriterion("describe <>", value, "describe");
+        public Criteria andDescribesNotEqualTo(String value) {
+            addCriterion("describes <>", value, "describes");
             return (Criteria) this;
         }
 
-        public Criteria andDescribeGreaterThan(String value) {
-            addCriterion("describe >", value, "describe");
+        public Criteria andDescribesGreaterThan(String value) {
+            addCriterion("describes >", value, "describes");
             return (Criteria) this;
         }
 
-        public Criteria andDescribeGreaterThanOrEqualTo(String value) {
-            addCriterion("describe >=", value, "describe");
+        public Criteria andDescribesGreaterThanOrEqualTo(String value) {
+            addCriterion("describes >=", value, "describes");
             return (Criteria) this;
         }
 
-        public Criteria andDescribeLessThan(String value) {
-            addCriterion("describe <", value, "describe");
+        public Criteria andDescribesLessThan(String value) {
+            addCriterion("describes <", value, "describes");
             return (Criteria) this;
         }
 
-        public Criteria andDescribeLessThanOrEqualTo(String value) {
-            addCriterion("describe <=", value, "describe");
+        public Criteria andDescribesLessThanOrEqualTo(String value) {
+            addCriterion("describes <=", value, "describes");
             return (Criteria) this;
         }
 
-        public Criteria andDescribeLike(String value) {
-            addCriterion("describe like", value, "describe");
+        public Criteria andDescribesLike(String value) {
+            addCriterion("describes like", value, "describes");
             return (Criteria) this;
         }
 
-        public Criteria andDescribeNotLike(String value) {
-            addCriterion("describe not like", value, "describe");
+        public Criteria andDescribesNotLike(String value) {
+            addCriterion("describes not like", value, "describes");
             return (Criteria) this;
         }
 
-        public Criteria andDescribeIn(List<String> values) {
-            addCriterion("describe in", values, "describe");
+        public Criteria andDescribesIn(List<String> values) {
+            addCriterion("describes in", values, "describes");
             return (Criteria) this;
         }
 
-        public Criteria andDescribeNotIn(List<String> values) {
-            addCriterion("describe not in", values, "describe");
+        public Criteria andDescribesNotIn(List<String> values) {
+            addCriterion("describes not in", values, "describes");
             return (Criteria) this;
         }
 
-        public Criteria andDescribeBetween(String value1, String value2) {
-            addCriterion("describe between", value1, value2, "describe");
+        public Criteria andDescribesBetween(String value1, String value2) {
+            addCriterion("describes between", value1, value2, "describes");
             return (Criteria) this;
         }
 
-        public Criteria andDescribeNotBetween(String value1, String value2) {
-            addCriterion("describe not between", value1, value2, "describe");
+        public Criteria andDescribesNotBetween(String value1, String value2) {
+            addCriterion("describes not between", value1, value2, "describes");
             return (Criteria) this;
         }
 

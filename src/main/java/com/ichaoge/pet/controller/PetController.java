@@ -96,4 +96,26 @@ public class PetController extends BaseController {
     }
 
 
+    /**
+     * 根据id查询宠物
+     *
+     * @param request
+     * @return 查询结果信息
+     */
+    @RequestMapping(value = "/queryPetById", method = RequestMethod.POST)
+    @ResponseBody
+    public RemoteResult<?> queryPetById(HttpServletRequest request, @RequestBody Pet param) {
+        logger.info("请求地址：" + request.getRequestURI() + ",请求参数："+param + "，sessionid:" + request.getSession().getId() + "，用户：" + getUser());
+        Pet pet = null;
+        //开始查询
+            try {
+            pet = petServiceI.selectByPrimaryKey(param.getId());
+            logger.info("应答参数：" + pet + "sessionid:" + request.getSession().getId() + "用户：" + getUser());
+        } catch (Exception e) {
+            logger.error("查询发生未知错误!", e);
+            return Utils.webResult(false, ResulstCodeEnum.SERVICE_EXCEPTION.getCode(),"查询发生未知错误!", null);
+        }
+        return Utils.webResult(true, ResulstCodeEnum.SERVICE_SUCESS.getCode(),ResulstCodeEnum.SERVICE_SUCESS.getCodeDesc(), pet);
+    }
+
 }
