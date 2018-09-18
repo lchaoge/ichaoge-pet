@@ -25,7 +25,7 @@ import java.util.Date;
 @Controller
 @RequestMapping("/api/userInfo")
 public class UserInfoController extends BaseController {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(UserController.class);
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(UserInfoController.class);
     private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
     @Resource

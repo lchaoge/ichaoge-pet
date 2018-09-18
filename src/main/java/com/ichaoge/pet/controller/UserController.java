@@ -156,7 +156,7 @@ public class UserController extends BaseController {
      */
     @RequestMapping(value = "/deciphering", method = RequestMethod.POST)
     @ResponseBody
-    public RemoteResult<?> deciphering(HttpServletRequest request,String encrypdata,String ivdata, String code) {
+    public RemoteResult<?> deciphering(HttpServletRequest request,@RequestBody String encrypdata, @RequestBody String ivdata, @RequestBody String code) {
         String str="";
 
         try {

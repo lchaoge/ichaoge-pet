@@ -25,7 +25,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/api/address")
 public class AddressController extends BaseController {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(PetController.class);
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(AddressController.class);
     private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
     @Resource
