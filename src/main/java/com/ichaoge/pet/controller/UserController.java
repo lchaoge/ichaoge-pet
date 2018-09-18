@@ -5,6 +5,7 @@ import com.ichaoge.pet.domain.baseenum.ResulstCodeEnum;
 import com.ichaoge.pet.domain.entity.Pet;
 import com.ichaoge.pet.domain.entity.User;
 import com.ichaoge.pet.domain.entity.UserInfo;
+import com.ichaoge.pet.domain.inputParam.DecodeParam;
 import com.ichaoge.pet.domain.inputParam.UserParam;
 import com.ichaoge.pet.service.iservice.PetServiceI;
 import com.ichaoge.pet.service.iservice.UserInfoServiceI;
@@ -147,25 +148,23 @@ public class UserController extends BaseController {
 
     /**
      * 解密并且获取用户手机号码
-     * @param encrypdata
-     * @param ivdata
-     * @param code
+     * @param param
      * @param request
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/deciphering", method = RequestMethod.POST)
+    @RequestMapping(value = "/decode", method = RequestMethod.POST)
     @ResponseBody
-    public RemoteResult<?> deciphering(HttpServletRequest request,@RequestBody String encrypdata, @RequestBody String ivdata, @RequestBody String code) {
+    public RemoteResult<?> decode(HttpServletRequest request, @RequestBody DecodeParam param) {
         String str="";
 
         try {
-            String resultJson = userServiceI.selectByCode(code);
+            String resultJson = userServiceI.selectByCode(param.getCode());
             JSONObject jsonObject=JSONObject.fromObject(resultJson);
             String session_key = jsonObject.get("session_key").toString();
 
-            byte[] encrypData = Base64.decode(encrypdata);
-            byte[] ivData = Base64.decode(ivdata);
+            byte[] encrypData = Base64.decode(param.getEncrypdata());
+            byte[] ivData = Base64.decode(param.getIvdata());
             byte[] sessionKey = Base64.decode(session_key);
 
 
