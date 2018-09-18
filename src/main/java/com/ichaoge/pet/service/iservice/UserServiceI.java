@@ -15,5 +15,7 @@ public interface UserServiceI {
     int updateByPrimaryKey(User record);
     int updateByPrimaryKeySelective(User record);
     User selectByPrimaryKey(Long id);
+    // 获取openid
+    String selectByCode(String code);
 
 }

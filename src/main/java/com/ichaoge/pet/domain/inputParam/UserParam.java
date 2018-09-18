@@ -16,6 +16,8 @@ public class UserParam extends RequestParam implements Serializable {
 
     private String openid;
 
+    private String sessionKey;
+
     private String userName;
 
     private String password;
@@ -42,8 +44,6 @@ public class UserParam extends RequestParam implements Serializable {
 
     private Date modified;
 
-    private List<Pet> petList;
-
     public Long getId() {
         return id;
     }
@@ -58,6 +58,14 @@ public class UserParam extends RequestParam implements Serializable {
 
     public void setOpenid(String openid) {
         this.openid = openid;
+    }
+
+    public String getSessionKey() {
+        return sessionKey;
+    }
+
+    public void setSessionKey(String sessionKey) {
+        this.sessionKey = sessionKey;
     }
 
     public String getUserName() {
@@ -165,18 +173,12 @@ public class UserParam extends RequestParam implements Serializable {
     }
 
 
-    public List<Pet> getPetList() {
-        return petList;
-    }
-
-    public void setPetList(List<Pet> petList) {
-        this.petList = petList;
-    }
-
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("{");
         sb.append("\"id\":\"").append(id).append('\"');
+        sb.append("\"openid\":\"").append(openid).append('\"');
+        sb.append("\"sessionKey\":\"").append(sessionKey).append('\"');
         sb.append("\"userName\":\"").append(userName).append('\"');
         sb.append("\"password\":\"").append(password).append('\"');
         sb.append("\"phone\":\"").append(phone).append('\"');
@@ -190,7 +192,6 @@ public class UserParam extends RequestParam implements Serializable {
         sb.append("\"creator\":\"").append(creator).append('\"');
         sb.append("\"created\":\"").append(created).append('\"');
         sb.append("\"modified\":\"").append(modified).append('\"');
-        sb.append("\"petList\":\"").append(petList).append('\"');
         sb.append('}');
         return sb.toString();
     }

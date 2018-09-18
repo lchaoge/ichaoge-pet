@@ -12,13 +12,18 @@ import com.ichaoge.pet.service.iservice.UserServiceI;
 import com.ichaoge.pet.utils.HttpClientUtil;
 import com.ichaoge.pet.utils.Utils;
 import com.retail.sap.api.base.RemoteResult;
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import net.sf.json.JSONObject;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.crypto.Cipher;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.http.HttpServletRequest;
+import java.security.spec.AlgorithmParameterSpec;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -51,13 +56,10 @@ public class UserController extends BaseController {
     @RequestMapping(value = "/wxLogin", method = RequestMethod.POST)
     @ResponseBody
     public RemoteResult<?> wxLogin(HttpServletRequest request, @RequestBody String code) {
-        String appid = "wx216e84db512d7ab5";
-        String secret = "7d983f1bdbdf345deed336515c392843";
-        String url = "https://api.weixin.qq.com/sns/jscode2session?appid="+appid+"&secret="+secret+"&js_code="+code+"&grant_type=authorization_code";
         logger.info("请求地址：" + request.getRequestURI() + "  " + "请求参数：" + code + "sessionid:" + request.getSession().getId() + "用户：" + getUser());
         Map<String,Object> results = new HashMap<String,Object>();
         User loginUser = null;
-        String resultJson = HttpClientUtil.doGet(url);
+        String resultJson = userServiceI.selectByCode(code);
         JSONObject jsonObject=JSONObject.fromObject(resultJson);
         String session_key = jsonObject.get("session_key").toString();
         String openid = jsonObject.get("openid").toString();
@@ -65,6 +67,7 @@ public class UserController extends BaseController {
         try {
             UserParam param = new UserParam();
             param.setOpenid(openid);
+            param.setSessionKey(session_key);
             List<User> users = userServiceI.selectByExample(param);
             if(users.size()>0){
                 loginUser = users.get(0);
@@ -110,6 +113,7 @@ public class UserController extends BaseController {
             results.put("loginPet",pet);
             logger.info("应答参数：" + results + ",sessionid:" + request.getSession().getId() + ",用户：" + getUser());
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             logger.error("查询发生未知错误!", e);
             return Utils.webResult(false, ResulstCodeEnum.SERVICE_EXCEPTION.getCode(),
                     "查询发生未知错误!", null);
@@ -118,7 +122,7 @@ public class UserController extends BaseController {
     }
 
     /**
-     * demo
+     * 查询用户
      *
      * @param request
      * @return 查询结果信息
@@ -139,6 +143,48 @@ public class UserController extends BaseController {
         }
         return Utils.webResult(true, ResulstCodeEnum.SERVICE_SUCESS.getCode(),
                 ResulstCodeEnum.SERVICE_SUCESS.getCodeDesc(), Users);
+    }
+
+    /**
+     * 解密并且获取用户手机号码
+     * @param encrypdata
+     * @param ivdata
+     * @param code
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/deciphering", method = RequestMethod.POST)
+    @ResponseBody
+    public RemoteResult<?> deciphering(HttpServletRequest request,String encrypdata,String ivdata, String code) {
+        String str="";
+
+        try {
+            String resultJson = userServiceI.selectByCode(code);
+            JSONObject jsonObject=JSONObject.fromObject(resultJson);
+            String session_key = jsonObject.get("session_key").toString();
+
+            byte[] encrypData = Base64.decode(encrypdata);
+            byte[] ivData = Base64.decode(ivdata);
+            byte[] sessionKey = Base64.decode(session_key);
+
+
+            str = decrypt(sessionKey,ivData,encrypData);
+        } catch (Exception e) {
+            logger.error("用户手机号解密失败!", e);
+            return Utils.webResult(false, ResulstCodeEnum.SERVICE_EXCEPTION.getCode(),"用户手机号解密失败!", null);
+        }
+        System.out.println(str);
+        return Utils.webResult(true, ResulstCodeEnum.SERVICE_SUCESS.getCode(),ResulstCodeEnum.SERVICE_SUCESS.getCodeDesc(), str);
+
+    }
+    public static String decrypt(byte[] key, byte[] iv, byte[] encData) throws Exception {
+        AlgorithmParameterSpec ivSpec = new IvParameterSpec(iv);
+        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+        SecretKeySpec keySpec = new SecretKeySpec(key, "AES");
+        cipher.init(Cipher.DECRYPT_MODE, keySpec, ivSpec);
+        //解析解密后的字符串
+        return new String(cipher.doFinal(encData),"UTF-8");
     }
 
 
