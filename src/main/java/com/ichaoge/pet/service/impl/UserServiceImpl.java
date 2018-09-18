@@ -18,7 +18,9 @@ import java.util.List;
  */
 @Service
 public class UserServiceImpl implements UserServiceI {
+
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+
     @Resource
     private UserMapper userMapper;
 

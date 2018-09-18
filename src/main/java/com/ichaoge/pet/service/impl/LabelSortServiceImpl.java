@@ -1,6 +1,6 @@
 package com.ichaoge.pet.service.impl;
 
-import com.alibaba.dubbo.config.annotation.Service;
+import org.springframework.stereotype.Service;
 import com.ichaoge.pet.dao.mapper.LabelSortMapper;
 import com.ichaoge.pet.domain.entity.LabelSort;
 import com.ichaoge.pet.domain.entity.LabelSortExample;
@@ -14,6 +14,7 @@ import java.util.List;
  */
 @Service
 public class LabelSortServiceImpl implements LabelSortServiceI {
+
     @Resource
     private LabelSortMapper labelSortMapper;
 

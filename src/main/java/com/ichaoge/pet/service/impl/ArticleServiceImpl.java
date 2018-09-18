@@ -1,7 +1,6 @@
 package com.ichaoge.pet.service.impl;
 
-import com.alibaba.dubbo.config.annotation.Service;
-import com.ichaoge.pet.dao.mapper.AddressMapper;
+import org.springframework.stereotype.Service;
 import com.ichaoge.pet.dao.mapper.ArticleMapper;
 import com.ichaoge.pet.domain.entity.Article;
 import com.ichaoge.pet.domain.entity.ArticleExample;

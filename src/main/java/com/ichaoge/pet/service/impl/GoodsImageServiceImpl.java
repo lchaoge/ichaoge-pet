@@ -1,6 +1,6 @@
 package com.ichaoge.pet.service.impl;
 
-import com.alibaba.dubbo.config.annotation.Service;
+import org.springframework.stereotype.Service;
 import com.ichaoge.pet.dao.mapper.GoodsImageMapper;
 import com.ichaoge.pet.domain.entity.GoodsImage;
 import com.ichaoge.pet.domain.entity.GoodsImageExample;
@@ -14,6 +14,7 @@ import java.util.List;
  */
 @Service
 public class GoodsImageServiceImpl implements GoodsImageServiceI {
+
     @Resource
     private GoodsImageMapper goodsImageMapper;
 

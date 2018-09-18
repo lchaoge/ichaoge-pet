@@ -1,6 +1,6 @@
 package com.ichaoge.pet.service.impl;
 
-import com.alibaba.dubbo.config.annotation.Service;
+import org.springframework.stereotype.Service;
 import com.ichaoge.pet.dao.mapper.CartMapper;
 import com.ichaoge.pet.domain.entity.Cart;
 import com.ichaoge.pet.domain.entity.CartExample;
@@ -14,8 +14,10 @@ import java.util.List;
  */
 @Service
 public class CartServiceImpl implements CartServiceI {
+
     @Resource
     private CartMapper cartMapper;
+
     @Override
     public int countByExample(CartExample example) {
         return cartMapper.countByExample(example);

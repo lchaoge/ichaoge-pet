@@ -1,6 +1,6 @@
 package com.ichaoge.pet.service.impl;
 
-import com.alibaba.dubbo.config.annotation.Service;
+import org.springframework.stereotype.Service;
 import com.ichaoge.pet.dao.mapper.OrderMainMapper;
 import com.ichaoge.pet.domain.entity.OrderMain;
 import com.ichaoge.pet.domain.entity.OrderMainExample;
@@ -14,6 +14,7 @@ import java.util.List;
  */
 @Service
 public class OrderMainServiceImpl implements OrderMainServiceI {
+
     @Resource
     private OrderMainMapper orderMainMapper;
 

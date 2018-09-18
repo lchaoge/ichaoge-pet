@@ -1,6 +1,6 @@
 package com.ichaoge.pet.service.impl;
 
-import com.alibaba.dubbo.config.annotation.Service;
+import org.springframework.stereotype.Service;
 import com.ichaoge.pet.dao.mapper.ArticleSortMapper;
 import com.ichaoge.pet.domain.entity.ArticleSort;
 import com.ichaoge.pet.domain.entity.ArticleSortExample;

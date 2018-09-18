@@ -1,6 +1,6 @@
 package com.ichaoge.pet.service.impl;
 
-import com.alibaba.dubbo.config.annotation.Service;
+import org.springframework.stereotype.Service;
 import com.ichaoge.pet.dao.mapper.EvaluateMapper;
 import com.ichaoge.pet.domain.entity.Evaluate;
 import com.ichaoge.pet.domain.entity.EvaluateExample;
@@ -14,6 +14,7 @@ import java.util.List;
  */
 @Service
 public class EvaluateServiceImpl implements EvaluateServiceI {
+
     @Resource
     private EvaluateMapper evaluateMapper;
 

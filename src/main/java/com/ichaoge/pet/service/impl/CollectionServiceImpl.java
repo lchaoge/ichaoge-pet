@@ -1,6 +1,6 @@
 package com.ichaoge.pet.service.impl;
 
-import com.alibaba.dubbo.config.annotation.Service;
+import org.springframework.stereotype.Service;
 import com.ichaoge.pet.dao.mapper.CollectionMapper;
 import com.ichaoge.pet.domain.entity.Collection;
 import com.ichaoge.pet.domain.entity.CollectionExample;
@@ -14,6 +14,7 @@ import java.util.List;
  */
 @Service
 public class CollectionServiceImpl implements CollectionServiceI {
+
     @Resource
     private CollectionMapper collectionMapper;
 

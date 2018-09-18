@@ -1,10 +1,10 @@
 package com.ichaoge.pet.service.impl;
 
-import com.alibaba.dubbo.config.annotation.Service;
 import com.ichaoge.pet.dao.mapper.ArticleCommentMapper;
 import com.ichaoge.pet.domain.entity.ArticleComment;
 import com.ichaoge.pet.domain.entity.ArticleCommentExample;
 import com.ichaoge.pet.service.iservice.ArticleCommentServiceI;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;

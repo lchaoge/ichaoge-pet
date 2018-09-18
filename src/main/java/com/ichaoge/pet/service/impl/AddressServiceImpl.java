@@ -3,7 +3,6 @@ package com.ichaoge.pet.service.impl;
 import com.ichaoge.pet.dao.mapper.AddressMapper;
 import com.ichaoge.pet.domain.entity.Address;
 import com.ichaoge.pet.domain.entity.AddressExample;
-import com.ichaoge.pet.domain.entity.PetExample;
 import com.ichaoge.pet.service.iservice.AddressServiceI;
 import org.springframework.stereotype.Service;
 
