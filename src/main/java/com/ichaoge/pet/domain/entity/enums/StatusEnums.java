@@ -2,14 +2,12 @@ package com.ichaoge.pet.domain.entity.enums;
 
 /**
  * 共用stutes
- *
+ * 状态 1：正常 0:异常
  */
 public enum StatusEnums {
-    EFFICIENT(1, "生效的"),
-    DISABLED(0, "失效的"),
-    INPUTED(2,"已导入"),
-    CANEDIT(3,"可修改"),
-    CLOSED(4,"已关闭");
+
+    EFFECTIVE(1, "正常"),
+    INVALID(0, "异常");
 
     private int value;
     private String desc;

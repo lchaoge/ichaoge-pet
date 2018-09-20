@@ -1,16 +1,15 @@
 package com.ichaoge.pet.domain.inputParam;
 
 
-import com.ichaoge.pet.domain.entity.Pet;
+import com.ichaoge.pet.domain.inputParam.base.BaseParam;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by chaoge on 2018/8/28.
  */
-public class UserParam extends RequestParam implements Serializable {
+public class UserParam extends BaseParam implements Serializable {
 
     private Long id;
 

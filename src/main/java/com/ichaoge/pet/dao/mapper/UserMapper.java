@@ -1,8 +1,11 @@
 package com.ichaoge.pet.dao.mapper;
 
+import com.ichaoge.pet.domain.base.Pagination;
 import com.ichaoge.pet.domain.entity.User;
 import com.ichaoge.pet.domain.entity.UserExample;
 import java.util.List;
+
+import com.ichaoge.pet.domain.inputParam.UserParam;
 import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
@@ -27,4 +30,5 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
 }

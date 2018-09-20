@@ -1,6 +1,7 @@
 package com.ichaoge.pet.controller;
 
 import com.ichaoge.pet.controller.baseinfo.BaseController;
+import com.ichaoge.pet.domain.base.Pagination;
 import com.ichaoge.pet.domain.baseenum.ResulstCodeEnum;
 import com.ichaoge.pet.domain.entity.Pet;
 import com.ichaoge.pet.domain.entity.User;
@@ -10,10 +11,8 @@ import com.ichaoge.pet.domain.inputParam.UserParam;
 import com.ichaoge.pet.service.iservice.PetServiceI;
 import com.ichaoge.pet.service.iservice.UserInfoServiceI;
 import com.ichaoge.pet.service.iservice.UserServiceI;
-import com.ichaoge.pet.utils.HttpClientUtil;
 import com.ichaoge.pet.utils.Utils;
 import com.retail.sap.api.base.RemoteResult;
-import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import net.sf.json.JSONObject;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -30,6 +29,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.apache.commons.codec.binary.Base64;
+import javax.crypto.Cipher;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
+import java.security.spec.AlgorithmParameterSpec;
 
 /**
  * Created by chaoge on 2018/8/27.
@@ -47,6 +51,33 @@ public class UserController extends BaseController {
     private UserInfoServiceI userInfoServiceI;
     @Resource
     private PetServiceI petServiceI;
+
+    /**
+     * 分页查询
+     *
+     * @param param
+     * @return 查询结果信息
+     */
+    @RequestMapping(value = "/queryAllPage", method = RequestMethod.POST)
+    @ResponseBody
+    public RemoteResult<?> queryAllPage(HttpServletRequest request, @RequestBody UserParam param) {
+        logger.info("请求地址：" + request.getRequestURI() + "  " + "请求参数：" + param.toString() + "sessionid:" + request.getSession().getId() + "用户：" + getUser());
+        Pagination pagination = null;
+        //开始查询
+        try {
+            pagination = userServiceI.queryAllPage(param);
+            if(pagination == null){
+                logger.error("没用查询到数据!");
+                return Utils.webResult(false, ResulstCodeEnum.SERVICE_EXCEPTION.getCode(),"没用查询到数据!", null);
+            }
+            logger.info("应答参数：" + pagination + "sessionid:" + request.getSession().getId() + "用户：" + getUser());
+        } catch (Exception e) {
+            logger.error("查询当前用户错误!", e);
+            return Utils.webResult(false, ResulstCodeEnum.SERVICE_EXCEPTION.getCode(),"查询当前用户错误!", null);
+        }
+        return Utils.webResult(true, ResulstCodeEnum.SERVICE_SUCESS.getCode(), ResulstCodeEnum.SERVICE_SUCESS.getCodeDesc(), pagination);
+    }
+
 
     /**
      * 登录
@@ -123,27 +154,29 @@ public class UserController extends BaseController {
     }
 
     /**
-     * 查询用户
+     * 根据ID查询用户
      *
      * @param request
      * @return 查询结果信息
      */
-    @RequestMapping(value = "/queryItem", method = RequestMethod.POST)
+    @RequestMapping(value = "/queryById", method = RequestMethod.POST)
     @ResponseBody
-    public RemoteResult<?> queryItem(HttpServletRequest request, @RequestBody UserParam param) {
+    public RemoteResult<?> queryById(HttpServletRequest request, @RequestBody User param) {
         logger.info("请求地址：" + request.getRequestURI() + "  " + "请求参数：" + param.toString() + "sessionid:" + request.getSession().getId() + "用户：" + getUser());
-        List<User> Users;
+        User currentUser = null;
         //开始查询
         try {
-            Users = userServiceI.selectByExample(param);
-            logger.info("应答参数：" + Users.size() + "sessionid:" + request.getSession().getId() + "用户：" + getUser());
+            currentUser = userServiceI.selectByPrimaryKey(param.getId());
+            if(currentUser == null){
+                logger.error("没用查询到用户!");
+                return Utils.webResult(false, ResulstCodeEnum.SERVICE_EXCEPTION.getCode(),"没用查询到用户!", null);
+            }
+            logger.info("应答参数：" + currentUser + "sessionid:" + request.getSession().getId() + "用户：" + getUser());
         } catch (Exception e) {
-            logger.error("查询发生未知错误!", e);
-            return Utils.webResult(false, ResulstCodeEnum.SERVICE_EXCEPTION.getCode(),
-                    "查询发生未知错误!", null);
+            logger.error("查询当前用户错误!", e);
+            return Utils.webResult(false, ResulstCodeEnum.SERVICE_EXCEPTION.getCode(),"查询当前用户错误!", null);
         }
-        return Utils.webResult(true, ResulstCodeEnum.SERVICE_SUCESS.getCode(),
-                ResulstCodeEnum.SERVICE_SUCESS.getCodeDesc(), Users);
+        return Utils.webResult(true, ResulstCodeEnum.SERVICE_SUCESS.getCode(), ResulstCodeEnum.SERVICE_SUCESS.getCodeDesc(), currentUser);
     }
 
     /**
@@ -156,34 +189,38 @@ public class UserController extends BaseController {
     @RequestMapping(value = "/decode", method = RequestMethod.POST)
     @ResponseBody
     public RemoteResult<?> decode(HttpServletRequest request, @RequestBody DecodeParam param) {
-        String str="";
-
+        User currentUser = null;
+        if(param.getCode() == ""){
+            return Utils.webResult(false, ResulstCodeEnum.SERVICE_EXCEPTION.getCode(),"微信code不能为空!", null);
+        }
         try {
             String resultJson = userServiceI.selectByCode(param.getCode());
             JSONObject jsonObject=JSONObject.fromObject(resultJson);
             String session_key = jsonObject.get("session_key").toString();
 
-            byte[] encrypData = Base64.decode(param.getEncrypdata());
-            byte[] ivData = Base64.decode(param.getIvdata());
-            byte[] sessionKey = Base64.decode(session_key);
+            byte[] encrypData = Base64.decodeBase64(param.getEncrypdata());
+            byte[] ivData = Base64.decodeBase64(param.getIvdata());
+            byte[] sessionKey = Base64.decodeBase64(session_key);
 
+            String str = userServiceI.decrypt(sessionKey,ivData,encrypData);
+            JSONObject jsonResult = JSONObject.fromObject(str);
 
-            str = decrypt(sessionKey,ivData,encrypData);
+            // 获取用户
+            currentUser = userServiceI.selectByPrimaryKey(param.getUserId());
+            currentUser.setSessionKey(session_key);
+            currentUser.setPhone(jsonResult.get("phoneNumber").toString());
+            currentUser.setModified(new Date());
+            int r = userServiceI.updateByPrimaryKey(currentUser);
+            if(r<=0){
+                logger.error("修改用户手机号失败");
+                return Utils.webResult(false, ResulstCodeEnum.SERVICE_EXCEPTION.getCode(),"修改用户手机号失败!", null);
+            }
         } catch (Exception e) {
             logger.error("用户手机号解密失败!", e);
             return Utils.webResult(false, ResulstCodeEnum.SERVICE_EXCEPTION.getCode(),"用户手机号解密失败!", null);
         }
-        System.out.println(str);
-        return Utils.webResult(true, ResulstCodeEnum.SERVICE_SUCESS.getCode(),ResulstCodeEnum.SERVICE_SUCESS.getCodeDesc(), str);
-
-    }
-    public static String decrypt(byte[] key, byte[] iv, byte[] encData) throws Exception {
-        AlgorithmParameterSpec ivSpec = new IvParameterSpec(iv);
-        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-        SecretKeySpec keySpec = new SecretKeySpec(key, "AES");
-        cipher.init(Cipher.DECRYPT_MODE, keySpec, ivSpec);
-        //解析解密后的字符串
-        return new String(cipher.doFinal(encData),"UTF-8");
+        System.out.println(currentUser);
+        return Utils.webResult(true, ResulstCodeEnum.SERVICE_SUCESS.getCode(),ResulstCodeEnum.SERVICE_SUCESS.getCodeDesc(), currentUser);
     }
 
 

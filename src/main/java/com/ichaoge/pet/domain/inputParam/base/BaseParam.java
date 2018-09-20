@@ -1,11 +1,11 @@
-package com.ichaoge.pet.domain.inputParam;
+package com.ichaoge.pet.domain.inputParam.base;
 
 import java.io.Serializable;
 
 /**
  * Created by chaoge on 2018/8/28.
  */
-public class RequestParam implements Serializable {
+public class BaseParam implements Serializable {
     private Integer pageSize;
     private Integer currentPage;
 

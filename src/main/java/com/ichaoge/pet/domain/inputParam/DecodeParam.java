@@ -5,13 +5,23 @@ import java.io.Serializable;
 /**
  * Created by chaoge on 2018/9/18.
  */
-public class DecodeParam  extends RequestParam implements Serializable {
+public class DecodeParam implements Serializable {
+
+    private Long userId;
 
     private String code;
 
     private String encrypdata;
 
     private String ivdata;
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
     public String getCode() {
         return code;

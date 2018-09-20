@@ -1,18 +1,18 @@
 package com.ichaoge.pet.domain.entity.enums;
 
 /**
- * 员工提交审批stutes
- *
+ * 用户角色
+ * 角色 普通用户=1，管理员=0
  */
-public enum EmployeeScoreStatusEnums {
-    UNSUBMITTED(0, "未提交"),
-    SUBMITTED(1, "已提交"),
-    APPROVALED(2, "已审批");
+public enum UserRoleEnums {
+
+    SUBMITTED(1, "普通用户"),
+    REJECT(0, "管理员");
 
     private int value;
     private String desc;
 
-    private EmployeeScoreStatusEnums(int value, String desc) {
+    private UserRoleEnums(int value, String desc) {
         this.desc = desc;
         this.value = value;
     }

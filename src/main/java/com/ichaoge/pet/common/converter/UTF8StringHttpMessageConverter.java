@@ -21,7 +21,7 @@ import java.util.List;
  * MVC框架字符串传送的编码格式重载，默认使用UTF-8
  * 解决中文乱码问题
  *
- * User: gaofx
+ * User: chaoge
  * Date: 15-2-27
  * Time: 上午9:51
  */

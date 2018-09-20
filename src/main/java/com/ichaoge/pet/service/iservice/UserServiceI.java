@@ -1,5 +1,6 @@
 package com.ichaoge.pet.service.iservice;
 
+import com.ichaoge.pet.domain.base.Pagination;
 import com.ichaoge.pet.domain.entity.User;
 import com.ichaoge.pet.domain.inputParam.UserParam;
 
@@ -17,5 +18,8 @@ public interface UserServiceI {
     User selectByPrimaryKey(Long id);
     // 获取openid
     String selectByCode(String code);
-
+    // 解密手机号码
+    String decrypt(byte[] key, byte[] iv, byte[] encData);
+    // 分页查询
+    Pagination queryAllPage(UserParam param);
 }
