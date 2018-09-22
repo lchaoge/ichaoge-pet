@@ -165,63 +165,63 @@ public class PhotoAlbumImageExample {
             return (Criteria) this;
         }
 
-        public Criteria andUserIdIsNull() {
-            addCriterion("user_id is null");
+        public Criteria andPetIdIsNull() {
+            addCriterion("pet_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdIsNotNull() {
-            addCriterion("user_id is not null");
+        public Criteria andPetIdIsNotNull() {
+            addCriterion("pet_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdEqualTo(Long value) {
-            addCriterion("user_id =", value, "userId");
+        public Criteria andPetIdEqualTo(Long value) {
+            addCriterion("pet_id =", value, "petId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdNotEqualTo(Long value) {
-            addCriterion("user_id <>", value, "userId");
+        public Criteria andPetIdNotEqualTo(Long value) {
+            addCriterion("pet_id <>", value, "petId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdGreaterThan(Long value) {
-            addCriterion("user_id >", value, "userId");
+        public Criteria andPetIdGreaterThan(Long value) {
+            addCriterion("pet_id >", value, "petId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("user_id >=", value, "userId");
+        public Criteria andPetIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("pet_id >=", value, "petId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdLessThan(Long value) {
-            addCriterion("user_id <", value, "userId");
+        public Criteria andPetIdLessThan(Long value) {
+            addCriterion("pet_id <", value, "petId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdLessThanOrEqualTo(Long value) {
-            addCriterion("user_id <=", value, "userId");
+        public Criteria andPetIdLessThanOrEqualTo(Long value) {
+            addCriterion("pet_id <=", value, "petId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdIn(List<Long> values) {
-            addCriterion("user_id in", values, "userId");
+        public Criteria andPetIdIn(List<Long> values) {
+            addCriterion("pet_id in", values, "petId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdNotIn(List<Long> values) {
-            addCriterion("user_id not in", values, "userId");
+        public Criteria andPetIdNotIn(List<Long> values) {
+            addCriterion("pet_id not in", values, "petId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdBetween(Long value1, Long value2) {
-            addCriterion("user_id between", value1, value2, "userId");
+        public Criteria andPetIdBetween(Long value1, Long value2) {
+            addCriterion("pet_id between", value1, value2, "petId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdNotBetween(Long value1, Long value2) {
-            addCriterion("user_id not between", value1, value2, "userId");
+        public Criteria andPetIdNotBetween(Long value1, Long value2) {
+            addCriterion("pet_id not between", value1, value2, "petId");
             return (Criteria) this;
         }
 

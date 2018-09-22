@@ -2,7 +2,6 @@ package com.ichaoge.pet.service.iservice;
 
 import com.ichaoge.pet.domain.entity.PhotoAlbumImage;
 import com.ichaoge.pet.domain.entity.PhotoAlbumImageExample;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 

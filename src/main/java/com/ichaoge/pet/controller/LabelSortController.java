@@ -2,11 +2,8 @@ package com.ichaoge.pet.controller;
 
 import com.ichaoge.pet.controller.baseinfo.BaseController;
 import com.ichaoge.pet.domain.baseenum.ResulstCodeEnum;
-import com.ichaoge.pet.domain.entity.GoodsImage;
-import com.ichaoge.pet.domain.entity.GoodsImageExample;
 import com.ichaoge.pet.domain.entity.LabelSort;
-import com.ichaoge.pet.domain.entity.LabelSortExample;
-import com.ichaoge.pet.service.iservice.GoodsImageServiceI;
+import com.ichaoge.pet.domain.output.LabelSortOutput;
 import com.ichaoge.pet.service.iservice.LabelSortServiceI;
 import com.ichaoge.pet.utils.Utils;
 import com.retail.sap.api.base.RemoteResult;
@@ -17,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,7 +32,7 @@ public class LabelSortController extends BaseController {
     private LabelSortServiceI labelSortServiceI;
 
     /**
-     * 查询列表
+     * 查询所有标签
      *
      * @param request
      * @return 查询结果信息
@@ -43,17 +41,21 @@ public class LabelSortController extends BaseController {
     @ResponseBody
     public RemoteResult<?> queryAll(HttpServletRequest request, @RequestBody LabelSort param) {
         logger.info("请求地址：" + request.getRequestURI() + ",请求参数："+param + "，sessionid:" + request.getSession().getId() + "，用户：" + getUser());
-        List<LabelSort> labelSortList = null;
+        List<LabelSortOutput> result = new ArrayList<>();
         //开始查询
         try {
-            labelSortList = labelSortServiceI.selectByExample(new LabelSortExample());
-
+            List<LabelSort> labelSortList = labelSortServiceI.selectByExample(param);
+            if(labelSortList.size()>0){
+                for (LabelSort labelSort:labelSortList) {
+                    result.add(new LabelSortOutput(labelSort));
+                }
+            }
             logger.info("应答参数：" + labelSortList + "sessionid:" + request.getSession().getId() + "用户：" + getUser());
         } catch (Exception e) {
-            logger.error("查询列表失败!", e);
-            return Utils.webResult(false, ResulstCodeEnum.SERVICE_EXCEPTION.getCode(),"查询列表失败!", null);
+            logger.error("查询所有标签失败!", e);
+            return Utils.webResult(false, ResulstCodeEnum.SERVICE_EXCEPTION.getCode(),"查询所有标签失败!", null);
         }
-        return Utils.webResult(true, ResulstCodeEnum.SERVICE_SUCESS.getCode(),ResulstCodeEnum.SERVICE_SUCESS.getCodeDesc(), labelSortList);
+        return Utils.webResult(true, ResulstCodeEnum.SERVICE_SUCESS.getCode(),ResulstCodeEnum.SERVICE_SUCESS.getCodeDesc(), result);
     }
 
 }

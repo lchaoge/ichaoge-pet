@@ -6,7 +6,7 @@ import java.util.Date;
 public class PhotoAlbum implements Serializable {
     private Long id;
 
-    private Long userId;
+    private Long petId;
 
     private Integer type;
 
@@ -36,12 +36,12 @@ public class PhotoAlbum implements Serializable {
         this.id = id;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Long getPetId() {
+        return petId;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setPetId(Long petId) {
+        this.petId = petId;
     }
 
     public Integer getType() {
@@ -129,7 +129,7 @@ public class PhotoAlbum implements Serializable {
         }
         PhotoAlbum other = (PhotoAlbum) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
+            && (this.getPetId() == null ? other.getPetId() == null : this.getPetId().equals(other.getPetId()))
             && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
             && (this.getLabelSortId() == null ? other.getLabelSortId() == null : this.getLabelSortId().equals(other.getLabelSortId()))
             && (this.getRecordDate() == null ? other.getRecordDate() == null : this.getRecordDate().equals(other.getRecordDate()))
@@ -146,7 +146,7 @@ public class PhotoAlbum implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
+        result = prime * result + ((getPetId() == null) ? 0 : getPetId().hashCode());
         result = prime * result + ((getType() == null) ? 0 : getType().hashCode());
         result = prime * result + ((getLabelSortId() == null) ? 0 : getLabelSortId().hashCode());
         result = prime * result + ((getRecordDate() == null) ? 0 : getRecordDate().hashCode());

@@ -165,6 +165,66 @@ public class LabelSortExample {
             return (Criteria) this;
         }
 
+        public Criteria andTypeIsNull() {
+            addCriterion("type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIsNotNull() {
+            addCriterion("type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeEqualTo(Integer value) {
+            addCriterion("type =", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotEqualTo(Integer value) {
+            addCriterion("type <>", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeGreaterThan(Integer value) {
+            addCriterion("type >", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("type >=", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeLessThan(Integer value) {
+            addCriterion("type <", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("type <=", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIn(List<Integer> values) {
+            addCriterion("type in", values, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotIn(List<Integer> values) {
+            addCriterion("type not in", values, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeBetween(Integer value1, Integer value2) {
+            addCriterion("type between", value1, value2, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("type not between", value1, value2, "type");
+            return (Criteria) this;
+        }
+
         public Criteria andTitleIsNull() {
             addCriterion("title is null");
             return (Criteria) this;
@@ -236,72 +296,72 @@ public class LabelSortExample {
         }
 
         public Criteria andDescribeIsNull() {
-            addCriterion("describe is null");
+            addCriterion("describes is null");
             return (Criteria) this;
         }
 
         public Criteria andDescribeIsNotNull() {
-            addCriterion("describe is not null");
+            addCriterion("describes is not null");
             return (Criteria) this;
         }
 
         public Criteria andDescribeEqualTo(String value) {
-            addCriterion("describe =", value, "describe");
+            addCriterion("describes =", value, "describes");
             return (Criteria) this;
         }
 
         public Criteria andDescribeNotEqualTo(String value) {
-            addCriterion("describe <>", value, "describe");
+            addCriterion("describes <>", value, "describes");
             return (Criteria) this;
         }
 
         public Criteria andDescribeGreaterThan(String value) {
-            addCriterion("describe >", value, "describe");
+            addCriterion("describes >", value, "describes");
             return (Criteria) this;
         }
 
         public Criteria andDescribeGreaterThanOrEqualTo(String value) {
-            addCriterion("describe >=", value, "describe");
+            addCriterion("describes >=", value, "describes");
             return (Criteria) this;
         }
 
         public Criteria andDescribeLessThan(String value) {
-            addCriterion("describe <", value, "describe");
+            addCriterion("describes <", value, "describes");
             return (Criteria) this;
         }
 
         public Criteria andDescribeLessThanOrEqualTo(String value) {
-            addCriterion("describe <=", value, "describe");
+            addCriterion("describes <=", value, "describes");
             return (Criteria) this;
         }
 
         public Criteria andDescribeLike(String value) {
-            addCriterion("describe like", value, "describe");
+            addCriterion("describes like", value, "describes");
             return (Criteria) this;
         }
 
         public Criteria andDescribeNotLike(String value) {
-            addCriterion("describe not like", value, "describe");
+            addCriterion("describes not like", value, "describes");
             return (Criteria) this;
         }
 
         public Criteria andDescribeIn(List<String> values) {
-            addCriterion("describe in", values, "describe");
+            addCriterion("describes in", values, "describes");
             return (Criteria) this;
         }
 
         public Criteria andDescribeNotIn(List<String> values) {
-            addCriterion("describe not in", values, "describe");
+            addCriterion("describes not in", values, "describes");
             return (Criteria) this;
         }
 
         public Criteria andDescribeBetween(String value1, String value2) {
-            addCriterion("describe between", value1, value2, "describe");
+            addCriterion("describes between", value1, value2, "describes");
             return (Criteria) this;
         }
 
         public Criteria andDescribeNotBetween(String value1, String value2) {
-            addCriterion("describe not between", value1, value2, "describe");
+            addCriterion("describes not between", value1, value2, "describes");
             return (Criteria) this;
         }
 

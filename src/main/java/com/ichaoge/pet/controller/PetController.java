@@ -135,7 +135,6 @@ public class PetController extends BaseController {
     }
 
     /**
-     * @createtime 2017年8月20日17:15:41
      * @param request
      * @param file
      * @return 上传成功返回“success”，上传失败返回“error”
@@ -167,7 +166,8 @@ public class PetController extends BaseController {
                         // 项目在容器中实际发布运行的根路径
                         String realPath = request.getSession().getServletContext().getRealPath("/");
                         // 自定义的文件名称
-                        String trueFileName = String.valueOf(System.currentTimeMillis()) + fileName;
+//                        String trueFileName = String.valueOf(System.currentTimeMillis()) + fileName;
+                        String trueFileName = "img-"+String.valueOf(System.currentTimeMillis()) + "."+type;
                         // 设置存放图片文件的路径
                         pet.setPhoto(realPath + "/static/uploads/images/" + trueFileName);
                         logger.info("存放图片文件的路径:" + pet.getPhoto());

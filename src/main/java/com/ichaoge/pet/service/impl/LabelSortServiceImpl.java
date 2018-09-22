@@ -1,9 +1,9 @@
 package com.ichaoge.pet.service.impl;
 
-import org.springframework.stereotype.Service;
-import com.ichaoge.pet.dao.mapper.LabelSortMapper;
 import com.ichaoge.pet.domain.entity.LabelSort;
 import com.ichaoge.pet.domain.entity.LabelSortExample;
+import org.springframework.stereotype.Service;
+import com.ichaoge.pet.dao.mapper.LabelSortMapper;
 import com.ichaoge.pet.service.iservice.LabelSortServiceI;
 
 import javax.annotation.Resource;
@@ -44,8 +44,14 @@ public class LabelSortServiceImpl implements LabelSortServiceI {
     }
 
     @Override
-    public List<LabelSort> selectByExample(LabelSortExample example) {
-        return labelSortMapper.selectByExample(example);
+    public List<LabelSort> selectByExample(LabelSort param) {
+        LabelSortExample labelSortExample = new LabelSortExample();
+        LabelSortExample.Criteria criteria = labelSortExample.createCriteria();
+        if (org.apache.commons.lang3.StringUtils.isNotEmpty(param.getTitle())) {
+            criteria.andTitleEqualTo(param.getTitle());
+        }
+        labelSortExample.setOrderByClause("id desc");
+        return labelSortMapper.selectByExample(labelSortExample);
     }
 
     @Override

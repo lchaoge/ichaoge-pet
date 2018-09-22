@@ -2,7 +2,6 @@ package com.ichaoge.pet.service.iservice;
 
 import com.ichaoge.pet.domain.entity.LabelSort;
 import com.ichaoge.pet.domain.entity.LabelSortExample;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -20,7 +19,7 @@ public interface LabelSortServiceI {
 
     int insertSelective(LabelSort record);
 
-    List<LabelSort> selectByExample(LabelSortExample example);
+    List<LabelSort> selectByExample(LabelSort example);
 
     LabelSort selectByPrimaryKey(Long id);
 

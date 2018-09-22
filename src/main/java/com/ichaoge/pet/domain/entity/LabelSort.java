@@ -6,9 +6,11 @@ import java.util.Date;
 public class LabelSort implements Serializable {
     private Long id;
 
+    private Integer type;
+
     private String title;
 
-    private String describe;
+    private String describes;
 
     private String photo;
 
@@ -30,6 +32,14 @@ public class LabelSort implements Serializable {
         this.id = id;
     }
 
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -39,11 +49,11 @@ public class LabelSort implements Serializable {
     }
 
     public String getDescribe() {
-        return describe;
+        return describes;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe == null ? null : describe.trim();
+    public void setDescribe(String describes) {
+        this.describes = describes == null ? null : describes.trim();
     }
 
     public String getPhoto() {
@@ -99,6 +109,7 @@ public class LabelSort implements Serializable {
         }
         LabelSort other = (LabelSort) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
+            && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
             && (this.getTitle() == null ? other.getTitle() == null : this.getTitle().equals(other.getTitle()))
             && (this.getDescribe() == null ? other.getDescribe() == null : this.getDescribe().equals(other.getDescribe()))
             && (this.getPhoto() == null ? other.getPhoto() == null : this.getPhoto().equals(other.getPhoto()))
@@ -113,6 +124,7 @@ public class LabelSort implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
+        result = prime * result + ((getType() == null) ? 0 : getType().hashCode());
         result = prime * result + ((getTitle() == null) ? 0 : getTitle().hashCode());
         result = prime * result + ((getDescribe() == null) ? 0 : getDescribe().hashCode());
         result = prime * result + ((getPhoto() == null) ? 0 : getPhoto().hashCode());

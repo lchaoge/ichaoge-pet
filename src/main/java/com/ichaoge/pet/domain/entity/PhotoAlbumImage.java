@@ -6,7 +6,7 @@ import java.util.Date;
 public class PhotoAlbumImage implements Serializable {
     private Long id;
 
-    private Long userId;
+    private Long petId;
 
     private Long photoAlbumId;
 
@@ -32,12 +32,12 @@ public class PhotoAlbumImage implements Serializable {
         this.id = id;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Long getPetId() {
+        return petId;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setPetId(Long petId) {
+        this.petId = petId;
     }
 
     public Long getPhotoAlbumId() {
@@ -109,7 +109,7 @@ public class PhotoAlbumImage implements Serializable {
         }
         PhotoAlbumImage other = (PhotoAlbumImage) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
+            && (this.getPetId() == null ? other.getPetId() == null : this.getPetId().equals(other.getPetId()))
             && (this.getPhotoAlbumId() == null ? other.getPhotoAlbumId() == null : this.getPhotoAlbumId().equals(other.getPhotoAlbumId()))
             && (this.getImageUrl() == null ? other.getImageUrl() == null : this.getImageUrl().equals(other.getImageUrl()))
             && (this.getTitle() == null ? other.getTitle() == null : this.getTitle().equals(other.getTitle()))
@@ -124,7 +124,7 @@ public class PhotoAlbumImage implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
+        result = prime * result + ((getPetId() == null) ? 0 : getPetId().hashCode());
         result = prime * result + ((getPhotoAlbumId() == null) ? 0 : getPhotoAlbumId().hashCode());
         result = prime * result + ((getImageUrl() == null) ? 0 : getImageUrl().hashCode());
         result = prime * result + ((getTitle() == null) ? 0 : getTitle().hashCode());
