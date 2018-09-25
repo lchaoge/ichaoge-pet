@@ -3,6 +3,8 @@ package com.ichaoge.pet.service.impl;
 import com.ichaoge.pet.dao.mapper.PhotoAlbumImageMapper;
 import com.ichaoge.pet.domain.entity.PhotoAlbumImage;
 import com.ichaoge.pet.domain.entity.PhotoAlbumImageExample;
+import com.ichaoge.pet.domain.entity.UserExample;
+import com.ichaoge.pet.domain.inputParam.PhotoAlbumImageParam;
 import com.ichaoge.pet.service.iservice.PhotoAlbumImageServiceI;
 import org.springframework.stereotype.Service;
 
@@ -44,8 +46,18 @@ public class PhotoAlbumImageServiceImpl implements PhotoAlbumImageServiceI {
     }
 
     @Override
-    public List<PhotoAlbumImage> selectByExample(PhotoAlbumImageExample example) {
-        return photoAlbumImageMapper.selectByExample(example);
+    public List<PhotoAlbumImage> selectByExample(PhotoAlbumImageParam param) {
+        PhotoAlbumImageExample photoAlbumImageExample = new PhotoAlbumImageExample();
+        PhotoAlbumImageExample.Criteria criteria = photoAlbumImageExample.createCriteria();
+        if (param.getPetId()!=0) {
+            criteria.andPetIdEqualTo(param.getPetId());
+        }
+        if (param.getPhotoAlbumId()!=0) {
+            criteria.andPhotoAlbumIdEqualTo(param.getPhotoAlbumId());
+        }
+
+        photoAlbumImageExample.setOrderByClause("id desc");
+        return photoAlbumImageMapper.selectByExample(photoAlbumImageExample);
     }
 
     @Override

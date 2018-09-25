@@ -2,6 +2,7 @@ package com.ichaoge.pet.service.iservice;
 
 import com.ichaoge.pet.domain.entity.PhotoAlbumImage;
 import com.ichaoge.pet.domain.entity.PhotoAlbumImageExample;
+import com.ichaoge.pet.domain.inputParam.PhotoAlbumImageParam;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public interface PhotoAlbumImageServiceI {
 
     int insertSelective(PhotoAlbumImage record);
 
-    List<PhotoAlbumImage> selectByExample(PhotoAlbumImageExample example);
+    List<PhotoAlbumImage> selectByExample(PhotoAlbumImageParam example);
 
     PhotoAlbumImage selectByPrimaryKey(Long id);
 

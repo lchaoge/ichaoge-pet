@@ -10,8 +10,6 @@ public class PhotoAlbum implements Serializable {
 
     private Integer type;
 
-    private Long labelSortId;
-
     private Date recordDate;
 
     private Integer recommend;
@@ -50,14 +48,6 @@ public class PhotoAlbum implements Serializable {
 
     public void setType(Integer type) {
         this.type = type;
-    }
-
-    public Long getLabelSortId() {
-        return labelSortId;
-    }
-
-    public void setLabelSortId(Long labelSortId) {
-        this.labelSortId = labelSortId;
     }
 
     public Date getRecordDate() {
@@ -131,7 +121,6 @@ public class PhotoAlbum implements Serializable {
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getPetId() == null ? other.getPetId() == null : this.getPetId().equals(other.getPetId()))
             && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
-            && (this.getLabelSortId() == null ? other.getLabelSortId() == null : this.getLabelSortId().equals(other.getLabelSortId()))
             && (this.getRecordDate() == null ? other.getRecordDate() == null : this.getRecordDate().equals(other.getRecordDate()))
             && (this.getRecommend() == null ? other.getRecommend() == null : this.getRecommend().equals(other.getRecommend()))
             && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
@@ -148,7 +137,6 @@ public class PhotoAlbum implements Serializable {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getPetId() == null) ? 0 : getPetId().hashCode());
         result = prime * result + ((getType() == null) ? 0 : getType().hashCode());
-        result = prime * result + ((getLabelSortId() == null) ? 0 : getLabelSortId().hashCode());
         result = prime * result + ((getRecordDate() == null) ? 0 : getRecordDate().hashCode());
         result = prime * result + ((getRecommend() == null) ? 0 : getRecommend().hashCode());
         result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());

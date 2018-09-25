@@ -1,12 +1,14 @@
 package com.ichaoge.pet.domain.inputParam;
 
+import com.ichaoge.pet.domain.inputParam.base.BaseParam;
+
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by chaoge on 2018/9/21.
  */
-public class PhotoAlbumParam implements Serializable {
+public class PhotoAlbumParam extends BaseParam implements Serializable {
     private Long id;
 
     private Long petId;

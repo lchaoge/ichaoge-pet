@@ -5,7 +5,6 @@
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="pet_id" property="petId" jdbcType="BIGINT" />
     <result column="type" property="type" jdbcType="INTEGER" />
-    <result column="label_sort_id" property="labelSortId" jdbcType="BIGINT" />
     <result column="record_date" property="recordDate" jdbcType="TIMESTAMP" />
     <result column="recommend" property="recommend" jdbcType="INTEGER" />
     <result column="status" property="status" jdbcType="INTEGER" />
@@ -75,8 +74,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, pet_id, type, label_sort_id, record_date, recommend, status, creator, created, 
-    modified
+    id, pet_id, type, record_date, recommend, status, creator, created, modified
   </sql>
   <sql id="Blob_Column_List" >
     content
@@ -133,14 +131,14 @@
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into photo_album (pet_id, type, label_sort_id, 
-      record_date, recommend, status, 
-      creator, created, modified, 
-      content)
-    values (#{petId,jdbcType=BIGINT}, #{type,jdbcType=INTEGER}, #{labelSortId,jdbcType=BIGINT}, 
-      #{recordDate,jdbcType=TIMESTAMP}, #{recommend,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
-      #{creator,jdbcType=VARCHAR}, #{created,jdbcType=TIMESTAMP}, #{modified,jdbcType=TIMESTAMP}, 
-      #{content,jdbcType=LONGVARCHAR})
+    insert into photo_album (pet_id, type, record_date, 
+      recommend, status, creator, 
+      created, modified, content
+      )
+    values (#{petId,jdbcType=BIGINT}, #{type,jdbcType=INTEGER}, #{recordDate,jdbcType=TIMESTAMP}, 
+      #{recommend,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{creator,jdbcType=VARCHAR}, 
+      #{created,jdbcType=TIMESTAMP}, #{modified,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.ichaoge.pet.domain.entity.PhotoAlbum" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
@@ -153,9 +151,6 @@
       </if>
       <if test="type != null" >
         type,
-      </if>
-      <if test="labelSortId != null" >
-        label_sort_id,
       </if>
       <if test="recordDate != null" >
         record_date,
@@ -185,9 +180,6 @@
       </if>
       <if test="type != null" >
         #{type,jdbcType=INTEGER},
-      </if>
-      <if test="labelSortId != null" >
-        #{labelSortId,jdbcType=BIGINT},
       </if>
       <if test="recordDate != null" >
         #{recordDate,jdbcType=TIMESTAMP},
@@ -230,9 +222,6 @@
       <if test="record.type != null" >
         type = #{record.type,jdbcType=INTEGER},
       </if>
-      <if test="record.labelSortId != null" >
-        label_sort_id = #{record.labelSortId,jdbcType=BIGINT},
-      </if>
       <if test="record.recordDate != null" >
         record_date = #{record.recordDate,jdbcType=TIMESTAMP},
       </if>
@@ -264,7 +253,6 @@
     set id = #{record.id,jdbcType=BIGINT},
       pet_id = #{record.petId,jdbcType=BIGINT},
       type = #{record.type,jdbcType=INTEGER},
-      label_sort_id = #{record.labelSortId,jdbcType=BIGINT},
       record_date = #{record.recordDate,jdbcType=TIMESTAMP},
       recommend = #{record.recommend,jdbcType=INTEGER},
       status = #{record.status,jdbcType=INTEGER},
@@ -281,7 +269,6 @@
     set id = #{record.id,jdbcType=BIGINT},
       pet_id = #{record.petId,jdbcType=BIGINT},
       type = #{record.type,jdbcType=INTEGER},
-      label_sort_id = #{record.labelSortId,jdbcType=BIGINT},
       record_date = #{record.recordDate,jdbcType=TIMESTAMP},
       recommend = #{record.recommend,jdbcType=INTEGER},
       status = #{record.status,jdbcType=INTEGER},
@@ -300,9 +287,6 @@
       </if>
       <if test="type != null" >
         type = #{type,jdbcType=INTEGER},
-      </if>
-      <if test="labelSortId != null" >
-        label_sort_id = #{labelSortId,jdbcType=BIGINT},
       </if>
       <if test="recordDate != null" >
         record_date = #{recordDate,jdbcType=TIMESTAMP},
@@ -332,7 +316,6 @@
     update photo_album
     set pet_id = #{petId,jdbcType=BIGINT},
       type = #{type,jdbcType=INTEGER},
-      label_sort_id = #{labelSortId,jdbcType=BIGINT},
       record_date = #{recordDate,jdbcType=TIMESTAMP},
       recommend = #{recommend,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
@@ -346,7 +329,6 @@
     update photo_album
     set pet_id = #{petId,jdbcType=BIGINT},
       type = #{type,jdbcType=INTEGER},
-      label_sort_id = #{labelSortId,jdbcType=BIGINT},
       record_date = #{recordDate,jdbcType=TIMESTAMP},
       recommend = #{recommend,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},

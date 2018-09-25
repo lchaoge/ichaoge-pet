@@ -4,7 +4,9 @@ import com.ichaoge.pet.controller.baseinfo.BaseController;
 import com.ichaoge.pet.domain.baseenum.ResulstCodeEnum;
 import com.ichaoge.pet.domain.entity.Pet;
 import com.ichaoge.pet.domain.entity.PetExample;
+import com.ichaoge.pet.domain.inputParam.PhotoAlbumParam;
 import com.ichaoge.pet.service.iservice.PetServiceI;
+import com.ichaoge.pet.service.iservice.PhotoAlbumServiceI;
 import com.ichaoge.pet.utils.Utils;
 import com.retail.sap.api.base.RemoteResult;
 import org.slf4j.LoggerFactory;
@@ -18,9 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Created by chaoge on 2018/8/30.
@@ -35,6 +35,8 @@ public class PetController extends BaseController {
 
     @Resource
     private PetServiceI petServiceI;
+    @Resource
+    private PhotoAlbumServiceI photoAlbumServiceI;
 
 
     /**
@@ -240,6 +242,39 @@ public class PetController extends BaseController {
             return Utils.webResult(false, ResulstCodeEnum.SERVICE_EXCEPTION.getCode(),"查询发生未知错误!", null);
         }
         return Utils.webResult(true, ResulstCodeEnum.SERVICE_SUCESS.getCode(),ResulstCodeEnum.SERVICE_SUCESS.getCodeDesc(), pet);
+    }
+
+    /**
+     * @查询写真集数量
+     * @查询传记数量
+     * @查询健康数量
+     *
+     * @param request
+     * @return 查询结果信息
+     */
+    @RequestMapping(value = "/queryCount", method = RequestMethod.POST)
+    @ResponseBody
+    public RemoteResult<?> queryCount(HttpServletRequest request, @RequestBody Pet param) {
+        logger.info("请求地址：" + request.getRequestURI() + ",请求参数："+param + "，sessionid:" + request.getSession().getId() + "，用户：" + getUser());
+        Map<String,Object> result = new HashMap<String,Object>();
+        //开始查询
+        try {
+            PhotoAlbumParam photoAlbumParam = new PhotoAlbumParam();
+            photoAlbumParam.setPetId(param.getId());
+            int photoAlnumCount = photoAlbumServiceI.countByExample(photoAlbumParam);
+            if(photoAlnumCount!=0){
+                result.put("photoAlnumCount",photoAlnumCount);
+            }
+            // TODO: 2018/9/25 查询传记数量
+
+            // TODO: 2018/9/25 查询健康数量
+
+            logger.info("应答参数：" + result + "sessionid:" + request.getSession().getId() + "用户：" + getUser());
+        } catch (Exception e) {
+            logger.error("查询发生未知错误!", e);
+            return Utils.webResult(false, ResulstCodeEnum.SERVICE_EXCEPTION.getCode(),"查询发生未知错误!", null);
+        }
+        return Utils.webResult(true, ResulstCodeEnum.SERVICE_SUCESS.getCode(),ResulstCodeEnum.SERVICE_SUCESS.getCodeDesc(), result);
     }
 
 }
