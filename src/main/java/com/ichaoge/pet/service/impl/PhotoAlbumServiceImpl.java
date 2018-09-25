@@ -33,7 +33,12 @@ public class PhotoAlbumServiceImpl implements PhotoAlbumServiceI {
     public int countByExample(PhotoAlbumParam param) {
         PhotoAlbumExample photoAlbumExample = new PhotoAlbumExample();
         PhotoAlbumExample.Criteria criteria = photoAlbumExample.createCriteria();
-        criteria.andPetIdEqualTo(param.getPetId());
+        if (param.getId()!=null) {
+            criteria.andIdEqualTo(param.getId());
+        }
+        if (param.getPetId()!=null) {
+            criteria.andPetIdEqualTo(param.getPetId());
+        }
         return photoAlbumMapper.countByExample(photoAlbumExample);
     }
 
@@ -67,6 +72,12 @@ public class PhotoAlbumServiceImpl implements PhotoAlbumServiceI {
         PhotoAlbumExample photoAlbumExample = new PhotoAlbumExample();
         PhotoAlbumExample.Criteria criteria = photoAlbumExample.createCriteria();
         criteria.andPetIdEqualTo(param.getPetId());
+        if (param.getId()!=null) {
+            criteria.andIdEqualTo(param.getId());
+        }
+        if (param.getPetId()!=null) {
+            criteria.andPetIdEqualTo(param.getPetId());
+        }
         photoAlbumExample.setOrderByClause("id desc");
         return photoAlbumMapper.selectByExample(photoAlbumExample);
     }

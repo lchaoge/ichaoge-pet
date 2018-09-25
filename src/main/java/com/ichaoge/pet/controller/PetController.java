@@ -147,6 +147,7 @@ public class PetController extends BaseController {
     public RemoteResult<?> uploadFile(HttpServletRequest request, @RequestParam(value = "file", required = false) MultipartFile file){
         System.out.println("uploadFile");
         Pet pet = new Pet();  // 图片路径
+        String IP = "";
         try {
             InetAddress ia = InetAddress.getLocalHost();
             System.out.println(ia.getHostName());//域名               127
@@ -177,7 +178,7 @@ public class PetController extends BaseController {
                         logger.info("文件成功上传到指定目录下");
 
                         // 修改图片地址
-                        String path = "http://" + ia.getHostAddress() + "/static/uploads/images/" + trueFileName;
+                        String path = "http://www.ichaoge.com:3000/static/uploads/images/" + trueFileName;
                         pet.setPhoto(path);
                     }else {
                         logger.info("不是我们想要的文件类型,请按要求重新上传");
@@ -262,9 +263,9 @@ public class PetController extends BaseController {
             PhotoAlbumParam photoAlbumParam = new PhotoAlbumParam();
             photoAlbumParam.setPetId(param.getId());
             int photoAlnumCount = photoAlbumServiceI.countByExample(photoAlbumParam);
-            if(photoAlnumCount!=0){
-                result.put("photoAlnumCount",photoAlnumCount);
-            }
+            // 写真集
+            result.put("photoAlnumCount",photoAlnumCount);
+
             // TODO: 2018/9/25 查询传记数量
 
             // TODO: 2018/9/25 查询健康数量

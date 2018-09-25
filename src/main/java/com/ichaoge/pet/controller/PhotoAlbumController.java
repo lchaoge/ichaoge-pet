@@ -88,7 +88,7 @@ public class PhotoAlbumController extends BaseController {
                         logger.info("图片成功上传到指定目录下");
 
                         // 修改图片地址
-                        path = "http://" + ia.getHostAddress() + "/static/uploads/images/" + trueFileName;
+                        path = "http://www.ichaoge.com:3000/static/uploads/images/" + trueFileName;
                     }else{
                         // 视频
                         // 项目在容器中实际发布运行的根路径
