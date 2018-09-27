@@ -1,8 +1,10 @@
 package com.ichaoge.pet.service.impl;
 
 import com.ichaoge.pet.dao.mapper.PhotoAlbumLabelSortMapper;
+import com.ichaoge.pet.domain.entity.PhotoAlbumImageExample;
 import com.ichaoge.pet.domain.entity.PhotoAlbumLabelSort;
 import com.ichaoge.pet.domain.entity.PhotoAlbumLabelSortExample;
+import com.ichaoge.pet.domain.inputParam.PhotoAlbumLabelSortParam;
 import com.ichaoge.pet.service.iservice.PhotoAlbumLabelSortServiceI;
 import org.springframework.stereotype.Service;
 
@@ -44,8 +46,20 @@ public class PhotoAlbumLabelSortServiceImpl implements PhotoAlbumLabelSortServic
     }
 
     @Override
-    public List<PhotoAlbumLabelSort> selectByExample(PhotoAlbumLabelSortExample example) {
-        return photoAlbumLabelSortMapper.selectByExample(example);
+    public List<PhotoAlbumLabelSort> selectByExample(PhotoAlbumLabelSortParam param) {
+        PhotoAlbumLabelSortExample photoAlbumLabelSortExample = new PhotoAlbumLabelSortExample();
+        PhotoAlbumLabelSortExample.Criteria criteria = photoAlbumLabelSortExample.createCriteria();
+        if (param.getId()!=null) {
+            criteria.andIdEqualTo(param.getId());
+        }
+        if (param.getPhotoAlbumId()!=null) {
+            criteria.andPhotoAlbumIdEqualTo(param.getPhotoAlbumId());
+        }
+        if(param.getLabelSortId()!=null){
+            criteria.andLabelSortIdEqualTo(param.getLabelSortId());
+        }
+        photoAlbumLabelSortExample.setOrderByClause("id desc");
+        return photoAlbumLabelSortMapper.selectByExample(photoAlbumLabelSortExample);
     }
 
     @Override

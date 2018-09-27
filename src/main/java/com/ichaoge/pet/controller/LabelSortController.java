@@ -3,6 +3,7 @@ package com.ichaoge.pet.controller;
 import com.ichaoge.pet.controller.baseinfo.BaseController;
 import com.ichaoge.pet.domain.baseenum.ResulstCodeEnum;
 import com.ichaoge.pet.domain.entity.LabelSort;
+import com.ichaoge.pet.domain.entity.enums.LabelTypeEnums;
 import com.ichaoge.pet.domain.output.LabelSortOutput;
 import com.ichaoge.pet.service.iservice.LabelSortServiceI;
 import com.ichaoge.pet.utils.Utils;
@@ -44,13 +45,44 @@ public class LabelSortController extends BaseController {
         List<LabelSortOutput> result = new ArrayList<>();
         //开始查询
         try {
+
             List<LabelSort> labelSortList = labelSortServiceI.selectByExample(param);
+            List<com.ichaoge.pet.domain.output.LabelSort> labelSortList1 = new ArrayList<>();
+            List<com.ichaoge.pet.domain.output.LabelSort> labelSortList2 = new ArrayList<>();
+            List<com.ichaoge.pet.domain.output.LabelSort> labelSortList3 = new ArrayList<>();
+            List<com.ichaoge.pet.domain.output.LabelSort> labelSortList4 = new ArrayList<>();
             if(labelSortList.size()>0){
                 for (LabelSort labelSort:labelSortList) {
-                    result.add(new LabelSortOutput(labelSort));
+                    if(labelSort.getType() == LabelTypeEnums.DAILY.getValue()){
+                        labelSortList1.add(new com.ichaoge.pet.domain.output.LabelSort(labelSort));
+                    }
+                    if(labelSort.getType() == LabelTypeEnums.APPLIANCE.getValue()){
+                        labelSortList2.add(new com.ichaoge.pet.domain.output.LabelSort(labelSort));
+                    }
+                    if(labelSort.getType() == LabelTypeEnums.FOOD.getValue()){
+                        labelSortList3.add(new com.ichaoge.pet.domain.output.LabelSort(labelSort));
+                    }
+                    if(labelSort.getType() == LabelTypeEnums.HEALTHCARE.getValue()){
+                        labelSortList4.add(new com.ichaoge.pet.domain.output.LabelSort(labelSort));
+                    }
+                }
+
+                for(int i=0;i<LabelTypeEnums.values().length;i++){
+                    if(LabelTypeEnums.values()[i].getValue()==1){
+                        result.add(new LabelSortOutput(LabelTypeEnums.values()[i].getValue(),LabelTypeEnums.values()[i].getDesc(),labelSortList1));
+                    }
+                    if(LabelTypeEnums.values()[i].getValue()==2){
+                        result.add(new LabelSortOutput(LabelTypeEnums.values()[i].getValue(),LabelTypeEnums.values()[i].getDesc(),labelSortList2));
+                    }
+                    if(LabelTypeEnums.values()[i].getValue()==3){
+                        result.add(new LabelSortOutput(LabelTypeEnums.values()[i].getValue(),LabelTypeEnums.values()[i].getDesc(),labelSortList3));
+                    }
+                    if(LabelTypeEnums.values()[i].getValue()==4){
+                        result.add(new LabelSortOutput(LabelTypeEnums.values()[i].getValue(),LabelTypeEnums.values()[i].getDesc(),labelSortList4));
+                    }
                 }
             }
-            logger.info("应答参数：" + labelSortList + "sessionid:" + request.getSession().getId() + "用户：" + getUser());
+            logger.info("应答参数：" + result + "sessionid:" + request.getSession().getId() + "用户：" + getUser());
         } catch (Exception e) {
             logger.error("查询所有标签失败!", e);
             return Utils.webResult(false, ResulstCodeEnum.SERVICE_EXCEPTION.getCode(),"查询所有标签失败!", null);

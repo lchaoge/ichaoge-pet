@@ -4,6 +4,7 @@ import com.ichaoge.pet.controller.baseinfo.BaseController;
 import com.ichaoge.pet.domain.baseenum.ResulstCodeEnum;
 import com.ichaoge.pet.domain.entity.Pet;
 import com.ichaoge.pet.domain.entity.PetExample;
+import com.ichaoge.pet.domain.inputParam.PetParam;
 import com.ichaoge.pet.domain.inputParam.PhotoAlbumParam;
 import com.ichaoge.pet.service.iservice.PetServiceI;
 import com.ichaoge.pet.service.iservice.PhotoAlbumServiceI;
@@ -55,7 +56,7 @@ public class PetController extends BaseController {
         param.setModified(new Date());
         //开始查询
         try {
-            Pet userPet = new Pet();
+            PetParam userPet = new PetParam();
             userPet.setUserId(param.getUserId());
             List<Pet> pets = petServiceI.selectByExample(userPet);
             for (Pet p:pets) {
@@ -103,13 +104,12 @@ public class PetController extends BaseController {
     @ResponseBody
     public RemoteResult<?> update(HttpServletRequest request, @RequestBody Pet param) {
         logger.info("请求地址：" + request.getRequestURI() + ",请求参数："+param + "，sessionid:" + request.getSession().getId() + "，用户：" + getUser());
-        int result = -1;
         Pet currentPet = null;
-        param.setCreated(new Date());
         param.setModified(new Date());
         //开始查询
         try {
-            Pet userPet = new Pet();
+            // 修改用户萌宠卡的默认卡
+            PetParam userPet = new PetParam();
             userPet.setUserId(param.getUserId());
             List<Pet> pets = petServiceI.selectByExample(userPet);
             for (Pet p:pets) {
@@ -118,9 +118,8 @@ public class PetController extends BaseController {
                     petServiceI.updateByPrimaryKeySelective(p);
                 }
             }
-
-            param.setIsCurrent(1);
-            result = petServiceI.updateByPrimaryKeySelective(param);
+            // 修改为当前卡
+            int result = petServiceI.updateByPrimaryKeySelective(param);
             if(result<0){
                 logger.error("修改宠物卡失败!");
                 return Utils.webResult(false, ResulstCodeEnum.SERVICE_EXCEPTION.getCode(),"修改宠物卡失败!", null);
@@ -178,7 +177,7 @@ public class PetController extends BaseController {
                         logger.info("文件成功上传到指定目录下");
 
                         // 修改图片地址
-                        String path = "http://www.ichaoge.com:3000/static/uploads/images/" + trueFileName;
+                        String path = "http://pet.ichaoge.com:3000/static/uploads/images/" + trueFileName;
                         pet.setPhoto(path);
                     }else {
                         logger.info("不是我们想要的文件类型,请按要求重新上传");
@@ -208,7 +207,7 @@ public class PetController extends BaseController {
      */
     @RequestMapping(value = "/queryPetAll", method = RequestMethod.POST)
     @ResponseBody
-    public RemoteResult<?> queryPetAll(HttpServletRequest request, @RequestBody Pet param) {
+    public RemoteResult<?> queryPetAll(HttpServletRequest request, @RequestBody PetParam param) {
         logger.info("请求地址：" + request.getRequestURI() + ",请求参数："+param + "，sessionid:" + request.getSession().getId() + "，用户：" + getUser());
         List<Pet> pets = null;
         //开始查询

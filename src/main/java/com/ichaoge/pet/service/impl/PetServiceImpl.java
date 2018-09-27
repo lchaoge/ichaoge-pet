@@ -4,6 +4,7 @@ import com.ichaoge.pet.dao.mapper.PetMapper;
 import com.ichaoge.pet.domain.entity.Pet;
 import com.ichaoge.pet.domain.entity.PetExample;
 import com.ichaoge.pet.domain.entity.UserExample;
+import com.ichaoge.pet.domain.inputParam.PetParam;
 import com.ichaoge.pet.service.iservice.PetServiceI;
 import org.springframework.stereotype.Service;
 
@@ -30,11 +31,20 @@ public class PetServiceImpl implements PetServiceI {
     }
 
     @Override
-    public List<Pet> selectByExample(Pet pet) {
+    public List<Pet> selectByExample(PetParam param) {
         PetExample petExample = new PetExample();
         PetExample.Criteria criteria = petExample.createCriteria();
-        if (org.apache.commons.lang3.StringUtils.isNotEmpty(pet.getUserId().toString())) {
-            criteria.andUserIdEqualTo(pet.getUserId());
+        if(param.getId()!=null){
+            criteria.andIdEqualTo(param.getId());
+        }
+        if(param.getUserId()!=null){
+            criteria.andUserIdEqualTo(param.getUserId());
+        }
+        if(param.getCardNo()!=null){
+            criteria.andCardNoEqualTo(param.getCardNo());
+        }
+        if(param.getIsCurrent()!=null){
+            criteria.andIsCurrentEqualTo(param.getIsCurrent());
         }
         return petMapper.selectByExample(petExample);
     }

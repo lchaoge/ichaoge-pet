@@ -2,6 +2,7 @@ package com.ichaoge.pet.service.iservice;
 
 import com.ichaoge.pet.domain.entity.PhotoAlbumLabelSort;
 import com.ichaoge.pet.domain.entity.PhotoAlbumLabelSortExample;
+import com.ichaoge.pet.domain.inputParam.PhotoAlbumLabelSortParam;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public interface PhotoAlbumLabelSortServiceI {
 
     int insertSelective(PhotoAlbumLabelSort record);
 
-    List<PhotoAlbumLabelSort> selectByExample(PhotoAlbumLabelSortExample example);
+    List<PhotoAlbumLabelSort> selectByExample(PhotoAlbumLabelSortParam param);
 
     PhotoAlbumLabelSort selectByPrimaryKey(Long id);
 

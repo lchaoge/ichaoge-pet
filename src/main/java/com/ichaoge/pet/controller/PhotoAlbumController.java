@@ -3,10 +3,9 @@ package com.ichaoge.pet.controller;
 import com.ichaoge.pet.controller.baseinfo.BaseController;
 import com.ichaoge.pet.domain.base.Pagination;
 import com.ichaoge.pet.domain.baseenum.ResulstCodeEnum;
-import com.ichaoge.pet.domain.entity.Pet;
-import com.ichaoge.pet.domain.entity.PhotoAlbum;
-import com.ichaoge.pet.domain.entity.PhotoAlbumImage;
-import com.ichaoge.pet.domain.entity.PhotoAlbumLabelSort;
+import com.ichaoge.pet.domain.entity.*;
+import com.ichaoge.pet.domain.inputParam.PhotoAlbumImageParam;
+import com.ichaoge.pet.domain.inputParam.PhotoAlbumLabelSortParam;
 import com.ichaoge.pet.domain.inputParam.PhotoAlbumParam;
 import com.ichaoge.pet.domain.inputParam.UserParam;
 import com.ichaoge.pet.service.iservice.LabelSortServiceI;
@@ -26,7 +25,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.*;
 
 
 /**
@@ -45,7 +44,8 @@ public class PhotoAlbumController extends BaseController {
     private PhotoAlbumImageServiceI photoAlbumImageServiceI;
     @Resource
     private PhotoAlbumLabelSortServiceI photoAlbumLabelSortServiceI;
-
+    @Resource
+    private LabelSortServiceI labelSortServiceI;
     /**
      * @param request
      * @param file
@@ -88,21 +88,35 @@ public class PhotoAlbumController extends BaseController {
                         logger.info("图片成功上传到指定目录下");
 
                         // 修改图片地址
-                        path = "http://www.ichaoge.com:3000/static/uploads/images/" + trueFileName;
-                    }else{
+                        path = "http://pet.ichaoge.com:3000/static/uploads/images/" + trueFileName;
+                    }else if(type.equals("0")){
                         // 视频
                         // 项目在容器中实际发布运行的根路径
                         String realPath = request.getSession().getServletContext().getRealPath("/");
                         // 自定义的文件名称
                         String trueFileName = "video-"+String.valueOf(System.currentTimeMillis()) + "."+imgType;
-                        // 设置存放图片文件的路径
+                        // 设置存放视频文件的路径
                         String imgPath = realPath + "/static/uploads/video/" + trueFileName;
                         logger.info("存放视频文件的路径:" + imgPath);
                         file.transferTo(new File(imgPath));
                         logger.info("视频成功上传到指定目录下");
 
-                        // 修改图片地址
-                        path = "http://" + ia.getHostAddress() + "/static/uploads/video/" + trueFileName;
+                        // 修改视频地址
+                        path = "http://pet.ichaoge.com:3000/static/uploads/video/" + trueFileName;
+                    }else{
+                        // GIF
+                        // 项目在容器中实际发布运行的根路径
+                        String realPath = request.getSession().getServletContext().getRealPath("/");
+                        // 自定义的文件名称
+                        String trueFileName = "gif-"+String.valueOf(System.currentTimeMillis()) + "."+imgType;
+                        // 设置存放视频文件的路径
+                        String imgPath = realPath + "/static/uploads/gif/" + trueFileName;
+                        logger.info("存放GIF文件的路径:" + imgPath);
+                        file.transferTo(new File(imgPath));
+                        logger.info("GIF成功上传到指定目录下");
+
+                        // 修改视频地址
+                        path = "http://pet.ichaoge.com:3000/static/uploads/gif/" + trueFileName;
                     }
 
 
@@ -215,5 +229,88 @@ public class PhotoAlbumController extends BaseController {
     }
 
 
+    /**
+     * 根据id删除写真集
+     *
+     * @param request
+     * @return 查询结果信息
+     */
+    @RequestMapping(value = "/deletePhotoAlbumById", method = RequestMethod.POST)
+    @ResponseBody
+    public RemoteResult<?> deletePhotoAlbumById(HttpServletRequest request, @RequestBody PhotoAlbumParam param) {
+        logger.info("请求地址：" + request.getRequestURI() + ",请求参数："+param + "，sessionid:" + request.getSession().getId() + "，用户：" + getUser());
+        Map<String,Object> result = new HashMap<>();
+
+        //开始查询
+        try {
+            // 删除写真集
+            photoAlbumServiceI.deleteByPrimaryKey(param.getId());
+
+            // 删除写真集图片
+            for(int i =0;i<param.getPhotoAlbumImageList().length;i++){
+                Long photoAlbumImageId = Long.parseLong(param.getPhotoAlbumImageList()[i]);
+                photoAlbumImageServiceI.deleteByPrimaryKey(photoAlbumImageId);
+            }
+
+            // 删除写真集标签
+            for(int j =0;j<param.getLabelSortList().length;j++){
+                Long photoAlbumLabelSortId = Long.parseLong(param.getLabelSortList()[j]);
+                PhotoAlbumLabelSortParam photoAlbumLabelSortParam = new PhotoAlbumLabelSortParam();
+                photoAlbumLabelSortParam.setLabelSortId(photoAlbumLabelSortId);
+                PhotoAlbumLabelSort p = photoAlbumLabelSortServiceI.selectByExample(photoAlbumLabelSortParam).get(0);
+                if(p!=null){
+                    photoAlbumLabelSortServiceI.deleteByPrimaryKey(p.getId());
+                }
+            }
+
+            logger.info("应答参数：" + result + "sessionid:" + request.getSession().getId() + "用户：" + getUser());
+        } catch (Exception e) {
+            logger.error("新增写真集失败!", e);
+            return Utils.webResult(false, ResulstCodeEnum.SERVICE_EXCEPTION.getCode(),"新增写真集失败!", null);
+        }
+        return Utils.webResult(true, ResulstCodeEnum.SERVICE_SUCESS.getCode(),ResulstCodeEnum.SERVICE_SUCESS.getCodeDesc(), result);
+    }
+
+    /**
+     * 根据id查询写真集
+     *
+     * @param request
+     * @return 查询结果信息
+     */
+    @RequestMapping(value = "/queryPhotoAlbumById", method = RequestMethod.POST)
+    @ResponseBody
+    public RemoteResult<?> queryPhotoAlbumById(HttpServletRequest request, @RequestBody PhotoAlbumParam param) {
+        logger.info("请求地址：" + request.getRequestURI() + ",请求参数："+param + "，sessionid:" + request.getSession().getId() + "，用户：" + getUser());
+        Map<String,Object> result = new HashMap<>();
+
+        //开始查询
+        try {
+            // 查询写真集
+            PhotoAlbum photoAlbum = photoAlbumServiceI.selectByPrimaryKey(param.getId());
+            result.put("photoAlbum",photoAlbum);
+            // 查询写真集图片
+            PhotoAlbumImageParam photoAlbumImageParam = new PhotoAlbumImageParam();
+            photoAlbumImageParam.setPhotoAlbumId(param.getId());
+            List<PhotoAlbumImage> photoAlbumImageList = photoAlbumImageServiceI.selectByExample(photoAlbumImageParam);
+            result.put("photoAlbumImageList",photoAlbumImageList);
+            // 查询写真集标签
+            PhotoAlbumLabelSortParam photoAlbumLabelSortParam = new PhotoAlbumLabelSortParam();
+            photoAlbumLabelSortParam.setPhotoAlbumId(param.getId());
+            List<PhotoAlbumLabelSort> photoAlbumLabelSortList = photoAlbumLabelSortServiceI.selectByExample(photoAlbumLabelSortParam);
+            List<LabelSort> labelSortList = new ArrayList<>();
+            for(int i =0;i<photoAlbumLabelSortList.size();i++){
+                Long labelSortId = photoAlbumLabelSortList.get(i).getLabelSortId();
+                LabelSort labelSort = labelSortServiceI.selectByPrimaryKey(labelSortId);
+                labelSortList.add(labelSort);
+            }
+            result.put("labelSortList",labelSortList);
+
+            logger.info("应答参数：" + result + "sessionid:" + request.getSession().getId() + "用户：" + getUser());
+        } catch (Exception e) {
+            logger.error("新增写真集失败!", e);
+            return Utils.webResult(false, ResulstCodeEnum.SERVICE_EXCEPTION.getCode(),"新增写真集失败!", null);
+        }
+        return Utils.webResult(true, ResulstCodeEnum.SERVICE_SUCESS.getCode(),ResulstCodeEnum.SERVICE_SUCESS.getCodeDesc(), result);
+    }
 
 }

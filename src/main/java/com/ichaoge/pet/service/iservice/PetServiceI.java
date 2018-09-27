@@ -2,6 +2,7 @@ package com.ichaoge.pet.service.iservice;
 
 import com.ichaoge.pet.domain.entity.Pet;
 import com.ichaoge.pet.domain.entity.PetExample;
+import com.ichaoge.pet.domain.inputParam.PetParam;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface PetServiceI {
 
     int insertSelective(Pet record);
 
-    List<Pet> selectByExample(Pet pet);
+    List<Pet> selectByExample(PetParam param);
 
     Pet selectByPrimaryKey(Long id);
 

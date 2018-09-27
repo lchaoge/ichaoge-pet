@@ -49,10 +49,13 @@ public class PhotoAlbumImageServiceImpl implements PhotoAlbumImageServiceI {
     public List<PhotoAlbumImage> selectByExample(PhotoAlbumImageParam param) {
         PhotoAlbumImageExample photoAlbumImageExample = new PhotoAlbumImageExample();
         PhotoAlbumImageExample.Criteria criteria = photoAlbumImageExample.createCriteria();
-        if (param.getPetId()!=0) {
+        if(param.getId()!=null){
+            criteria.andIdEqualTo(param.getId());
+        }
+        if (param.getPetId()!=null) {
             criteria.andPetIdEqualTo(param.getPetId());
         }
-        if (param.getPhotoAlbumId()!=0) {
+        if (param.getPhotoAlbumId()!=null) {
             criteria.andPhotoAlbumIdEqualTo(param.getPhotoAlbumId());
         }
 

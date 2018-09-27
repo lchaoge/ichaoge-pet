@@ -7,6 +7,7 @@ import com.ichaoge.pet.domain.entity.Pet;
 import com.ichaoge.pet.domain.entity.User;
 import com.ichaoge.pet.domain.entity.UserInfo;
 import com.ichaoge.pet.domain.inputParam.DecodeParam;
+import com.ichaoge.pet.domain.inputParam.PetParam;
 import com.ichaoge.pet.domain.inputParam.UserParam;
 import com.ichaoge.pet.service.iservice.PetServiceI;
 import com.ichaoge.pet.service.iservice.UserInfoServiceI;
@@ -131,7 +132,7 @@ public class UserController extends BaseController {
                 }
 
             }
-            Pet petParam = new Pet();
+            PetParam petParam = new PetParam();
             petParam.setUserId(loginUser.getId());
             List<Pet> petList = petServiceI.selectByExample(petParam);
             Pet pet = null;
@@ -177,6 +178,46 @@ public class UserController extends BaseController {
             return Utils.webResult(false, ResulstCodeEnum.SERVICE_EXCEPTION.getCode(),"查询当前用户错误!", null);
         }
         return Utils.webResult(true, ResulstCodeEnum.SERVICE_SUCESS.getCode(), ResulstCodeEnum.SERVICE_SUCESS.getCodeDesc(), currentUser);
+    }
+
+    /**
+     * 根据ID查询用户和萌宠卡
+     *
+     * @param request
+     * @return 查询结果信息
+     */
+    @RequestMapping(value = "/queryUserAndPet", method = RequestMethod.POST)
+    @ResponseBody
+    public RemoteResult<?> queryUserAndPet(HttpServletRequest request, @RequestBody User param) {
+        logger.info("请求地址：" + request.getRequestURI() + "  " + "请求参数：" + param.toString() + "sessionid:" + request.getSession().getId() + "用户：" + getUser());
+        Map<String,Object> result = new HashMap<String,Object>();
+        //开始查询
+        try {
+            //  查询当前用户
+            User currentUser = userServiceI.selectByPrimaryKey(param.getId());
+            if(currentUser == null){
+                logger.error("没有查询到用户!");
+                return Utils.webResult(false, ResulstCodeEnum.SERVICE_EXCEPTION.getCode(),"没用查询到用户!", null);
+            }
+            result.put("currentUser",currentUser);
+
+            // 查询当前萌宠卡
+            PetParam petParam = new PetParam();
+            petParam.setUserId(param.getId());
+            petParam.setIsCurrent(1);
+            Pet currentPet = petServiceI.selectByExample(petParam).get(0);
+            if(currentPet == null){
+                logger.error("没有查询到萌宠卡!");
+                return Utils.webResult(false, ResulstCodeEnum.SERVICE_EXCEPTION.getCode(),"没用查询到用户!", null);
+            }
+            result.put("currentPet",currentPet);
+
+            logger.info("应答参数：" + result + "sessionid:" + request.getSession().getId() + "用户：" + getUser());
+        } catch (Exception e) {
+            logger.error("查询当前用户错误!", e);
+            return Utils.webResult(false, ResulstCodeEnum.SERVICE_EXCEPTION.getCode(),"查询当前用户错误!", null);
+        }
+        return Utils.webResult(true, ResulstCodeEnum.SERVICE_SUCESS.getCode(), ResulstCodeEnum.SERVICE_SUCESS.getCodeDesc(), result);
     }
 
     /**
