@@ -31,9 +31,18 @@
         <includeCallerData>true</includeCallerData>
         <appender-ref ref="ALL"/>
     </appender>
-
-    <root level="INFO">
+    <!-- 控制台输出 -->
+    <property name="consoleLayoutPattern"
+              value="%-20(%d{yyyyMMdd_HH:mm:ss.SSS} [%logger][%thread] [%-4relative])
+                [%X{hostName} %X{requestId} %X{processId} %X{service.timing} ][%level] %msg%n" />
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <layout name="StandardFormat" class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${consoleLayoutPattern}</pattern>
+        </layout>
+    </appender>
+    <root level="DEBUG">
         <appender-ref ref="ALL_ASYNC"/>
+        <appender-ref ref="CONSOLE"/>
     </root>
 
 </configuration>

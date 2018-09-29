@@ -7,7 +7,6 @@
  */
 package com.ichaoge.pet.controller.baseinfo;
 
-import com.retail.cx.web.interceptor.LoginContext;
 
 /**
  * ClassName: BaseController
@@ -18,10 +17,7 @@ import com.retail.cx.web.interceptor.LoginContext;
 public class BaseController {
     public String getUser() {
         String userNo = "-1";
-        LoginContext lc = LoginContext.getLoginContext();
-        if (lc != null) {
-            userNo = lc.getAccount();
-        }
+
         return userNo;
     }
 }

@@ -61,7 +61,7 @@
         <!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
         <property name="typeAliasesPackage" value="com.ichaoge.pet.domain.*"/>
         <!-- 显式指定Mapper文件位置 -->
-        <property name="mapperLocations" value="classpath:/mybatis/GoodsMapper.xml"/>
+        <property name="mapperLocations" value="classpath*:mybatis/*.xml"/>
         <property name="plugins">
             <list>
                 <bean id="sqlStatementInterceptor" class="com.ichaoge.pet.dao.mybatis.SqlStatementInterceptor"/>

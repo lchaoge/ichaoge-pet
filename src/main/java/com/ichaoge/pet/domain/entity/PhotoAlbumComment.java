@@ -3,16 +3,20 @@ package com.ichaoge.pet.domain.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-public class PhotoAlbumImage implements Serializable {
+public class PhotoAlbumComment implements Serializable {
     private Long id;
-
-    private Long petId;
 
     private Long photoAlbumId;
 
-    private String imageUrl;
+    private Long userId;
 
-    private String firstVideoImageUrl;
+    private Long stayUserId;
+
+    private Long parentId;
+
+    private Long floor;
+
+    private String ip;
 
     private Integer status;
 
@@ -21,6 +25,8 @@ public class PhotoAlbumImage implements Serializable {
     private Date created;
 
     private Date modified;
+
+    private String content;
 
     private static final long serialVersionUID = 1L;
 
@@ -32,14 +38,6 @@ public class PhotoAlbumImage implements Serializable {
         this.id = id;
     }
 
-    public Long getPetId() {
-        return petId;
-    }
-
-    public void setPetId(Long petId) {
-        this.petId = petId;
-    }
-
     public Long getPhotoAlbumId() {
         return photoAlbumId;
     }
@@ -48,20 +46,44 @@ public class PhotoAlbumImage implements Serializable {
         this.photoAlbumId = photoAlbumId;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl == null ? null : imageUrl.trim();
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public String getFirstVideoImageUrl() {
-        return firstVideoImageUrl;
+    public Long getStayUserId() {
+        return stayUserId;
     }
 
-    public void setFirstVideoImageUrl(String firstVideoImageUrl) {
-        this.firstVideoImageUrl = firstVideoImageUrl == null ? null : firstVideoImageUrl.trim();
+    public void setStayUserId(Long stayUserId) {
+        this.stayUserId = stayUserId;
+    }
+
+    public Long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
+    }
+
+    public Long getFloor() {
+        return floor;
+    }
+
+    public void setFloor(Long floor) {
+        this.floor = floor;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip == null ? null : ip.trim();
     }
 
     public Integer getStatus() {
@@ -96,6 +118,14 @@ public class PhotoAlbumImage implements Serializable {
         this.modified = modified;
     }
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -107,16 +137,19 @@ public class PhotoAlbumImage implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        PhotoAlbumImage other = (PhotoAlbumImage) that;
+        PhotoAlbumComment other = (PhotoAlbumComment) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getPetId() == null ? other.getPetId() == null : this.getPetId().equals(other.getPetId()))
             && (this.getPhotoAlbumId() == null ? other.getPhotoAlbumId() == null : this.getPhotoAlbumId().equals(other.getPhotoAlbumId()))
-            && (this.getImageUrl() == null ? other.getImageUrl() == null : this.getImageUrl().equals(other.getImageUrl()))
-            && (this.getFirstVideoImageUrl() == null ? other.getFirstVideoImageUrl() == null : this.getFirstVideoImageUrl().equals(other.getFirstVideoImageUrl()))
+            && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
+            && (this.getStayUserId() == null ? other.getStayUserId() == null : this.getStayUserId().equals(other.getStayUserId()))
+            && (this.getParentId() == null ? other.getParentId() == null : this.getParentId().equals(other.getParentId()))
+            && (this.getFloor() == null ? other.getFloor() == null : this.getFloor().equals(other.getFloor()))
+            && (this.getIp() == null ? other.getIp() == null : this.getIp().equals(other.getIp()))
             && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
             && (this.getCreator() == null ? other.getCreator() == null : this.getCreator().equals(other.getCreator()))
             && (this.getCreated() == null ? other.getCreated() == null : this.getCreated().equals(other.getCreated()))
-            && (this.getModified() == null ? other.getModified() == null : this.getModified().equals(other.getModified()));
+            && (this.getModified() == null ? other.getModified() == null : this.getModified().equals(other.getModified()))
+            && (this.getContent() == null ? other.getContent() == null : this.getContent().equals(other.getContent()));
     }
 
     @Override
@@ -124,14 +157,17 @@ public class PhotoAlbumImage implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getPetId() == null) ? 0 : getPetId().hashCode());
         result = prime * result + ((getPhotoAlbumId() == null) ? 0 : getPhotoAlbumId().hashCode());
-        result = prime * result + ((getImageUrl() == null) ? 0 : getImageUrl().hashCode());
-        result = prime * result + ((getFirstVideoImageUrl() == null) ? 0 : getFirstVideoImageUrl().hashCode());
+        result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
+        result = prime * result + ((getStayUserId() == null) ? 0 : getStayUserId().hashCode());
+        result = prime * result + ((getParentId() == null) ? 0 : getParentId().hashCode());
+        result = prime * result + ((getFloor() == null) ? 0 : getFloor().hashCode());
+        result = prime * result + ((getIp() == null) ? 0 : getIp().hashCode());
         result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
         result = prime * result + ((getCreator() == null) ? 0 : getCreator().hashCode());
         result = prime * result + ((getCreated() == null) ? 0 : getCreated().hashCode());
         result = prime * result + ((getModified() == null) ? 0 : getModified().hashCode());
+        result = prime * result + ((getContent() == null) ? 0 : getContent().hashCode());
         return result;
     }
 }

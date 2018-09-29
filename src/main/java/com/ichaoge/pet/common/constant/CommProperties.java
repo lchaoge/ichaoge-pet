@@ -1,7 +1,7 @@
 package com.ichaoge.pet.common.constant;
 
 /**
- * Created by user on 2018/5/2.
+ * Created by chaoge on 2018/5/2.
  */
 public class CommProperties {
     private String oaUrl;

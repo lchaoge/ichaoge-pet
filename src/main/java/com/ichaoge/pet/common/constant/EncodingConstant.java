@@ -3,9 +3,7 @@ package com.ichaoge.pet.common.constant;
 /**
  * 编码常量
  *
- * User: gaofx
- * Date: 15-2-3
- * Time: 下午3:09
+ * User: chaoge
  */
 public class EncodingConstant {
 

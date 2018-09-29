@@ -8,6 +8,7 @@ import com.ichaoge.pet.domain.inputParam.PetParam;
 import com.ichaoge.pet.domain.inputParam.PhotoAlbumParam;
 import com.ichaoge.pet.service.iservice.PetServiceI;
 import com.ichaoge.pet.service.iservice.PhotoAlbumServiceI;
+import com.ichaoge.pet.utils.IpUtils;
 import com.ichaoge.pet.utils.Utils;
 import com.retail.sap.api.base.RemoteResult;
 import org.slf4j.LoggerFactory;
@@ -41,7 +42,7 @@ public class PetController extends BaseController {
 
 
     /**
-     * 上传头像
+     * 新增
      *
      * @param request
      * @return 查询结果信息
@@ -54,6 +55,7 @@ public class PetController extends BaseController {
         Pet currentPet = null;
         param.setCreated(new Date());
         param.setModified(new Date());
+
         //开始查询
         try {
             PetParam userPet = new PetParam();

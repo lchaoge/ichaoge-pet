@@ -6,7 +6,7 @@
     <result column="pet_id" property="petId" jdbcType="BIGINT" />
     <result column="photo_album_id" property="photoAlbumId" jdbcType="BIGINT" />
     <result column="image_url" property="imageUrl" jdbcType="VARCHAR" />
-    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="first_video_image_url" property="firstVideoImageUrl" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="INTEGER" />
     <result column="creator" property="creator" jdbcType="BIGINT" />
     <result column="created" property="created" jdbcType="TIMESTAMP" />
@@ -71,7 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, pet_id, photo_album_id, image_url, title, status, creator, created, modified
+    id, pet_id, photo_album_id, image_url, first_video_image_url, status, creator, created, 
+    modified
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ichaoge.pet.domain.entity.PhotoAlbumImageExample" >
     select
@@ -108,10 +109,10 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into photo_album_image (pet_id, photo_album_id, image_url, 
-      title, status, creator, 
+      first_video_image_url, status, creator, 
       created, modified)
     values (#{petId,jdbcType=BIGINT}, #{photoAlbumId,jdbcType=BIGINT}, #{imageUrl,jdbcType=VARCHAR}, 
-      #{title,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{creator,jdbcType=BIGINT}, 
+      #{firstVideoImageUrl,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{creator,jdbcType=BIGINT}, 
       #{created,jdbcType=TIMESTAMP}, #{modified,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.ichaoge.pet.domain.entity.PhotoAlbumImage" >
@@ -129,8 +130,8 @@
       <if test="imageUrl != null" >
         image_url,
       </if>
-      <if test="title != null" >
-        title,
+      <if test="firstVideoImageUrl != null" >
+        first_video_image_url,
       </if>
       <if test="status != null" >
         status,
@@ -155,8 +156,8 @@
       <if test="imageUrl != null" >
         #{imageUrl,jdbcType=VARCHAR},
       </if>
-      <if test="title != null" >
-        #{title,jdbcType=VARCHAR},
+      <if test="firstVideoImageUrl != null" >
+        #{firstVideoImageUrl,jdbcType=VARCHAR},
       </if>
       <if test="status != null" >
         #{status,jdbcType=INTEGER},
@@ -193,8 +194,8 @@
       <if test="record.imageUrl != null" >
         image_url = #{record.imageUrl,jdbcType=VARCHAR},
       </if>
-      <if test="record.title != null" >
-        title = #{record.title,jdbcType=VARCHAR},
+      <if test="record.firstVideoImageUrl != null" >
+        first_video_image_url = #{record.firstVideoImageUrl,jdbcType=VARCHAR},
       </if>
       <if test="record.status != null" >
         status = #{record.status,jdbcType=INTEGER},
@@ -219,7 +220,7 @@
       pet_id = #{record.petId,jdbcType=BIGINT},
       photo_album_id = #{record.photoAlbumId,jdbcType=BIGINT},
       image_url = #{record.imageUrl,jdbcType=VARCHAR},
-      title = #{record.title,jdbcType=VARCHAR},
+      first_video_image_url = #{record.firstVideoImageUrl,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=INTEGER},
       creator = #{record.creator,jdbcType=BIGINT},
       created = #{record.created,jdbcType=TIMESTAMP},
@@ -240,8 +241,8 @@
       <if test="imageUrl != null" >
         image_url = #{imageUrl,jdbcType=VARCHAR},
       </if>
-      <if test="title != null" >
-        title = #{title,jdbcType=VARCHAR},
+      <if test="firstVideoImageUrl != null" >
+        first_video_image_url = #{firstVideoImageUrl,jdbcType=VARCHAR},
       </if>
       <if test="status != null" >
         status = #{status,jdbcType=INTEGER},
@@ -263,7 +264,7 @@
     set pet_id = #{petId,jdbcType=BIGINT},
       photo_album_id = #{photoAlbumId,jdbcType=BIGINT},
       image_url = #{imageUrl,jdbcType=VARCHAR},
-      title = #{title,jdbcType=VARCHAR},
+      first_video_image_url = #{firstVideoImageUrl,jdbcType=VARCHAR},
       status = #{status,jdbcType=INTEGER},
       creator = #{creator,jdbcType=BIGINT},
       created = #{created,jdbcType=TIMESTAMP},

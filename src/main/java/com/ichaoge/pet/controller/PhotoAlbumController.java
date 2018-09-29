@@ -1,5 +1,6 @@
 package com.ichaoge.pet.controller;
 
+import com.ichaoge.pet.common.service.VideoInfoService;
 import com.ichaoge.pet.controller.baseinfo.BaseController;
 import com.ichaoge.pet.domain.base.Pagination;
 import com.ichaoge.pet.domain.baseenum.ResulstCodeEnum;
@@ -55,7 +56,7 @@ public class PhotoAlbumController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/uploadFile")
     public RemoteResult<?> uploadFile(HttpServletRequest request, @RequestParam(value = "file", required = false) MultipartFile file){
-        String path ="";
+        Map<String,Object> result = new HashMap<String,Object>();
         try {
             InetAddress ia = InetAddress.getLocalHost();
             System.out.println(ia.getHostName());//域名               127
@@ -75,6 +76,7 @@ public class PhotoAlbumController extends BaseController {
 
                 if (imgType != null) {
 //                    if ("GIF".equals(imgType.toUpperCase())||"PNG".equals(imgType.toUpperCase())||"JPG".equals(imgType.toUpperCase())||"JPEG".equals(imgType.toUpperCase())) {
+                    result.put("type",type);
                     if(type.equals("1")){
                         // 图片
                         // 项目在容器中实际发布运行的根路径
@@ -88,21 +90,31 @@ public class PhotoAlbumController extends BaseController {
                         logger.info("图片成功上传到指定目录下");
 
                         // 修改图片地址
-                        path = "http://pet.ichaoge.com:3000/static/uploads/images/" + trueFileName;
-                    }else if(type.equals("0")){
+                        String path = "http://pet.ichaoge.com:3000/static/uploads/images/" + trueFileName;
+                        result.put("path",path);
+                    }else if(type.equals("2")){
                         // 视频
                         // 项目在容器中实际发布运行的根路径
                         String realPath = request.getSession().getServletContext().getRealPath("/");
                         // 自定义的文件名称
                         String trueFileName = "video-"+String.valueOf(System.currentTimeMillis()) + "."+imgType;
                         // 设置存放视频文件的路径
-                        String imgPath = realPath + "/static/uploads/video/" + trueFileName;
-                        logger.info("存放视频文件的路径:" + imgPath);
-                        file.transferTo(new File(imgPath));
+                        String videoPath = realPath + "/static/uploads/video/" + trueFileName;
+                        logger.info("存放视频文件的路径:" + videoPath);
+                        file.transferTo(new File(videoPath));
                         logger.info("视频成功上传到指定目录下");
 
                         // 修改视频地址
-                        path = "http://pet.ichaoge.com:3000/static/uploads/video/" + trueFileName;
+                        String path = "http://pet.ichaoge.com:3000/static/uploads/video/" + trueFileName;
+                        result.put("path",path);
+                        // 获取视频第一针的图片
+                        // 自定义的图片文件名称
+                        String trueFileNameUrl = "video-"+String.valueOf(System.currentTimeMillis()) + ".png";
+                        // 设置存放视频文件的路径
+                        String imgPath = realPath + "/static/uploads/video/" + trueFileNameUrl;
+                        VideoInfoService.getFirstImage(videoPath, imgPath);
+                        String firstVideoImageUrl = "http://pet.ichaoge.com:3000/static/uploads/video/" + trueFileNameUrl;
+                        result.put("firstVideoImageUrl",firstVideoImageUrl);
                     }else{
                         // GIF
                         // 项目在容器中实际发布运行的根路径
@@ -116,14 +128,10 @@ public class PhotoAlbumController extends BaseController {
                         logger.info("GIF成功上传到指定目录下");
 
                         // 修改视频地址
-                        path = "http://pet.ichaoge.com:3000/static/uploads/gif/" + trueFileName;
+                        String path = "http://pet.ichaoge.com:3000/static/uploads/gif/" + trueFileName;
+                        result.put("path",path);
                     }
 
-
-//                    }else {
-//                        logger.info("不是我们想要的文件类型,请按要求重新上传");
-//                        return Utils.webResult(false, ResulstCodeEnum.SERVICE_EXCEPTION.getCode(),"不是我们想要的文件类型,请按要求重新上传!", null);
-//                    }
                 }else {
                     logger.info("文件类型为空");
                     return Utils.webResult(false, ResulstCodeEnum.SERVICE_EXCEPTION.getCode(),"文件类型为空!", null);
@@ -137,7 +145,7 @@ public class PhotoAlbumController extends BaseController {
             logger.error("服务区系统错误!", e);
             return Utils.webResult(false, ResulstCodeEnum.SERVICE_EXCEPTION.getCode(),"服务区系统错误!", null);
         }
-        return Utils.webResult(true, ResulstCodeEnum.SERVICE_SUCESS.getCode(),ResulstCodeEnum.SERVICE_SUCESS.getCodeDesc(), path);
+        return Utils.webResult(true, ResulstCodeEnum.SERVICE_SUCESS.getCode(),ResulstCodeEnum.SERVICE_SUCESS.getCodeDesc(), result);
     }
 
     /**
@@ -166,18 +174,36 @@ public class PhotoAlbumController extends BaseController {
             photoAlbum.setModified(new Date());
             result = photoAlbumServiceI.insert(photoAlbum);
             if(result>0){
-                // 新增图片
                 String[] photoAlbumImageList = param.getPhotoAlbumImageList();
-                for (int i = 0; i < photoAlbumImageList.length; i++) {
+                if(photoAlbum.getType()==2){
+                    // 新增视频
+                    String VideoUrlAndImageUrl = photoAlbumImageList[0];
+                    String videoUrl = VideoUrlAndImageUrl.split(",")[0];
+                    String imageUrl = VideoUrlAndImageUrl.split(",")[1];
+
                     PhotoAlbumImage p = new PhotoAlbumImage();
                     p.setPetId(param.getPetId());
                     p.setPhotoAlbumId(photoAlbum.getId());
-                    p.setImageUrl(photoAlbumImageList[i]);
+                    p.setImageUrl(videoUrl);
+                    p.setFirstVideoImageUrl(imageUrl);
                     p.setStatus(1);
                     p.setCreated(new Date());
                     p.setModified(new Date());
                     photoAlbumImageServiceI.insert(p);
+                }else{
+                    // 新增图片或GIF
+                    for (int i = 0; i < photoAlbumImageList.length; i++) {
+                        PhotoAlbumImage p = new PhotoAlbumImage();
+                        p.setPetId(param.getPetId());
+                        p.setPhotoAlbumId(photoAlbum.getId());
+                        p.setImageUrl(photoAlbumImageList[i]);
+                        p.setStatus(1);
+                        p.setCreated(new Date());
+                        p.setModified(new Date());
+                        photoAlbumImageServiceI.insert(p);
+                    }
                 }
+
                 // 增加标签
                 String[] labelSortList = param.getLabelSortList();
                 for (int i = 0; i < labelSortList.length; i++) {

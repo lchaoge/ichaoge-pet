@@ -2,9 +2,12 @@ package com.ichaoge.pet.service.iservice;
 
 import com.ichaoge.pet.domain.entity.PhotoAlbumComment;
 import com.ichaoge.pet.domain.entity.PhotoAlbumCommentExample;
+import com.ichaoge.pet.domain.inputParam.PhotoAlbumCommentParam;
+import com.ichaoge.pet.domain.output.CommentFloor;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by chaoge on 2018/9/27.
@@ -21,9 +24,9 @@ public interface PhotoAlbumCommentServiceI {
 
     int insertSelective(PhotoAlbumComment record);
 
-    List<PhotoAlbumComment> selectByExampleWithBLOBs(PhotoAlbumCommentExample example);
+    List<PhotoAlbumComment> selectByExampleWithBLOBs(PhotoAlbumCommentExample param);
 
-    List<PhotoAlbumComment> selectByExample(PhotoAlbumCommentExample example);
+    List<PhotoAlbumComment> selectByExample(PhotoAlbumCommentParam param);
 
     PhotoAlbumComment selectByPrimaryKey(Long id);
 
@@ -32,4 +35,9 @@ public interface PhotoAlbumCommentServiceI {
     int updateByPrimaryKeyWithBLOBs(PhotoAlbumComment record);
 
     int updateByPrimaryKey(PhotoAlbumComment record);
+
+    // 查询当前评论的最后一个楼
+    Long selectFloorByPhotoAlbumId(Long photoAlbumId);
+
+    List<CommentFloor> selectAllFloor(Long photoAlbumId);
 }

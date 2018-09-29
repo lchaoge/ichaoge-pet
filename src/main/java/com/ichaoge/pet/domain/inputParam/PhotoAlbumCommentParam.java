@@ -1,5 +1,6 @@
 package com.ichaoge.pet.domain.inputParam;
 
+import com.ichaoge.pet.domain.entity.PhotoAlbumComment;
 import com.ichaoge.pet.domain.inputParam.base.BaseParam;
 
 import java.io.Serializable;
@@ -33,6 +34,23 @@ public class PhotoAlbumCommentParam extends BaseParam implements Serializable {
     private Date modified;
 
     private String content;
+
+    public PhotoAlbumCommentParam(){}
+
+    public PhotoAlbumCommentParam(PhotoAlbumComment photoAlbumComment) {
+        this.id = photoAlbumComment.getId();
+        this.photoAlbumId = photoAlbumComment.getPhotoAlbumId();
+        this.userId = photoAlbumComment.getUserId();
+        this.stayUserId = photoAlbumComment.getStayUserId();
+        this.parentId = photoAlbumComment.getParentId();
+        this.floor = photoAlbumComment.getFloor();
+        this.ip = photoAlbumComment.getIp();
+        this.status = photoAlbumComment.getStatus();
+        this.creator = photoAlbumComment.getCreator();
+        this.created = photoAlbumComment.getCreated();
+        this.modified = photoAlbumComment.getModified();
+        this.content = photoAlbumComment.getContent();
+    }
 
     @Override
     public String toString() {

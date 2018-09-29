@@ -61,8 +61,8 @@ public class PaginationInterceptor implements Interceptor {
         BoundSql boundSql = delegate.getBoundSql();
 
         Object parameterObject = boundSql.getParameterObject();
-        
-        
+
+
         if (!(parameterObject instanceof Map)) {
             return invocation.proceed();
         }

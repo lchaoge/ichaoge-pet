@@ -5,7 +5,7 @@
     <artifactId>ichaoge-pet</artifactId>
     <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
-    <name>wm-partner Maven Webapp</name>
+    <name>ichaoge-pet Maven Webapp</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -469,19 +469,6 @@
             <version>6.2.4</version>
         </dependency>
 
-
-        <dependency>
-            <groupId>com.wm</groupId>
-            <artifactId>wm-ms-erp-common</artifactId>
-            <version>3.1.5-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.wm</groupId>
-            <artifactId>wm-erp-common</artifactId>
-            <version>1.8.0-SNAPSHOT</version>
-        </dependency>
-
-
         <dependency>
             <groupId>com.sohu.tv</groupId>
             <artifactId>cachecloud-open-client-redis</artifactId>
@@ -500,7 +487,6 @@
         <dependency>
             <groupId>com.retail</groupId>
             <artifactId>sap-api</artifactId>
-            <!-- <version>1.0.14</version> -->
             <version>1.2.6</version>
         </dependency>
         <dependency>
@@ -590,6 +576,15 @@
             <version>2.4.2</version>
             <scope>runtime</scope>
         </dependency>
+
+        <!--javacv获取视频第一针-->
+        <dependency>
+            <groupId>org.bytedeco</groupId>
+            <artifactId>javacv</artifactId>
+            <version>0.8</version>
+        </dependency>
+
+
     </dependencies>
 
     <repositories>
@@ -611,6 +606,7 @@
             <properties>
                 <deploy.type>qa</deploy.type>
             </properties>
+
         </profile>
         <profile>
             <id>product</id>
@@ -629,7 +625,7 @@
         <resources>
             <!-- 先指定 src/main/resources下所有文件及文件夹为资源文件 -->
             <resource>
-                <directory>src/main/resources</directory>
+                <directory>${resources.dir}</directory>
                 <includes>
                     <include>**/*</include>
                 </includes>

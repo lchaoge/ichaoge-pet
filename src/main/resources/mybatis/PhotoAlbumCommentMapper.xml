@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ichaoge.pet.dao.mapper.PhotoAlbumCommentMapper" >
+  <resultMap id="BaseResultMap" type="com.ichaoge.pet.domain.entity.PhotoAlbumComment" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="photo_album_id" property="photoAlbumId" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="stay_user_id" property="stayUserId" jdbcType="BIGINT" />
+    <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+    <result column="floor" property="floor" jdbcType="BIGINT" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="creator" property="creator" jdbcType="BIGINT" />
+    <result column="created" property="created" jdbcType="TIMESTAMP" />
+    <result column="modified" property="modified" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.ichaoge.pet.domain.entity.PhotoAlbumComment" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, photo_album_id, user_id, stay_user_id, parent_id, floor, ip, status, creator, 
+    created, modified
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.ichaoge.pet.domain.entity.PhotoAlbumCommentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from photo_album_comment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ichaoge.pet.domain.entity.PhotoAlbumCommentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from photo_album_comment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from photo_album_comment
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from photo_album_comment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ichaoge.pet.domain.entity.PhotoAlbumCommentExample" >
+    delete from photo_album_comment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ichaoge.pet.domain.entity.PhotoAlbumComment" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into photo_album_comment (photo_album_id, user_id, stay_user_id, 
+      parent_id, floor, ip, 
+      status, creator, created, 
+      modified, content)
+    values (#{photoAlbumId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{stayUserId,jdbcType=BIGINT}, 
+      #{parentId,jdbcType=BIGINT}, #{floor,jdbcType=BIGINT}, #{ip,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{creator,jdbcType=BIGINT}, #{created,jdbcType=TIMESTAMP}, 
+      #{modified,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ichaoge.pet.domain.entity.PhotoAlbumComment" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into photo_album_comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="photoAlbumId != null" >
+        photo_album_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="stayUserId != null" >
+        stay_user_id,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="floor != null" >
+        floor,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="created != null" >
+        created,
+      </if>
+      <if test="modified != null" >
+        modified,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="photoAlbumId != null" >
+        #{photoAlbumId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="stayUserId != null" >
+        #{stayUserId,jdbcType=BIGINT},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="floor != null" >
+        #{floor,jdbcType=BIGINT},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="created != null" >
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modified != null" >
+        #{modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ichaoge.pet.domain.entity.PhotoAlbumCommentExample" resultType="java.lang.Integer" >
+    select count(*) from photo_album_comment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update photo_album_comment
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.photoAlbumId != null" >
+        photo_album_id = #{record.photoAlbumId,jdbcType=BIGINT},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.stayUserId != null" >
+        stay_user_id = #{record.stayUserId,jdbcType=BIGINT},
+      </if>
+      <if test="record.parentId != null" >
+        parent_id = #{record.parentId,jdbcType=BIGINT},
+      </if>
+      <if test="record.floor != null" >
+        floor = #{record.floor,jdbcType=BIGINT},
+      </if>
+      <if test="record.ip != null" >
+        ip = #{record.ip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.creator != null" >
+        creator = #{record.creator,jdbcType=BIGINT},
+      </if>
+      <if test="record.created != null" >
+        created = #{record.created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modified != null" >
+        modified = #{record.modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update photo_album_comment
+    set id = #{record.id,jdbcType=BIGINT},
+      photo_album_id = #{record.photoAlbumId,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      stay_user_id = #{record.stayUserId,jdbcType=BIGINT},
+      parent_id = #{record.parentId,jdbcType=BIGINT},
+      floor = #{record.floor,jdbcType=BIGINT},
+      ip = #{record.ip,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      creator = #{record.creator,jdbcType=BIGINT},
+      created = #{record.created,jdbcType=TIMESTAMP},
+      modified = #{record.modified,jdbcType=TIMESTAMP},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update photo_album_comment
+    set id = #{record.id,jdbcType=BIGINT},
+      photo_album_id = #{record.photoAlbumId,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      stay_user_id = #{record.stayUserId,jdbcType=BIGINT},
+      parent_id = #{record.parentId,jdbcType=BIGINT},
+      floor = #{record.floor,jdbcType=BIGINT},
+      ip = #{record.ip,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      creator = #{record.creator,jdbcType=BIGINT},
+      created = #{record.created,jdbcType=TIMESTAMP},
+      modified = #{record.modified,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ichaoge.pet.domain.entity.PhotoAlbumComment" >
+    update photo_album_comment
+    <set >
+      <if test="photoAlbumId != null" >
+        photo_album_id = #{photoAlbumId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="stayUserId != null" >
+        stay_user_id = #{stayUserId,jdbcType=BIGINT},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="floor != null" >
+        floor = #{floor,jdbcType=BIGINT},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="created != null" >
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modified != null" >
+        modified = #{modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ichaoge.pet.domain.entity.PhotoAlbumComment" >
+    update photo_album_comment
+    set photo_album_id = #{photoAlbumId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      stay_user_id = #{stayUserId,jdbcType=BIGINT},
+      parent_id = #{parentId,jdbcType=BIGINT},
+      floor = #{floor,jdbcType=BIGINT},
+      ip = #{ip,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      creator = #{creator,jdbcType=BIGINT},
+      created = #{created,jdbcType=TIMESTAMP},
+      modified = #{modified,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ichaoge.pet.domain.entity.PhotoAlbumComment" >
+    update photo_album_comment
+    set photo_album_id = #{photoAlbumId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      stay_user_id = #{stayUserId,jdbcType=BIGINT},
+      parent_id = #{parentId,jdbcType=BIGINT},
+      floor = #{floor,jdbcType=BIGINT},
+      ip = #{ip,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      creator = #{creator,jdbcType=BIGINT},
+      created = #{created,jdbcType=TIMESTAMP},
+      modified = #{modified,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectFloorByPhotoAlbumId" parameterType="java.lang.Long" resultType="java.lang.Long" >
+    SELECT floor FROM photo_album_comment WHERE photo_album_id = ? ORDER BY floor DESC LIMIT 1
+  </select>
+  <select id="selectAllFloor" parameterType="java.lang.Long" resultType="com.ichaoge.pet.domain.output.CommentFloor" >
+    SELECT
+        ( SELECT u.nick_name FROM `user` AS u WHERE u.id = pac.user_id ) AS nickName,
+        ( SELECT u.photo FROM `user` AS u WHERE u.id = pac.user_id ) AS photo,
+        pac.id,
+        pac.photo_album_id AS photoAlbumId,
+        pac.user_id AS userId,
+        pac.stay_user_id AS stayUserId,
+        pac.parent_id AS parentId,
+        pac.floor AS floor,
+        pac.content AS content,
+        pac.ip AS ip,
+        pac.STATUS AS STATUS,
+        pac.creator AS creator,
+        pac.created AS created,
+        pac.modified AS modified
+    FROM
+        photo_album_comment AS pac
+    WHERE
+        pac.photo_album_id =  #{photoAlbumId,jdbcType=BIGINT}
+    GROUP BY
+        pac.floor
+    ORDER BY
+        pac.floor
+  </select>
+  <select id="selectOneFloor" parameterType="com.ichaoge.pet.domain.output.CommentFloor" resultType="com.ichaoge.pet.domain.output.CommentFloor" >
+    SELECT
+        ( SELECT u.nick_name FROM `user` AS u WHERE u.id = pac.user_id ) AS nickName,
+        ( SELECT u.photo FROM `user` AS u WHERE u.id = pac.user_id ) AS photo,
+        ( SELECT u.nick_name FROM `user` AS u WHERE u.id = pac.stay_user_id ) AS stayUserName,
+        pac.id,
+        pac.photo_album_id AS photoAlbumId,
+        pac.user_id AS userId,
+        pac.stay_user_id AS stayUserId,
+        pac.parent_id AS parentId,
+        pac.floor AS floor,
+        pac.content AS content,
+        pac.ip AS ip,
+        pac.STATUS AS STATUS,
+        pac.creator AS creator,
+        pac.created AS created,
+        pac.modified AS modified
+    FROM
+        photo_album_comment AS pac
+    WHERE
+        pac.photo_album_id = #{photoAlbumId,jdbcType=BIGINT}
+        AND pac.floor = #{floor,jdbcType=BIGINT}
+	    AND pac.parent_id IS NOT NULL
+    ORDER BY
+        pac.created
+  </select>
+</mapper>

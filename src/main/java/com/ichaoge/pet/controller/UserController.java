@@ -147,9 +147,8 @@ public class UserController extends BaseController {
             logger.info("应答参数：" + results + ",sessionid:" + request.getSession().getId() + ",用户：" + getUser());
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            logger.error("查询发生未知错误!", e);
-            return Utils.webResult(false, ResulstCodeEnum.SERVICE_EXCEPTION.getCode(),
-                    "查询发生未知错误!", null);
+            logger.error("登录失败!", e);
+            return Utils.webResult(false, ResulstCodeEnum.SERVICE_EXCEPTION.getCode(),"登录失败!", null);
         }
         return Utils.webResult(true, ResulstCodeEnum.SERVICE_SUCESS.getCode(),ResulstCodeEnum.SERVICE_SUCESS.getCodeDesc(), results);
     }
@@ -214,6 +213,7 @@ public class UserController extends BaseController {
 
             logger.info("应答参数：" + result + "sessionid:" + request.getSession().getId() + "用户：" + getUser());
         } catch (Exception e) {
+            System.out.println(e);
             logger.error("查询当前用户错误!", e);
             return Utils.webResult(false, ResulstCodeEnum.SERVICE_EXCEPTION.getCode(),"查询当前用户错误!", null);
         }

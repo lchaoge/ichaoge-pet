@@ -99,9 +99,9 @@
         <!--<table tableName="photo_album_label_sort" schema="">-->
             <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
         <!--</table>-->
-        <table tableName="photo_album_comment" schema="">
-        <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
+        <!--<table tableName="photo_album_comment" schema="">-->
+        <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
     </context>
 
 </generatorConfiguration>
