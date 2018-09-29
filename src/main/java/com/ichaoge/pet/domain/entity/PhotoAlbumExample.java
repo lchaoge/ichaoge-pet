@@ -475,62 +475,52 @@ public class PhotoAlbumExample {
             return (Criteria) this;
         }
 
-        public Criteria andCreatorEqualTo(String value) {
+        public Criteria andCreatorEqualTo(Long value) {
             addCriterion("creator =", value, "creator");
             return (Criteria) this;
         }
 
-        public Criteria andCreatorNotEqualTo(String value) {
+        public Criteria andCreatorNotEqualTo(Long value) {
             addCriterion("creator <>", value, "creator");
             return (Criteria) this;
         }
 
-        public Criteria andCreatorGreaterThan(String value) {
+        public Criteria andCreatorGreaterThan(Long value) {
             addCriterion("creator >", value, "creator");
             return (Criteria) this;
         }
 
-        public Criteria andCreatorGreaterThanOrEqualTo(String value) {
+        public Criteria andCreatorGreaterThanOrEqualTo(Long value) {
             addCriterion("creator >=", value, "creator");
             return (Criteria) this;
         }
 
-        public Criteria andCreatorLessThan(String value) {
+        public Criteria andCreatorLessThan(Long value) {
             addCriterion("creator <", value, "creator");
             return (Criteria) this;
         }
 
-        public Criteria andCreatorLessThanOrEqualTo(String value) {
+        public Criteria andCreatorLessThanOrEqualTo(Long value) {
             addCriterion("creator <=", value, "creator");
             return (Criteria) this;
         }
 
-        public Criteria andCreatorLike(String value) {
-            addCriterion("creator like", value, "creator");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatorNotLike(String value) {
-            addCriterion("creator not like", value, "creator");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatorIn(List<String> values) {
+        public Criteria andCreatorIn(List<Long> values) {
             addCriterion("creator in", values, "creator");
             return (Criteria) this;
         }
 
-        public Criteria andCreatorNotIn(List<String> values) {
+        public Criteria andCreatorNotIn(List<Long> values) {
             addCriterion("creator not in", values, "creator");
             return (Criteria) this;
         }
 
-        public Criteria andCreatorBetween(String value1, String value2) {
+        public Criteria andCreatorBetween(Long value1, Long value2) {
             addCriterion("creator between", value1, value2, "creator");
             return (Criteria) this;
         }
 
-        public Criteria andCreatorNotBetween(String value1, String value2) {
+        public Criteria andCreatorNotBetween(Long value1, Long value2) {
             addCriterion("creator not between", value1, value2, "creator");
             return (Criteria) this;
         }

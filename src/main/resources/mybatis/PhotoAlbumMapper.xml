@@ -8,7 +8,7 @@
     <result column="record_date" property="recordDate" jdbcType="TIMESTAMP" />
     <result column="recommend" property="recommend" jdbcType="INTEGER" />
     <result column="status" property="status" jdbcType="INTEGER" />
-    <result column="creator" property="creator" jdbcType="VARCHAR" />
+    <result column="creator" property="creator" jdbcType="BIGINT" />
     <result column="created" property="created" jdbcType="TIMESTAMP" />
     <result column="modified" property="modified" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -136,7 +136,7 @@
       created, modified, content
       )
     values (#{petId,jdbcType=BIGINT}, #{type,jdbcType=INTEGER}, #{recordDate,jdbcType=TIMESTAMP}, 
-      #{recommend,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{creator,jdbcType=VARCHAR}, 
+      #{recommend,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{creator,jdbcType=BIGINT}, 
       #{created,jdbcType=TIMESTAMP}, #{modified,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
       )
   </insert>
@@ -191,7 +191,7 @@
         #{status,jdbcType=INTEGER},
       </if>
       <if test="creator != null" >
-        #{creator,jdbcType=VARCHAR},
+        #{creator,jdbcType=BIGINT},
       </if>
       <if test="created != null" >
         #{created,jdbcType=TIMESTAMP},
@@ -232,7 +232,7 @@
         status = #{record.status,jdbcType=INTEGER},
       </if>
       <if test="record.creator != null" >
-        creator = #{record.creator,jdbcType=VARCHAR},
+        creator = #{record.creator,jdbcType=BIGINT},
       </if>
       <if test="record.created != null" >
         created = #{record.created,jdbcType=TIMESTAMP},
@@ -256,7 +256,7 @@
       record_date = #{record.recordDate,jdbcType=TIMESTAMP},
       recommend = #{record.recommend,jdbcType=INTEGER},
       status = #{record.status,jdbcType=INTEGER},
-      creator = #{record.creator,jdbcType=VARCHAR},
+      creator = #{record.creator,jdbcType=BIGINT},
       created = #{record.created,jdbcType=TIMESTAMP},
       modified = #{record.modified,jdbcType=TIMESTAMP},
       content = #{record.content,jdbcType=LONGVARCHAR}
@@ -272,7 +272,7 @@
       record_date = #{record.recordDate,jdbcType=TIMESTAMP},
       recommend = #{record.recommend,jdbcType=INTEGER},
       status = #{record.status,jdbcType=INTEGER},
-      creator = #{record.creator,jdbcType=VARCHAR},
+      creator = #{record.creator,jdbcType=BIGINT},
       created = #{record.created,jdbcType=TIMESTAMP},
       modified = #{record.modified,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
@@ -298,7 +298,7 @@
         status = #{status,jdbcType=INTEGER},
       </if>
       <if test="creator != null" >
-        creator = #{creator,jdbcType=VARCHAR},
+        creator = #{creator,jdbcType=BIGINT},
       </if>
       <if test="created != null" >
         created = #{created,jdbcType=TIMESTAMP},
@@ -319,7 +319,7 @@
       record_date = #{recordDate,jdbcType=TIMESTAMP},
       recommend = #{recommend,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
-      creator = #{creator,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=BIGINT},
       created = #{created,jdbcType=TIMESTAMP},
       modified = #{modified,jdbcType=TIMESTAMP},
       content = #{content,jdbcType=LONGVARCHAR}
@@ -332,7 +332,7 @@
       record_date = #{recordDate,jdbcType=TIMESTAMP},
       recommend = #{recommend,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
-      creator = #{creator,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=BIGINT},
       created = #{created,jdbcType=TIMESTAMP},
       modified = #{modified,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}

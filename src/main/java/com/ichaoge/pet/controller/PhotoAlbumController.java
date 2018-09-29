@@ -5,14 +5,8 @@ import com.ichaoge.pet.controller.baseinfo.BaseController;
 import com.ichaoge.pet.domain.base.Pagination;
 import com.ichaoge.pet.domain.baseenum.ResulstCodeEnum;
 import com.ichaoge.pet.domain.entity.*;
-import com.ichaoge.pet.domain.inputParam.PhotoAlbumImageParam;
-import com.ichaoge.pet.domain.inputParam.PhotoAlbumLabelSortParam;
-import com.ichaoge.pet.domain.inputParam.PhotoAlbumParam;
-import com.ichaoge.pet.domain.inputParam.UserParam;
-import com.ichaoge.pet.service.iservice.LabelSortServiceI;
-import com.ichaoge.pet.service.iservice.PhotoAlbumImageServiceI;
-import com.ichaoge.pet.service.iservice.PhotoAlbumLabelSortServiceI;
-import com.ichaoge.pet.service.iservice.PhotoAlbumServiceI;
+import com.ichaoge.pet.domain.inputParam.*;
+import com.ichaoge.pet.service.iservice.*;
 import com.ichaoge.pet.utils.Utils;
 import com.retail.sap.api.base.RemoteResult;
 import org.slf4j.LoggerFactory;
@@ -47,6 +41,8 @@ public class PhotoAlbumController extends BaseController {
     private PhotoAlbumLabelSortServiceI photoAlbumLabelSortServiceI;
     @Resource
     private LabelSortServiceI labelSortServiceI;
+    @Resource
+    private PhotoAlbumCommentServiceI photoAlbumCommentServiceI;
     /**
      * @param request
      * @param file
@@ -170,6 +166,7 @@ public class PhotoAlbumController extends BaseController {
             photoAlbum.setPetId(param.getPetId());
             photoAlbum.setContent(param.getContent());
             photoAlbum.setStatus(1);
+            photoAlbum.setCreator(param.getCreator());
             photoAlbum.setCreated(new Date());
             photoAlbum.setModified(new Date());
             result = photoAlbumServiceI.insert(photoAlbum);
@@ -187,6 +184,7 @@ public class PhotoAlbumController extends BaseController {
                     p.setImageUrl(videoUrl);
                     p.setFirstVideoImageUrl(imageUrl);
                     p.setStatus(1);
+                    p.setCreator(param.getCreator());
                     p.setCreated(new Date());
                     p.setModified(new Date());
                     photoAlbumImageServiceI.insert(p);
@@ -198,6 +196,7 @@ public class PhotoAlbumController extends BaseController {
                         p.setPhotoAlbumId(photoAlbum.getId());
                         p.setImageUrl(photoAlbumImageList[i]);
                         p.setStatus(1);
+                        photoAlbum.setCreator(param.getCreator());
                         p.setCreated(new Date());
                         p.setModified(new Date());
                         photoAlbumImageServiceI.insert(p);
@@ -287,6 +286,14 @@ public class PhotoAlbumController extends BaseController {
                 if(p!=null){
                     photoAlbumLabelSortServiceI.deleteByPrimaryKey(p.getId());
                 }
+            }
+
+            // 删除评论
+            PhotoAlbumCommentParam photoAlbumCommentParam = new PhotoAlbumCommentParam();
+            photoAlbumCommentParam.setPhotoAlbumId(param.getId());
+            List<PhotoAlbumComment> photoAlbumCommentList = photoAlbumCommentServiceI.selectByExample(photoAlbumCommentParam);
+            for(PhotoAlbumComment item : photoAlbumCommentList){
+                photoAlbumCommentServiceI.deleteByExample(item);
             }
 
             logger.info("应答参数：" + result + "sessionid:" + request.getSession().getId() + "用户：" + getUser());

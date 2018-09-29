@@ -374,7 +374,15 @@
   </update>
 
   <select id="selectFloorByPhotoAlbumId" parameterType="java.lang.Long" resultType="java.lang.Long" >
-    SELECT floor FROM photo_album_comment WHERE photo_album_id = ? ORDER BY floor DESC LIMIT 1
+    SELECT
+        floor
+    FROM
+        photo_album_comment
+    WHERE
+        photo_album_id = #{photoAlbumId,jdbcType=BIGINT}
+    ORDER BY
+        floor DESC
+        LIMIT 1
   </select>
   <select id="selectAllFloor" parameterType="java.lang.Long" resultType="com.ichaoge.pet.domain.output.CommentFloor" >
     SELECT

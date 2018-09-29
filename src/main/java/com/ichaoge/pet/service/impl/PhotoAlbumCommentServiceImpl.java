@@ -29,8 +29,25 @@ public class PhotoAlbumCommentServiceImpl implements PhotoAlbumCommentServiceI {
     }
 
     @Override
-    public int deleteByExample(PhotoAlbumCommentExample example) {
-        return photoAlbumCommentMapper.deleteByExample(example);
+    public int deleteByExample(PhotoAlbumComment param) {
+        PhotoAlbumCommentExample photoAlbumCommentExample = new PhotoAlbumCommentExample();
+        PhotoAlbumCommentExample.Criteria criteria = photoAlbumCommentExample.createCriteria();
+        if(param.getId()!=null){
+            criteria.andIdEqualTo(param.getId());
+        }
+        if(param.getPhotoAlbumId()!=null){
+            criteria.andPhotoAlbumIdEqualTo(param.getPhotoAlbumId());
+        }
+        if(param.getUserId()!=null){
+            criteria.andUserIdEqualTo(param.getUserId());
+        }
+        if(param.getStayUserId()!=null){
+            criteria.andStayUserIdEqualTo(param.getStayUserId());
+        }
+        if(param.getParentId()!=null){
+            criteria.andParentIdEqualTo(param.getParentId());
+        }
+        return photoAlbumCommentMapper.deleteByExample(photoAlbumCommentExample);
     }
 
     @Override

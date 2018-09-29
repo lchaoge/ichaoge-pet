@@ -16,7 +16,7 @@ public class PhotoAlbum implements Serializable {
 
     private Integer status;
 
-    private String creator;
+    private Long creator;
 
     private Date created;
 
@@ -74,12 +74,12 @@ public class PhotoAlbum implements Serializable {
         this.status = status;
     }
 
-    public String getCreator() {
+    public Long getCreator() {
         return creator;
     }
 
-    public void setCreator(String creator) {
-        this.creator = creator == null ? null : creator.trim();
+    public void setCreator(Long creator) {
+        this.creator = creator;
     }
 
     public Date getCreated() {

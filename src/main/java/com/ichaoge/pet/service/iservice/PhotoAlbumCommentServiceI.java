@@ -16,7 +16,7 @@ public interface PhotoAlbumCommentServiceI {
 
     int countByExample(PhotoAlbumCommentExample example);
 
-    int deleteByExample(PhotoAlbumCommentExample example);
+    int deleteByExample(PhotoAlbumComment param);
 
     int deleteByPrimaryKey(Long id);
 

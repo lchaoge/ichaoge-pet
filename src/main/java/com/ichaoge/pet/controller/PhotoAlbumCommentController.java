@@ -45,17 +45,22 @@ public class PhotoAlbumCommentController extends BaseController {
     @ResponseBody
     public RemoteResult<?> insert(HttpServletRequest request, @RequestBody PhotoAlbumComment param) {
         logger.info("请求地址：" + request.getRequestURI() + ",请求参数："+param + "，sessionid:" + request.getSession().getId() + "，用户：" + getUser());
-        List<PhotoAlbumComment> result = null;
+        List<CommentFloor> result = null;
 
         //开始查询
         try {
+            // 查询
             param.setCreated(new Date());
             param.setModified(new Date());
             param.setStatus(1);
             String ip = IpUtils.getIP(request);
             param.setIp(ip);
             Long floor = photoAlbumCommentServiceI.selectFloorByPhotoAlbumId(param.getPhotoAlbumId());
-            param.setFloor(floor+1);
+            if(floor == null){
+                param.setFloor(Long.parseLong("1"));
+            }else{
+                param.setFloor(floor+1);
+            }
             int insertOK = photoAlbumCommentServiceI.insert(param);
             if(insertOK<=0){
                 logger.error("写真集评论新增失败!");
@@ -63,9 +68,11 @@ public class PhotoAlbumCommentController extends BaseController {
             }
 
             // 查询写真集的评论
-            PhotoAlbumCommentParam photoAlbumCommentParam = new PhotoAlbumCommentParam();
-            photoAlbumCommentParam.setPhotoAlbumId(param.getPhotoAlbumId());
-            result = photoAlbumCommentServiceI.selectByExample(photoAlbumCommentParam);
+            result = photoAlbumCommentServiceI.selectAllFloor(param.getPhotoAlbumId());
+            if(result == null){
+                logger.error("写真集评论查询失败!");
+                return Utils.webResult(false, ResulstCodeEnum.SERVICE_EXCEPTION.getCode(),"写真集评论查询失败!", null);
+            }
 
             logger.info("应答参数：" + result + "sessionid:" + request.getSession().getId() + "用户：" + getUser());
         } catch (Exception e) {
