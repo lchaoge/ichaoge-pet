@@ -7,13 +7,15 @@ import com.ichaoge.pet.domain.entity.OrderItemExample;
 import com.ichaoge.pet.service.iservice.OrderItemServiceI;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * Created by chaoge on 2018/9/18.
  */
 @Service
-public class OrderItemServiceImpl implements OrderItemServiceI {
+@Transactional
+public class OrderItemServiceImpl extends RuntimeException implements OrderItemServiceI {
 
     @Resource
     private OrderItemMapper orderItemMapper;

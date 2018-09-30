@@ -7,13 +7,15 @@ import com.ichaoge.pet.domain.entity.ArticleImageExample;
 import com.ichaoge.pet.service.iservice.ArticleImageServiceI;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * Created by choage on 2018/9/18.
  */
 @Service
-public class ArticleImageServiceImpl implements ArticleImageServiceI {
+@Transactional
+public class ArticleImageServiceImpl extends RuntimeException implements ArticleImageServiceI {
     @Resource
     private ArticleImageMapper articleImageMapper;
 

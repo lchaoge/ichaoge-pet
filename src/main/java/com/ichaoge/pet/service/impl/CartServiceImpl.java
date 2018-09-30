@@ -7,13 +7,15 @@ import com.ichaoge.pet.domain.entity.CartExample;
 import com.ichaoge.pet.service.iservice.CartServiceI;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * Created by chaoge on 2018/9/18.
  */
 @Service
-public class CartServiceImpl implements CartServiceI {
+@Transactional
+public class CartServiceImpl extends RuntimeException implements CartServiceI {
 
     @Resource
     private CartMapper cartMapper;

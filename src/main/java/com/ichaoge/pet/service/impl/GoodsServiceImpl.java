@@ -7,13 +7,15 @@ import com.ichaoge.pet.domain.entity.GoodsExample;
 import com.ichaoge.pet.service.iservice.GoodsServiceI;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * Created by chaoge on 2018/9/18.
  */
 @Service
-public class GoodsServiceImpl implements GoodsServiceI {
+@Transactional
+public class GoodsServiceImpl extends RuntimeException implements GoodsServiceI {
 
     @Resource
     private GoodsMapper goodsMapper;

@@ -7,13 +7,15 @@ import com.ichaoge.pet.domain.entity.EvaluateExample;
 import com.ichaoge.pet.service.iservice.EvaluateServiceI;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * Created by chaoge on 2018/9/18.
  */
 @Service
-public class EvaluateServiceImpl implements EvaluateServiceI {
+@Transactional
+public class EvaluateServiceImpl extends RuntimeException implements EvaluateServiceI {
 
     @Resource
     private EvaluateMapper evaluateMapper;

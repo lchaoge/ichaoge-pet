@@ -7,13 +7,15 @@ import com.ichaoge.pet.service.iservice.AddressServiceI;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * Created by chaoge on 2018/9/18.
  */
 @Service
-public class AddressServiceImpl implements AddressServiceI {
+@Transactional
+public class AddressServiceImpl extends RuntimeException implements AddressServiceI {
     @Resource
     private AddressMapper addressMapper;
 

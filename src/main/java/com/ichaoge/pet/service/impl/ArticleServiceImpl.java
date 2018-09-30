@@ -7,13 +7,15 @@ import com.ichaoge.pet.domain.entity.ArticleExample;
 import com.ichaoge.pet.service.iservice.ArticleServiceI;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * Created by chaoge on 2018/9/18.
  */
 @Service
-public class ArticleServiceImpl implements ArticleServiceI {
+@Transactional
+public class ArticleServiceImpl extends RuntimeException implements ArticleServiceI {
 
     @Resource
     private ArticleMapper articleMapper;

@@ -7,13 +7,15 @@ import com.ichaoge.pet.domain.entity.CollectionExample;
 import com.ichaoge.pet.service.iservice.CollectionServiceI;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * Created by chaoge on 2018/9/18.
  */
 @Service
-public class CollectionServiceImpl implements CollectionServiceI {
+@Transactional
+public class CollectionServiceImpl extends RuntimeException implements CollectionServiceI {
 
     @Resource
     private CollectionMapper collectionMapper;

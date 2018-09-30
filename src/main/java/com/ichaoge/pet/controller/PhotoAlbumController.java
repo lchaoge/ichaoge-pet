@@ -71,23 +71,27 @@ public class PhotoAlbumController extends BaseController {
                 logger.info("图片初始名称为：" + fileName + " 类型为：" + imgType);
 
                 if (imgType != null) {
-//                    if ("GIF".equals(imgType.toUpperCase())||"PNG".equals(imgType.toUpperCase())||"JPG".equals(imgType.toUpperCase())||"JPEG".equals(imgType.toUpperCase())) {
                     result.put("type",type);
                     if(type.equals("1")){
-                        // 图片
-                        // 项目在容器中实际发布运行的根路径
-                        String realPath = request.getSession().getServletContext().getRealPath("/");
-                        // 自定义的文件名称
-                        String trueFileName = "img-"+String.valueOf(System.currentTimeMillis()) + "."+imgType;
-                        // 设置存放图片文件的路径
-                        String imgPath = realPath + "/static/uploads/images/" + trueFileName;
-                        logger.info("存放图片文件的路径:" + imgPath);
-                        file.transferTo(new File(imgPath));
-                        logger.info("图片成功上传到指定目录下");
+                        if ("BMP".equals(imgType.toUpperCase())||"PNG".equals(imgType.toUpperCase())||"JPG".equals(imgType.toUpperCase())||"JPEG".equals(imgType.toUpperCase())) {
+                            // 图片
+                            // 项目在容器中实际发布运行的根路径
+                            String realPath = request.getSession().getServletContext().getRealPath("/");
+                            // 自定义的文件名称
+                            String trueFileName = "img-"+String.valueOf(System.currentTimeMillis()) + "."+imgType;
+                            // 设置存放图片文件的路径
+                            String imgPath = realPath + "/static/uploads/images/" + trueFileName;
+                            logger.info("存放图片文件的路径:" + imgPath);
+                            file.transferTo(new File(imgPath));
+                            logger.info("图片成功上传到指定目录下");
 
-                        // 修改图片地址
-                        String path = "http://pet.ichaoge.com:3000/static/uploads/images/" + trueFileName;
-                        result.put("path",path);
+                            // 修改图片地址
+                            String path = "http://pet.ichaoge.com:3000/static/uploads/images/" + trueFileName;
+                            result.put("path",path);
+                        }else{
+                            logger.info("请选择bmp,png,jpg,jpeg格式的图片");
+                            return Utils.webResult(false, ResulstCodeEnum.SERVICE_EXCEPTION.getCode(),"请选择bmp,png,jpg,jpeg格式的图片!", null);
+                        }
                     }else if(type.equals("2")){
                         // 视频
                         // 项目在容器中实际发布运行的根路径
@@ -112,20 +116,26 @@ public class PhotoAlbumController extends BaseController {
                         String firstVideoImageUrl = "http://pet.ichaoge.com:3000/static/uploads/video/" + trueFileNameUrl;
                         result.put("firstVideoImageUrl",firstVideoImageUrl);
                     }else{
-                        // GIF
-                        // 项目在容器中实际发布运行的根路径
-                        String realPath = request.getSession().getServletContext().getRealPath("/");
-                        // 自定义的文件名称
-                        String trueFileName = "gif-"+String.valueOf(System.currentTimeMillis()) + "."+imgType;
-                        // 设置存放视频文件的路径
-                        String imgPath = realPath + "/static/uploads/gif/" + trueFileName;
-                        logger.info("存放GIF文件的路径:" + imgPath);
-                        file.transferTo(new File(imgPath));
-                        logger.info("GIF成功上传到指定目录下");
+                        if ("GIF".equals(imgType.toUpperCase())) {
+                            // GIF
+                            // 项目在容器中实际发布运行的根路径
+                            String realPath = request.getSession().getServletContext().getRealPath("/");
+                            // 自定义的文件名称
+                            String trueFileName = "gif-"+String.valueOf(System.currentTimeMillis()) + "."+imgType;
+                            // 设置存放视频文件的路径
+                            String imgPath = realPath + "/static/uploads/gif/" + trueFileName;
+                            logger.info("存放GIF文件的路径:" + imgPath);
+                            file.transferTo(new File(imgPath));
+                            logger.info("GIF成功上传到指定目录下");
 
-                        // 修改视频地址
-                        String path = "http://pet.ichaoge.com:3000/static/uploads/gif/" + trueFileName;
-                        result.put("path",path);
+                            // 修改视频地址
+                            String path = "http://pet.ichaoge.com:3000/static/uploads/gif/" + trueFileName;
+                            result.put("path",path);
+                        }else{
+                            logger.info("请选择gif格式的图片");
+                            return Utils.webResult(false, ResulstCodeEnum.SERVICE_EXCEPTION.getCode(),"请选择gif格式的图片!", null);
+                        }
+
                     }
 
                 }else {

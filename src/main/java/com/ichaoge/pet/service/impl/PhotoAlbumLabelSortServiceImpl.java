@@ -9,13 +9,15 @@ import com.ichaoge.pet.service.iservice.PhotoAlbumLabelSortServiceI;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * Created by chaoge on 2018/9/25.
  */
 @Service
-public class PhotoAlbumLabelSortServiceImpl implements PhotoAlbumLabelSortServiceI {
+@Transactional
+public class PhotoAlbumLabelSortServiceImpl extends RuntimeException implements PhotoAlbumLabelSortServiceI {
 
     @Resource
     private PhotoAlbumLabelSortMapper photoAlbumLabelSortMapper;

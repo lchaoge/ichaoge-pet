@@ -9,8 +9,6 @@
 
 
     <!-- 引入配置文件 -->
-
-
     <bean id="dataSource" name="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
         <!-- 驱动 -->
         <property name="driverClass" value="${jdbc.driver}"/>
@@ -91,5 +89,7 @@
         </property>
     </bean>
     <!-- 开启事务控制的注解支持 -->
-    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class = "true"/>
+
+
 </beans>

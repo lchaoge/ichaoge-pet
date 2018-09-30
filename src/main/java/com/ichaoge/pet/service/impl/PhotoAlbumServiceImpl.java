@@ -15,6 +15,7 @@ import com.ichaoge.pet.service.iservice.PhotoAlbumServiceI;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,8 @@ import java.util.List;
  * Created by chaoge on 2018/9/20.
  */
 @Service
-public class PhotoAlbumServiceImpl implements PhotoAlbumServiceI {
+@Transactional
+public class PhotoAlbumServiceImpl extends RuntimeException implements PhotoAlbumServiceI {
 
     @Resource
     private PhotoAlbumMapper photoAlbumMapper;
@@ -77,6 +79,12 @@ public class PhotoAlbumServiceImpl implements PhotoAlbumServiceI {
         }
         if (param.getPetId()!=null) {
             criteria.andPetIdEqualTo(param.getPetId());
+        }
+        if(param.getType()!=null){
+            criteria.andTypeEqualTo(param.getType());
+        }
+        if(param.getRecommend()!=null){
+            criteria.andRecommendEqualTo(param.getRecommend());
         }
         photoAlbumExample.setOrderByClause("id desc");
         return photoAlbumMapper.selectByExample(photoAlbumExample);

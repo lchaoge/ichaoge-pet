@@ -10,6 +10,7 @@ import com.ichaoge.pet.service.iservice.PhotoAlbumCommentServiceI;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +19,8 @@ import java.util.Map;
  * Created by chaoge on 2018/9/27.
  */
 @Service
-public class PhotoAlbumCommentServiceImpl implements PhotoAlbumCommentServiceI {
+@Transactional
+public class PhotoAlbumCommentServiceImpl extends RuntimeException implements PhotoAlbumCommentServiceI {
 
     @Resource
     private PhotoAlbumCommentMapper photoAlbumCommentMapper;

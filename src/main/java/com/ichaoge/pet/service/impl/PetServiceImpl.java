@@ -9,13 +9,15 @@ import com.ichaoge.pet.service.iservice.PetServiceI;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * Created by chaoge on 2018/8/30.
  */
 @Service
-public class PetServiceImpl implements PetServiceI {
+@Transactional
+public class PetServiceImpl extends RuntimeException implements PetServiceI {
 
     @Resource
     private PetMapper petMapper;

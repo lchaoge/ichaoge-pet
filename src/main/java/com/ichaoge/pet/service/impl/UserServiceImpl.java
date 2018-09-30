@@ -14,11 +14,13 @@ import com.ichaoge.pet.service.iservice.UserServiceI;
 import com.ichaoge.pet.utils.HttpClientUtil;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 
 import javax.annotation.Resource;
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import javax.transaction.Transactional;
 import java.security.spec.AlgorithmParameterSpec;
 import java.util.List;
 
@@ -26,7 +28,8 @@ import java.util.List;
  * Created by chaoge on 2018/8/28.
  */
 @Service
-public class UserServiceImpl implements UserServiceI {
+@Transactional
+public class UserServiceImpl extends RuntimeException implements UserServiceI {
 
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 

@@ -9,13 +9,15 @@ import com.ichaoge.pet.service.iservice.PhotoAlbumImageServiceI;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * Created by chaoge on 2018/9/20.
  */
 @Service
-public class PhotoAlbumImageServiceImpl implements PhotoAlbumImageServiceI {
+@Transactional
+public class PhotoAlbumImageServiceImpl extends RuntimeException implements PhotoAlbumImageServiceI {
 
     @Resource
     private PhotoAlbumImageMapper photoAlbumImageMapper;

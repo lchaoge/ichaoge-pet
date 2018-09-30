@@ -7,13 +7,15 @@ import com.ichaoge.pet.domain.entity.ArticleSortExample;
 import com.ichaoge.pet.service.iservice.ArticleSortServiceI;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * Created by chaoge on 2018/9/18.
  */
 @Service
-public class ArticleSortServiceImpl implements ArticleSortServiceI {
+@Transactional
+public class ArticleSortServiceImpl extends RuntimeException implements ArticleSortServiceI {
 
     @Resource
     private ArticleSortMapper articleSortMapper;

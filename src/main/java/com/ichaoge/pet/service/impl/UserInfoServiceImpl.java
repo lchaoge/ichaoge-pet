@@ -7,13 +7,15 @@ import com.ichaoge.pet.service.iservice.UserInfoServiceI;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * Created by chaoge on 2018/8/28.
  */
 @Service
-public class UserInfoServiceImpl implements UserInfoServiceI {
+@Transactional
+public class UserInfoServiceImpl extends RuntimeException implements UserInfoServiceI {
 
     @Resource
     private UserInfoMapper userInfoMapper;

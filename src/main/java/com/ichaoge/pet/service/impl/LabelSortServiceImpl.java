@@ -7,13 +7,15 @@ import com.ichaoge.pet.dao.mapper.LabelSortMapper;
 import com.ichaoge.pet.service.iservice.LabelSortServiceI;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * Created by chaoge on 2018/9/18.
  */
 @Service
-public class LabelSortServiceImpl implements LabelSortServiceI {
+@Transactional
+public class LabelSortServiceImpl extends RuntimeException implements LabelSortServiceI {
 
     @Resource
     private LabelSortMapper labelSortMapper;
